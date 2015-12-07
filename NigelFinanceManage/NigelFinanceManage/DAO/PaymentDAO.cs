@@ -32,7 +32,7 @@ namespace NigelFinanceManage.DAO
             return dt;
         }
 
-        public DataTable getList(XmlDataSource xml, string accId)
+        public DataTable getDataList(XmlDataSource xml, string accId)
         {
             DataTable dt = new DataTable();
 
@@ -48,6 +48,22 @@ namespace NigelFinanceManage.DAO
             }
 
             return dt;
+        }
+
+        public List<FinanceInfo> getPaymentListByMonth(XmlDataSource xml, string id, int month, int year)
+        {
+            List<FinanceInfo> list = new List<FinanceInfo>();
+
+            foreach (FinanceInfo info in this.getList(xml, id))
+            {
+                DateTime dateInfo = info.DateExpense;
+                if (dateInfo.Month == month && dateInfo.Year == year)
+                {
+                    list.Add(info);
+                }
+            }
+
+            return list;
         }
 
         public Payment getById(XmlDataSource xml, string id, string accId)
@@ -119,6 +135,35 @@ namespace NigelFinanceManage.DAO
             ele.ParentNode.RemoveChild(ele);
             doc.Save(xml.XmlPath);
             return true;
+        }
+
+        public List<FinanceInfo> getList(XmlDataSource xml, string accId)
+        {
+            DataTable dt = new DataTable();
+
+            XmlDocument doc = xml.getXmlDocument();
+            XmlNode root = doc.DocumentElement;
+
+            string xpath = "/my-expense/expense-data/data[@profile-id='" + accId
+                + "']/payments-log/payment";
+            XmlNodeList nodeList = root.SelectNodes(xpath);
+
+            List<FinanceInfo> list = new List<FinanceInfo>();
+            foreach (XmlElement ele in nodeList)
+            {
+                Income info = new Income
+                {
+                    Id = ele.GetAttribute("id"),
+                    Amount = int.Parse(ele.GetAttribute("amount")),
+                    Currency = ele.GetAttribute("currency"),
+                    DateExpense = DateTime.Parse(ele.GetAttribute("dateExpense").ToString()),
+                    Description = ele.GetAttribute("description"),
+                };
+
+                list.Add(info);
+            }
+
+            return list;
         }
     }
 }

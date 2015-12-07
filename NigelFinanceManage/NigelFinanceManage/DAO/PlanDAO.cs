@@ -32,7 +32,7 @@ namespace NigelFinanceManage.DAO
             return dt;
         }
 
-        public DataTable getList(XmlDataSource xml, string accId)
+        public DataTable getDataList(XmlDataSource xml, string accId)
         {
             DataTable dt = new DataTable();
 
@@ -119,6 +119,26 @@ namespace NigelFinanceManage.DAO
             ele.ParentNode.RemoveChild(ele);
             doc.Save(xml.XmlPath);
             return true;
+        }
+
+        public List<Plan> getList(XmlNodeList nodeList)
+        {
+            List<Plan> list = new List<Plan>();
+            foreach (XmlElement ele in nodeList)
+            {
+                Plan info = new Plan
+                {
+                    Id = ele.GetAttribute("id"),
+                    Amount = int.Parse(ele.GetAttribute("amount")),
+                    Currency = ele.GetAttribute("currency"),
+                    DateExpense = DateTime.Parse(ele.GetAttribute("dateExpense").ToString()),
+                    Description = ele.GetAttribute("description"),
+                };
+
+                list.Add(info);
+            }
+
+            return list;
         }
     }
 }
