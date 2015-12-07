@@ -72,19 +72,19 @@ namespace NigelFinanceManage.DAO
             string xpath = "/my-expense/expense-data/data[@profile-id='"
                 + accId + "']/withdraw-history/withdraw[@id='" + id + "']";
 
-            XmlNode ndPlan = doc.SelectSingleNode(xpath);
-            if (ndPlan == null)
+            XmlNode ndWdh = doc.SelectSingleNode(xpath);
+            if (ndWdh == null)
             {
                 return null;
             }
 
             Withdrawal withdr = new Withdrawal
             {
-                Id = ndPlan.Attributes["id"].Value,
-                Amount = int.Parse(ndPlan.Attributes["amount"].Value),
-                Currency = ndPlan.Attributes["currency"].Value,
-                DateExpense = DateTime.Parse(ndPlan.Attributes["date"].Value),
-                Description = ndPlan.Attributes["atm"].Value
+                Id = ndWdh.Attributes["id"].Value,
+                Amount = int.Parse(ndWdh.Attributes["amount"].Value),
+                Currency = ndWdh.Attributes["currency"].Value,
+                DateExpense = DateTime.Parse(ndWdh.Attributes["date"].Value),
+                Description = ndWdh.Attributes["atm"].Value
             };
 
             return withdr;
@@ -180,5 +180,6 @@ namespace NigelFinanceManage.DAO
 
             return list;
         }
+
     }
 }

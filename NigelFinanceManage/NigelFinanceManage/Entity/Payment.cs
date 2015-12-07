@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace NigelFinanceManage.Entity
 {
-    class Payment : FinanceInfo
+    public class Payment : FinanceInfo
     {
         public static String PREFIX = "P";
         public Payment()

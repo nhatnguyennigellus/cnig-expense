@@ -13,7 +13,7 @@ namespace NigelFinanceManage.DAO
     public interface IFinanceDAO <T>
         where T : class
     {
-        List<T> getList(XmlNodeList list);
+        List<FinanceInfo> getList(XmlDataSource xml, string accId);
         DataTable createDataTable(XmlNodeList list);
         DataTable getDataList(XmlDataSource xml, string accId);
         T getById(XmlDataSource xml, string id, string accId);

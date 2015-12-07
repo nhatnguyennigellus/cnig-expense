@@ -47,7 +47,7 @@ namespace NigelFinanceManage.DAO
             return list;
         }
 
-        private DataTable createDataTable(XmlNodeList list)
+        public DataTable createDataTable(XmlNodeList list)
         {
             DataTable dt = new DataTable();
 
@@ -70,7 +70,8 @@ namespace NigelFinanceManage.DAO
         public Income getById(XmlDataSource xml, string id, string accId)
         {
             XmlDocument doc = xml.getXmlDocument();
-            string xpath = "/my-expense/expense-data/data[@profile-id='" + accId + "']/income-log/income[@id='" + id + "']";
+            string xpath = "/my-expense/expense-data/data[@profile-id='" 
+                + accId + "']/income-log/income[@id='" + id + "']";
 
             XmlNode ndInc = doc.SelectSingleNode(xpath);
             if (ndInc == null)

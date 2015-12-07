@@ -14,20 +14,20 @@ namespace NigelFinanceManage.DAO
         public Account getAccountById(XmlDataSource xml, String accId)
         {
             XmlDocument doc = xml.getXmlDocument();
-            string xpath = "/my-expense/account/profile[@id='" + accId + "']";
+            string xpath = "/my-expense/account/profile[contains(@id, '" + accId + "')]";
 
             XmlNode ndAcc = doc.SelectSingleNode(xpath);
             if (ndAcc == null)
             {
                 return null;
             }
-
+            string Name = ndAcc.Attributes["name"].Value;
             Account account = new Account
             {
                 Id = accId,
                 Name = ndAcc.Attributes["name"].Value,
                 Bank = ndAcc.Attributes["bank"].Value,
-                CashWithdraw = int.Parse(ndAcc.Attributes["cash"].Value),
+                CashWithdraw = int.Parse(ndAcc.Attributes["cash-withdraw"].Value),
                 Balance = int.Parse(ndAcc.Attributes["balance"].Value),
                 Currency = ndAcc.Attributes["currency"].Value
             };

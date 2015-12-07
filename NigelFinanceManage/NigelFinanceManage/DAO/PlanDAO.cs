@@ -121,12 +121,41 @@ namespace NigelFinanceManage.DAO
             return true;
         }
 
-        public List<Plan> getList(XmlNodeList nodeList)
+        public List<FinanceInfo> getList(XmlNodeList nodeList)
         {
-            List<Plan> list = new List<Plan>();
+            List<FinanceInfo> list = new List<FinanceInfo>();
             foreach (XmlElement ele in nodeList)
             {
-                Plan info = new Plan
+                FinanceInfo info = new FinanceInfo
+                {
+                    Id = ele.GetAttribute("id"),
+                    Amount = int.Parse(ele.GetAttribute("amount")),
+                    Currency = ele.GetAttribute("currency"),
+                    DateExpense = DateTime.Parse(ele.GetAttribute("dateExpense").ToString()),
+                    Description = ele.GetAttribute("description"),
+                };
+
+                list.Add(info);
+            }
+
+            return list;
+        }
+
+        public List<FinanceInfo> getList(XmlDataSource xml, string accId)
+        {
+            DataTable dt = new DataTable();
+
+            XmlDocument doc = xml.getXmlDocument();
+            XmlNode root = doc.DocumentElement;
+
+            string xpath = "/my-expense/expense-data/data[@profile-id='" + accId
+                + "']/expense-plan/plan-item";
+            XmlNodeList nodeList = root.SelectNodes(xpath);
+
+            List<FinanceInfo> list = new List<FinanceInfo>();
+            foreach (XmlElement ele in nodeList)
+            {
+                Income info = new Income
                 {
                     Id = ele.GetAttribute("id"),
                     Amount = int.Parse(ele.GetAttribute("amount")),
