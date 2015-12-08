@@ -26,9 +26,9 @@ namespace NigelFinanceManage
             string pin = txtPassword.Text;
             if (service.isAuthenticated(id, pin))
             {
-                Main frm = new Main(service.getAccountById(id), this);
+                Main frm = new Main(service.getAccountById(id), this, service,
+                    cbDB.SelectedIndex);
                 frm.Show();
-                this.Hide();
             }
             else
             {

@@ -154,6 +154,11 @@ namespace NigelFinanceManage.Service
             return dt;
         }
 
+        public List<FinanceInfo> getIncomeList(string accId)
+        {
+            return incDAO.getList(xml, accId);
+        }
+
         public bool addIncomeLog(FinanceInfo income, String id)
         {
             return payDAO.add(xml, income, id);
@@ -175,6 +180,11 @@ namespace NigelFinanceManage.Service
         public DataTable getPaymentData(string id)
         {
             return payDAO.getDataList(xml, id);
+        }
+
+        public List<FinanceInfo> getPaymentList(string accId)
+        {
+            return payDAO.getList(xml, accId);
         }
 
         public DataTable getPaymentDataByMonth(string id, int month, int year)
@@ -246,6 +256,22 @@ namespace NigelFinanceManage.Service
             return dt;
         }
 
+        public DataTable getPaymentDataByDesc(DataTable dt, string keyword)
+        {
+            DataTable dtOut = new DataTable();
+
+            foreach (DataRow rowNew in dt.Rows)
+            {
+                if (rowNew["Description"].ToString().Contains(keyword))
+                {
+                    DataRow row = rowNew;
+                    dt.Rows.Add(row);
+                    
+                }
+            }
+
+            return dtOut;
+        }
         public bool addPaymentLog(FinanceInfo payment, String id)
         {
             return payDAO.add(xml, payment, id);

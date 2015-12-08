@@ -131,6 +131,7 @@
             this.dtpBizDate = new System.Windows.Forms.DateTimePicker();
             this.label11 = new System.Windows.Forms.Label();
             this.btnLogout = new System.Windows.Forms.Button();
+            this.sttMain = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusStrip1.SuspendLayout();
             this.tabWithdrawal.SuspendLayout();
             this.tabIncome.SuspendLayout();
@@ -166,27 +167,27 @@
             // 
             // txtBank
             // 
-            this.txtBank.BackColor = System.Drawing.Color.Green;
+            this.txtBank.BackColor = System.Drawing.SystemColors.Menu;
             this.txtBank.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBank.ForeColor = System.Drawing.SystemColors.Control;
+            this.txtBank.ForeColor = System.Drawing.Color.Green;
             this.txtBank.Location = new System.Drawing.Point(247, 7);
             this.txtBank.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.txtBank.Name = "txtBank";
             this.txtBank.ReadOnly = true;
-            this.txtBank.Size = new System.Drawing.Size(103, 31);
+            this.txtBank.Size = new System.Drawing.Size(124, 31);
             this.txtBank.TabIndex = 9;
             this.txtBank.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // txtCash
             // 
-            this.txtCash.BackColor = System.Drawing.SystemColors.HotTrack;
+            this.txtCash.BackColor = System.Drawing.SystemColors.Menu;
             this.txtCash.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCash.ForeColor = System.Drawing.SystemColors.Control;
+            this.txtCash.ForeColor = System.Drawing.SystemColors.HotTrack;
             this.txtCash.Location = new System.Drawing.Point(435, 7);
             this.txtCash.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtCash.Name = "txtCash";
             this.txtCash.ReadOnly = true;
-            this.txtCash.Size = new System.Drawing.Size(98, 31);
+            this.txtCash.Size = new System.Drawing.Size(119, 31);
             this.txtCash.TabIndex = 10;
             this.txtCash.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -221,7 +222,8 @@
             // statusStrip1
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.lbStatus});
+            this.lbStatus,
+            this.sttMain});
             this.statusStrip1.Location = new System.Drawing.Point(0, 554);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(668, 22);
@@ -294,7 +296,7 @@
             this.panel2.Controls.Add(this.dtpIncTo);
             this.panel2.Controls.Add(this.cbIncSrchType);
             this.panel2.Controls.Add(this.dtpIncFrom);
-            this.panel2.Location = new System.Drawing.Point(3, 108);
+            this.panel2.Location = new System.Drawing.Point(3, 105);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(654, 61);
             this.panel2.TabIndex = 8;
@@ -348,6 +350,7 @@
             this.btnIncSrch.TabIndex = 5;
             this.btnIncSrch.Text = "Search";
             this.btnIncSrch.UseVisualStyleBackColor = true;
+            this.btnIncSrch.Click += new System.EventHandler(this.btnIncSrch_Click);
             // 
             // dtpIncTo
             // 
@@ -367,6 +370,7 @@
             this.cbIncSrchType.Name = "cbIncSrchType";
             this.cbIncSrchType.Size = new System.Drawing.Size(103, 23);
             this.cbIncSrchType.TabIndex = 0;
+            this.cbIncSrchType.SelectedIndexChanged += new System.EventHandler(this.cbIncSrchType_SelectedIndexChanged);
             // 
             // dtpIncFrom
             // 
@@ -383,18 +387,22 @@
             this.panel1.Controls.Add(this.btnIncViewAll);
             this.panel1.Controls.Add(this.btnIncModify);
             this.panel1.Controls.Add(this.btnIncAdd);
-            this.panel1.Location = new System.Drawing.Point(3, 70);
+            this.panel1.Location = new System.Drawing.Point(3, 65);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(654, 32);
             this.panel1.TabIndex = 7;
             // 
             // txtIncTotal
             // 
-            this.txtIncTotal.Location = new System.Drawing.Point(549, 4);
+            this.txtIncTotal.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.txtIncTotal.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtIncTotal.ForeColor = System.Drawing.Color.OrangeRed;
+            this.txtIncTotal.Location = new System.Drawing.Point(549, 3);
             this.txtIncTotal.Name = "txtIncTotal";
             this.txtIncTotal.ReadOnly = true;
-            this.txtIncTotal.Size = new System.Drawing.Size(100, 23);
+            this.txtIncTotal.Size = new System.Drawing.Size(100, 26);
             this.txtIncTotal.TabIndex = 4;
+            this.txtIncTotal.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // btnIncRemove
             // 
@@ -413,6 +421,7 @@
             this.btnIncViewAll.TabIndex = 0;
             this.btnIncViewAll.Text = "View All";
             this.btnIncViewAll.UseVisualStyleBackColor = true;
+            this.btnIncViewAll.Click += new System.EventHandler(this.btnIncViewAll_Click);
             // 
             // btnIncModify
             // 
@@ -436,9 +445,11 @@
             // 
             this.cbIncDescTemp.FormattingEnabled = true;
             this.cbIncDescTemp.Location = new System.Drawing.Point(407, 35);
+            this.cbIncDescTemp.MaxDropDownItems = 50;
             this.cbIncDescTemp.Name = "cbIncDescTemp";
             this.cbIncDescTemp.Size = new System.Drawing.Size(121, 23);
             this.cbIncDescTemp.TabIndex = 2;
+            this.cbIncDescTemp.SelectedIndexChanged += new System.EventHandler(this.cbIncDescTemp_SelectedIndexChanged);
             // 
             // cbAddTo
             // 
@@ -532,6 +543,7 @@
             this.btnPlanImport.TabIndex = 4;
             this.btnPlanImport.Text = "Import";
             this.btnPlanImport.UseVisualStyleBackColor = true;
+            this.btnPlanImport.Click += new System.EventHandler(this.btnPlanImport_Click);
             // 
             // label10
             // 
@@ -641,6 +653,7 @@
             this.btnPaySrch.TabIndex = 6;
             this.btnPaySrch.Text = "Search";
             this.btnPaySrch.UseVisualStyleBackColor = true;
+            this.btnPaySrch.Click += new System.EventHandler(this.btnPaySrch_Click);
             // 
             // dtpPayTo
             // 
@@ -660,6 +673,7 @@
             this.cbPaySrchType.Name = "cbPaySrchType";
             this.cbPaySrchType.Size = new System.Drawing.Size(103, 23);
             this.cbPaySrchType.TabIndex = 0;
+            this.cbPaySrchType.SelectedIndexChanged += new System.EventHandler(this.cbPaySrchType_SelectedIndexChanged);
             // 
             // dtpPayFrom
             // 
@@ -716,6 +730,7 @@
             this.btnPayViewAll.TabIndex = 0;
             this.btnPayViewAll.Text = "View All";
             this.btnPayViewAll.UseVisualStyleBackColor = true;
+            this.btnPayViewAll.Click += new System.EventHandler(this.btnPayViewAll_Click);
             // 
             // btnPayModify
             // 
@@ -739,9 +754,11 @@
             // 
             this.cbPayDescTemp.FormattingEnabled = true;
             this.cbPayDescTemp.Location = new System.Drawing.Point(406, 35);
+            this.cbPayDescTemp.MaxDropDownItems = 50;
             this.cbPayDescTemp.Name = "cbPayDescTemp";
             this.cbPayDescTemp.Size = new System.Drawing.Size(121, 23);
             this.cbPayDescTemp.TabIndex = 2;
+            this.cbPayDescTemp.SelectedIndexChanged += new System.EventHandler(this.cbPayDescTemp_SelectedIndexChanged);
             // 
             // label7
             // 
@@ -1197,6 +1214,11 @@
             this.btnLogout.UseVisualStyleBackColor = true;
             this.btnLogout.Click += new System.EventHandler(this.btnLogout_Click);
             // 
+            // sttMain
+            // 
+            this.sttMain.Name = "sttMain";
+            this.sttMain.Size = new System.Drawing.Size(0, 17);
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -1217,6 +1239,8 @@
             this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.Name = "Main";
             this.Text = "Nigel Finance Diary";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Main_FormClosing);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Main_FormClosed);
             this.Load += new System.EventHandler(this.Main_Load);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
@@ -1356,5 +1380,6 @@
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.Label label21;
         private System.Windows.Forms.Button btnLogout;
+        private System.Windows.Forms.ToolStripStatusLabel sttMain;
     }
 }
