@@ -52,7 +52,7 @@ namespace NigelFinanceManage.Service
             }
 
 
-            string suffix = maxSuffix.ToString("D" + FinanceInfo.ID_SUFFIX_LENGTH);
+            string suffix = maxSuffix.ToString("D" + (FinanceInfo.ID_SUFFIX_LENGTH - 1));
 
             result.Append(prefix);
             result.Append(suffix);
@@ -161,17 +161,17 @@ namespace NigelFinanceManage.Service
 
         public bool addIncomeLog(FinanceInfo income, String id)
         {
-            return payDAO.add(xml, income, id);
+            return incDAO.add(xml, income, id);
         }
 
         public bool modifyIncome(FinanceInfo income, String accId)
         {
-            return payDAO.modify(xml, income, accId);
+            return incDAO.modify(xml, income, accId);
         }
 
         public bool removeIncome(FinanceInfo income, String accId)
         {
-            return payDAO.remove(xml, income, accId);
+            return incDAO.remove(xml, income, accId);
         }
 
         /**

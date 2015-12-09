@@ -36,6 +36,7 @@
             this.lbID = new System.Windows.Forms.Label();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.lbStatus = new System.Windows.Forms.ToolStripStatusLabel();
+            this.sttMain = new System.Windows.Forms.ToolStripStatusLabel();
             this.tabWithdrawal = new System.Windows.Forms.TabControl();
             this.tabIncome = new System.Windows.Forms.TabPage();
             this.label19 = new System.Windows.Forms.Label();
@@ -131,7 +132,6 @@
             this.dtpBizDate = new System.Windows.Forms.DateTimePicker();
             this.label11 = new System.Windows.Forms.Label();
             this.btnLogout = new System.Windows.Forms.Button();
-            this.sttMain = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusStrip1.SuspendLayout();
             this.tabWithdrawal.SuspendLayout();
             this.tabIncome.SuspendLayout();
@@ -235,6 +235,11 @@
             this.lbStatus.Name = "lbStatus";
             this.lbStatus.Size = new System.Drawing.Size(0, 17);
             // 
+            // sttMain
+            // 
+            this.sttMain.Name = "sttMain";
+            this.sttMain.Size = new System.Drawing.Size(0, 17);
+            // 
             // tabWithdrawal
             // 
             this.tabWithdrawal.Controls.Add(this.tabIncome);
@@ -280,9 +285,16 @@
             // 
             // dgvIncome
             // 
+            this.dgvIncome.AllowUserToAddRows = false;
+            this.dgvIncome.AllowUserToDeleteRows = false;
+            this.dgvIncome.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
             this.dgvIncome.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvIncome.GridColor = System.Drawing.SystemColors.ButtonFace;
             this.dgvIncome.Location = new System.Drawing.Point(4, 198);
+            this.dgvIncome.MultiSelect = false;
             this.dgvIncome.Name = "dgvIncome";
+            this.dgvIncome.ReadOnly = true;
+            this.dgvIncome.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvIncome.Size = new System.Drawing.Size(653, 235);
             this.dgvIncome.TabIndex = 4;
             // 
@@ -440,6 +452,7 @@
             this.btnIncAdd.TabIndex = 1;
             this.btnIncAdd.Text = "Add";
             this.btnIncAdd.UseVisualStyleBackColor = true;
+            this.btnIncAdd.Click += new System.EventHandler(this.btnIncAdd_Click);
             // 
             // cbIncDescTemp
             // 
@@ -502,6 +515,7 @@
             this.txtIncAmount.Name = "txtIncAmount";
             this.txtIncAmount.Size = new System.Drawing.Size(100, 23);
             this.txtIncAmount.TabIndex = 0;
+            this.txtIncAmount.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtIncAmount_KeyPress);
             // 
             // tabPage2
             // 
@@ -567,17 +581,29 @@
             // 
             // dgvPayPlan
             // 
+            this.dgvPayPlan.AllowUserToAddRows = false;
+            this.dgvPayPlan.AllowUserToDeleteRows = false;
+            this.dgvPayPlan.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
             this.dgvPayPlan.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvPayPlan.Location = new System.Drawing.Point(404, 197);
+            this.dgvPayPlan.MultiSelect = false;
             this.dgvPayPlan.Name = "dgvPayPlan";
+            this.dgvPayPlan.RowHeadersVisible = false;
+            this.dgvPayPlan.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvPayPlan.Size = new System.Drawing.Size(253, 247);
             this.dgvPayPlan.TabIndex = 15;
             // 
             // dgvPayment
             // 
+            this.dgvPayment.AllowUserToAddRows = false;
+            this.dgvPayment.AllowUserToDeleteRows = false;
+            this.dgvPayment.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
             this.dgvPayment.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvPayment.Location = new System.Drawing.Point(3, 197);
+            this.dgvPayment.MultiSelect = false;
             this.dgvPayment.Name = "dgvPayment";
+            this.dgvPayment.RowHeadersVisible = false;
+            this.dgvPayment.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvPayment.Size = new System.Drawing.Size(395, 247);
             this.dgvPayment.TabIndex = 14;
             // 
@@ -749,6 +775,7 @@
             this.btnPayAdd.TabIndex = 1;
             this.btnPayAdd.Text = "Add";
             this.btnPayAdd.UseVisualStyleBackColor = true;
+            this.btnPayAdd.Click += new System.EventHandler(this.btnPayAdd_Click);
             // 
             // cbPayDescTemp
             // 
@@ -1214,11 +1241,6 @@
             this.btnLogout.UseVisualStyleBackColor = true;
             this.btnLogout.Click += new System.EventHandler(this.btnLogout_Click);
             // 
-            // sttMain
-            // 
-            this.sttMain.Name = "sttMain";
-            this.sttMain.Size = new System.Drawing.Size(0, 17);
-            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -1237,6 +1259,7 @@
             this.Controls.Add(this.label4);
             this.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.MaximizeBox = false;
             this.Name = "Main";
             this.Text = "Nigel Finance Diary";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Main_FormClosing);

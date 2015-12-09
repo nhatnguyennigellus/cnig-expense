@@ -160,23 +160,27 @@ namespace NigelFinanceManage
 
         private void cbPaySrchType_SelectedIndexChanged(object sender, EventArgs e)
         {
-            DataTable dtPay = new DataTable();
-            if (cbIncSrchType.SelectedIndex == 0)
+            if (cbIncSrchType.SelectedIndex == 0) // Day range
             {
-                dtPay = service.getPaymentDataByRange
-                    (account.Id, dtpPayFrom.Value, dtpPayTo.Value);
+                dtpIncFrom.Enabled = true;
+                dtpIncTo.Enabled = true;
+                cbIncMonth.Enabled = false;
+                cbIncYear.Enabled = false;
             }
-            else if (cbIncSrchType.SelectedIndex == 2)
+            else if (cbIncSrchType.SelectedIndex == 2) // Month
             {
-                dtPay = service.getPaymentDataByMonth
-                    (account.Id, dtpPayFrom.Value.Month, dtpPayTo.Value.Year);
+                dtpIncFrom.Enabled = false;
+                dtpIncTo.Enabled = false;
+                cbIncMonth.Enabled = true;
+                cbIncYear.Enabled = true;
             }
-            else if (cbIncSrchType.SelectedIndex == 1)
+            else if (cbIncSrchType.SelectedIndex == 1) // Date
             {
-                dtPay = service.getPaymentDataByDate(account.Id, dtpPayFrom.Value);
+                dtpIncFrom.Enabled = true;
+                dtpIncTo.Enabled = false;
+                cbIncMonth.Enabled = false;
+                cbIncYear.Enabled = false;
             }
-            dgvPayment.DataSource = dtPay;
-            txtPayTotal.Text = calculateTotal(dtPay).ToString();
         }
 
         private void btnPaySrch_Click(object sender, EventArgs e)
@@ -203,8 +207,144 @@ namespace NigelFinanceManage
         private void btnPlanImport_Click(object sender, EventArgs e)
         {
             dgvPayPlan.DataSource = service.getPlanData(lbID.Text);
+            dgvPayPlan.Columns[0].Visible = false;
+            dgvPayPlan.Columns[2].Visible = false;
+            dgvPayPlan.Columns[3].Width = 170;
         }
 
+        private void errorMessage(string message)
+        {
+            sttMain.Text = message;
+            sttMain.ForeColor = Color.DarkRed;
+            statusStrip1.Refresh();
 
+        }
+
+        private void successMessage(string message)
+        {
+            sttMain.Text = message;
+            sttMain.ForeColor = Color.Green;
+            statusStrip1.Refresh();
+
+        }
+        private void btnIncAdd_Click(object sender, EventArgs e)
+        {
+            if (txtIncAmount.Text == "")
+            {
+                errorMessage("Amount is required!");
+                txtIncAmount.Focus();
+                return;
+            }
+            if (txtIncDesc.Text == "")
+            {
+                errorMessage("Description is required!");
+                txtIncDesc.Focus();
+                return;
+            }
+
+            string id = service.generateId(Income.PREFIX, service.getIncomeList(lbID.Text));
+            int amount = int.Parse(txtIncAmount.Text);
+            string desc = txtIncDesc.Text;
+            DateTime date = dtpBizDate.Value;
+            Income income = new Income
+            {
+                Id = id,
+                Amount = amount,
+                Description = desc,
+                DateExpense = date,
+                Currency = account.Currency
+            };
+            if (service.addIncomeLog(income, lbID.Text))
+            {
+                successMessage("Income log added!");
+
+                DataTable dt =  service.getIncomeData(lbID.Text);
+                dgvIncome.DataSource = dt;
+                txtIncTotal.Text = calculateTotal(dt).ToString();
+
+                if (cbAddTo.SelectedItem.ToString().Equals("Bank"))
+                {
+                    account.Balance += amount;
+                    txtBank.Text = account.Balance.ToString();
+                    service.updateBudget(lbID.Text, account.Balance,
+                        cbAddTo.SelectedItem.ToString());
+                }
+                else if (cbAddTo.SelectedItem.ToString().Equals("Cash"))
+                {
+                    account.CashWithdraw += amount;
+                    txtCash.Text = account.CashWithdraw.ToString();
+                    service.updateBudget(lbID.Text, account.CashWithdraw,
+                        cbAddTo.SelectedItem.ToString());
+                }
+            }
+            else
+            {
+                errorMessage("Error occurred!");
+            }
+        }
+
+        private void txtIncAmount_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            CheckNumPress(e);
+        }
+
+        private void CheckNumPress(KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void btnPayAdd_Click(object sender, EventArgs e)
+        {
+            if (txtPayAmount.Text == "")
+            {
+                errorMessage("Amount is required!");
+                txtPayAmount.Focus();
+                return;
+            }
+            if (txtPayDesc.Text == "")
+            {
+                errorMessage("Description is required!");
+                txtPayDesc.Focus();
+                return;
+            }
+
+            int amount = int.Parse(txtPayAmount.Text);
+            if (int.Parse(txtCash.Text) - amount < 0)
+            {
+                errorMessage("Not enough budget!");
+                txtPayAmount.Focus();
+                return;
+            }
+
+            string id = service.generateId(Payment.PREFIX, service.getPaymentList(lbID.Text));
+            
+            string desc = txtPayDesc.Text;
+            DateTime date = dtpBizDate.Value;
+            Payment payment = new Payment
+            {
+                Id = id,
+                Amount = amount,
+                Description = desc,
+                DateExpense = date,
+                Currency = account.Currency
+            };
+            if (service.addPaymentLog(payment, lbID.Text))
+            {
+                successMessage("Payment log added!");
+
+                DataTable dt = service.getPaymentData(lbID.Text);
+                txtPayTotal.Text = calculateTotal(dt).ToString();
+                account.CashWithdraw -= amount;
+                txtCash.Text = account.CashWithdraw.ToString();
+                service.updateBudget(lbID.Text, account.CashWithdraw, "Cash");
+            }
+            else
+            {
+                errorMessage("Error occurred!");
+            }
+        }
     }
 }
