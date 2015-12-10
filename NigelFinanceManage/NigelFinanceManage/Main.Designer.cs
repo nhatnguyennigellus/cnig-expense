@@ -849,9 +849,15 @@
             // 
             // dgvPlan
             // 
+            this.dgvPlan.AllowUserToAddRows = false;
+            this.dgvPlan.AllowUserToDeleteRows = false;
+            this.dgvPlan.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
             this.dgvPlan.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvPlan.Location = new System.Drawing.Point(3, 266);
+            this.dgvPlan.MultiSelect = false;
             this.dgvPlan.Name = "dgvPlan";
+            this.dgvPlan.RowHeadersVisible = false;
+            this.dgvPlan.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvPlan.Size = new System.Drawing.Size(654, 175);
             this.dgvPlan.TabIndex = 17;
             // 
@@ -871,34 +877,44 @@
             // 
             // txtPlanEstSum
             // 
-            this.txtPlanEstSum.Location = new System.Drawing.Point(364, 86);
+            this.txtPlanEstSum.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.txtPlanEstSum.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtPlanEstSum.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.txtPlanEstSum.Location = new System.Drawing.Point(364, 84);
             this.txtPlanEstSum.Name = "txtPlanEstSum";
             this.txtPlanEstSum.ReadOnly = true;
-            this.txtPlanEstSum.Size = new System.Drawing.Size(100, 23);
+            this.txtPlanEstSum.Size = new System.Drawing.Size(100, 27);
             this.txtPlanEstSum.TabIndex = 20;
+            this.txtPlanEstSum.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // txtPlanEstBal
             // 
-            this.txtPlanEstBal.Location = new System.Drawing.Point(364, 56);
+            this.txtPlanEstBal.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.txtPlanEstBal.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtPlanEstBal.Location = new System.Drawing.Point(364, 53);
             this.txtPlanEstBal.Name = "txtPlanEstBal";
             this.txtPlanEstBal.ReadOnly = true;
-            this.txtPlanEstBal.Size = new System.Drawing.Size(100, 23);
+            this.txtPlanEstBal.Size = new System.Drawing.Size(100, 27);
             this.txtPlanEstBal.TabIndex = 19;
+            this.txtPlanEstBal.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // txtPlanEstCash
             // 
-            this.txtPlanEstCash.Location = new System.Drawing.Point(364, 25);
+            this.txtPlanEstCash.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.txtPlanEstCash.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtPlanEstCash.Location = new System.Drawing.Point(364, 22);
             this.txtPlanEstCash.Name = "txtPlanEstCash";
             this.txtPlanEstCash.ReadOnly = true;
-            this.txtPlanEstCash.Size = new System.Drawing.Size(100, 23);
+            this.txtPlanEstCash.Size = new System.Drawing.Size(100, 27);
             this.txtPlanEstCash.TabIndex = 4;
+            this.txtPlanEstCash.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label16
             // 
             this.label16.AutoSize = true;
             this.label16.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label16.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label16.Location = new System.Drawing.Point(131, 89);
+            this.label16.Location = new System.Drawing.Point(131, 90);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(89, 15);
             this.label16.TabIndex = 18;
@@ -955,6 +971,7 @@
             this.btnPlanViewAll.TabIndex = 0;
             this.btnPlanViewAll.Text = "View All";
             this.btnPlanViewAll.UseVisualStyleBackColor = true;
+            this.btnPlanViewAll.Click += new System.EventHandler(this.btnPlanViewAll_Click);
             // 
             // btnPlanModify
             // 
@@ -973,6 +990,7 @@
             this.btnPlanAdd.TabIndex = 1;
             this.btnPlanAdd.Text = "Add";
             this.btnPlanAdd.UseVisualStyleBackColor = true;
+            this.btnPlanAdd.Click += new System.EventHandler(this.btnPlanAdd_Click);
             // 
             // label12
             // 
@@ -1039,6 +1057,7 @@
             // 
             // dgvWdh
             // 
+            this.dgvWdh.BackgroundColor = System.Drawing.SystemColors.Control;
             this.dgvWdh.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvWdh.Location = new System.Drawing.Point(3, 131);
             this.dgvWdh.Name = "dgvWdh";
@@ -1074,6 +1093,7 @@
             this.btnWdhViewAll.TabIndex = 0;
             this.btnWdhViewAll.Text = "View All";
             this.btnWdhViewAll.UseVisualStyleBackColor = true;
+            this.btnWdhViewAll.Click += new System.EventHandler(this.btnWdhViewAll_Click);
             // 
             // btnWdhModify
             // 
@@ -1092,6 +1112,7 @@
             this.btnWdhAdd.TabIndex = 1;
             this.btnWdhAdd.Text = "Add";
             this.btnWdhAdd.UseVisualStyleBackColor = true;
+            this.btnWdhAdd.Click += new System.EventHandler(this.btnWdhAdd_Click);
             // 
             // panel7
             // 
@@ -1154,6 +1175,7 @@
             this.btnWdhSrch.TabIndex = 2;
             this.btnWdhSrch.Text = "Search";
             this.btnWdhSrch.UseVisualStyleBackColor = true;
+            this.btnWdhSrch.Click += new System.EventHandler(this.btnWdhSrch_Click);
             // 
             // rbATMOther
             // 
@@ -1174,6 +1196,7 @@
             this.rbATMACB.TabIndex = 1;
             this.rbATMACB.TabStop = true;
             this.rbATMACB.UseVisualStyleBackColor = true;
+            this.rbATMACB.CheckedChanged += new System.EventHandler(this.rbATMACB_CheckedChanged);
             // 
             // cbATMACB
             // 

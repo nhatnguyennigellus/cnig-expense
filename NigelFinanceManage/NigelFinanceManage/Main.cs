@@ -37,8 +37,16 @@ namespace NigelFinanceManage
             txtCash.Text = account.CashWithdraw.ToString();
             txtBank.Text = account.Balance.ToString();
             lbID.Text = account.Id;
+
             cbAddTo.SelectedIndex = 0;
             cbIncSrchType.SelectedIndex = 0;
+            cbWdhMonth.SelectedIndex = 0;
+            cbWdhYear.SelectedIndex = 0;
+            cbIncMonth.SelectedIndex = 0;
+            cbIncYear.SelectedIndex = 0;
+            cbPayMonth.SelectedIndex = 0;
+            cbPayYear.SelectedIndex = 0;
+
             getIncPayTemp();
             sttMain.Text = "Welcome, " + account.Name;
         }
@@ -78,6 +86,9 @@ namespace NigelFinanceManage
             {
                 dgvIncome.DataSource = dtInc;
             }
+            dgvIncome.Columns[1].DefaultCellStyle.Alignment = 
+                DataGridViewContentAlignment.MiddleRight;
+
             txtIncTotal.Text = calculateTotal(dtInc).ToString();
         }
 
@@ -99,6 +110,11 @@ namespace NigelFinanceManage
                 dtInc = service.getIncomeDataByDate(account.Id, dtpIncFrom.Value);
             }
             dgvIncome.DataSource = dtInc;
+            dgvIncome.Columns[2].Width = 150;
+            dgvIncome.Columns[3].Width = 250;
+            dgvIncome.Columns[1].DefaultCellStyle.Alignment = 
+                DataGridViewContentAlignment.MiddleRight;
+
             txtIncTotal.Text = calculateTotal(dtInc).ToString();
         }
 
@@ -151,10 +167,17 @@ namespace NigelFinanceManage
         private void btnPayViewAll_Click(object sender, EventArgs e)
         {
             DataTable dtPay = service.getPaymentData(lbID.Text);
+
             if (dtPay != null)
             {
                 dgvPayment.DataSource = dtPay;
             }
+            dgvPayment.Columns[1].DefaultCellStyle.Alignment = 
+                DataGridViewContentAlignment.MiddleRight;
+            dgvPayment.Columns[0].Width = 60;
+            dgvPayment.Columns[1].Width = 60;
+            dgvPayment.Columns[2].Width = 140;
+
             txtPayTotal.Text = calculateTotal(dtPay).ToString();
         }
 
@@ -202,6 +225,9 @@ namespace NigelFinanceManage
             }
             dgvPayment.DataSource = dtPay;
             txtPayTotal.Text = calculateTotal(dtPay).ToString();
+            dgvPayment.Columns[1].DefaultCellStyle.Alignment = 
+                DataGridViewContentAlignment.MiddleRight;
+
         }
 
         private void btnPlanImport_Click(object sender, EventArgs e)
@@ -210,6 +236,8 @@ namespace NigelFinanceManage
             dgvPayPlan.Columns[0].Visible = false;
             dgvPayPlan.Columns[2].Visible = false;
             dgvPayPlan.Columns[3].Width = 170;
+            dgvPayPlan.Columns[1].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+
         }
 
         private void errorMessage(string message)
@@ -276,6 +304,10 @@ namespace NigelFinanceManage
                     service.updateBudget(lbID.Text, account.CashWithdraw,
                         cbAddTo.SelectedItem.ToString());
                 }
+
+                txtIncAmount.Text = "";
+                txtIncDesc.Text = "";
+
             }
             else
             {
@@ -340,10 +372,235 @@ namespace NigelFinanceManage
                 account.CashWithdraw -= amount;
                 txtCash.Text = account.CashWithdraw.ToString();
                 service.updateBudget(lbID.Text, account.CashWithdraw, "Cash");
+
+                txtPayAmount.Text = "";
+                txtPayDesc.Text = "";
             }
             else
             {
                 errorMessage("Error occurred!");
+            }
+        }
+
+        private void btnPlanViewAll_Click(object sender, EventArgs e)
+        {
+            DataTable dt = service.getPlanData(lbID.Text);
+            dgvPlan.DataSource = dt;
+            dgvPlan.Columns[1].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dgvPlan.Columns[2].Width = 150;
+            dgvPlan.Columns[3].Width = 250;
+            refreshPlanList(dt);
+
+        }
+
+        private void refreshPlanList(DataTable dt)
+        {
+
+            if (dt.Rows.Count == 0)
+            {
+                errorMessage("No data");
+                return;
+            }
+            else
+            {
+                if (sttMain.Text.Length > 0)
+                {
+                    successMessage(sttMain.Text + " Data loaded!");
+
+                }
+                else
+                {
+                    successMessage("Data loaded");
+                }
+            }
+            int total = 0;
+            foreach (DataRow row in dt.Rows)
+            {
+                total += int.Parse(row["Amount"].ToString());
+            }
+            txtPlanEstSum.Text = total.ToString();
+            int cash = int.Parse(txtCash.Text);
+            int balance = int.Parse(txtBank.Text);
+            txtPlanEstCash.Text = (cash - total).ToString();
+            txtPlanEstBal.Text = (balance - total).ToString();
+
+            if (cash - total < 0)
+            {
+                txtPlanEstCash.ForeColor = Color.DarkRed;
+            }
+            else
+            {
+                txtPlanEstCash.ForeColor = Color.Green;
+            }
+
+            if (balance - total < 100000)
+            {
+                txtPlanEstBal.ForeColor = Color.DarkRed;   
+            }
+            else
+            {
+                txtPlanEstBal.ForeColor = Color.Green;
+            }
+
+        }
+
+        private void btnWdhViewAll_Click(object sender, EventArgs e)
+        {
+            DataTable dt = service.getWithdrawalData(lbID.Text);
+
+            if (dt.Rows.Count == 0)
+            {
+                errorMessage("No data");
+            }
+            else
+            {
+                successMessage("Data loaded");
+            }
+
+            dgvWdh.DataSource = dt;
+            dgvWdh.Columns[0].Width = 70;
+            dgvWdh.Columns[1].Width = 100;
+            dgvWdh.Columns[1].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dgvWdh.Columns[2].Width = 170;
+            dgvWdh.Columns[3].Width = 200;
+        }
+
+        private void btnWdhSrch_Click(object sender, EventArgs e)
+        {
+            DataTable dt = service.getWithdrawalDataByMonth(lbID.Text,
+                int.Parse(cbWdhMonth.Text), int.Parse(cbWdhYear.Text));
+            if (dt.Rows.Count == 0)
+            {
+                errorMessage("No data");
+            }
+            else
+            {
+                successMessage("Data loaded");
+            }
+
+            dgvWdh.DataSource = dt;
+        }
+
+        private void btnPlanAdd_Click(object sender, EventArgs e)
+        {
+            if (txtPlanAmount.Text == "")
+            {
+                errorMessage("Amount is required!");
+                txtPlanAmount.Focus();
+                return;
+            }
+            if (txtPlanDesc.Text == "")
+            {
+                errorMessage("Description is required!");
+                txtPlanDesc.Focus();
+                return;
+            }
+
+            int amount = int.Parse(txtPlanAmount.Text);
+
+            string id = service.generateId(Plan.PREFIX, service.getPaymentList(lbID.Text));
+            string description = txtPlanDesc.Text;
+
+            Plan plan = new Plan()
+            {
+                Id = id,
+                Amount = amount,
+                Description = description,
+                DateExpense = dtpBizDate.Value,
+                Currency = account.Currency
+            };
+
+            if (service.addPlanLog(plan, lbID.Text))
+            {
+                successMessage("Plan added!");
+
+                DataTable dt = service.getPlanData(lbID.Text);
+                dgvPlan.DataSource = dt;
+
+                refreshPlanList(dt);
+            }
+            else
+            {
+                errorMessage("Error occurred!");
+            }
+        }
+
+        private void btnWdhAdd_Click(object sender, EventArgs e)
+        {
+            if (txtWdhAmount.Text == "")
+            {
+                errorMessage("Amount is required!");
+                txtPlanAmount.Focus();
+                return;
+            }
+            if (txtATMOther.Text == "" && rbATMOther.Checked == true)
+            {
+                errorMessage("ATM is required!");
+                return;
+            }
+
+            int amount = int.Parse(txtWdhAmount.Text);
+            if (int.Parse(txtBank.Text) - amount < 100000)
+            {
+                errorMessage("Not enough budget!");
+                return;
+            }
+
+            string id = service.generateId(Withdrawal.PREFIX, 
+                service.getWithdrawalList(lbID.Text));
+            string description = "";
+            int extraWdh = 0;
+            if (rbATMACB.Checked == true)
+            {
+                description = cbATMACB.SelectedItem.ToString();
+                extraWdh += 1100;
+            }
+            else if (rbATMOther.Checked == true)
+            {
+                description = txtATMOther.Text;
+                extraWdh += 3300;
+            }
+            amount += extraWdh;
+            Withdrawal wdh = new Withdrawal
+            {
+                Id = id,
+                Amount = amount,
+                Currency = account.Currency,
+                DateExpense = dtpBizDate.Value,
+                Description = description
+            };
+
+            if (service.addWithdrawalLog(wdh, lbID.Text))
+            {
+                successMessage("Withdrawal Log added! Data loaded!");
+
+                DataTable dt = service.getWithdrawalData(lbID.Text);
+                dgvWdh.DataSource = dt;
+
+                account.Balance = account.Balance - amount;
+                account.CashWithdraw = account.CashWithdraw + amount - extraWdh;
+                txtBank.Text = account.Balance.ToString();
+                txtCash.Text = account.CashWithdraw.ToString();
+                service.updateBudget(lbID.Text, int.Parse(txtBank.Text), "Bank");
+                service.updateBudget(lbID.Text, int.Parse(txtCash.Text), "Cash");
+
+            }
+            else
+            {
+                errorMessage("Error occurs!");
+            }
+        }
+
+        private void rbATMACB_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rbATMACB.Checked)
+            {
+                cbATMACB.Items.Clear();
+                foreach (string atm in service.getATMACBList())
+                {
+                    
+                    cbATMACB.Items.Add(atm);
+                }
             }
         }
     }

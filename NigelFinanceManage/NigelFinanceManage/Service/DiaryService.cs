@@ -313,7 +313,7 @@ namespace NigelFinanceManage.Service
         /**
          * Withdrawal Service
          */
-        public List<String> getATMACBList()
+        public List<string> getATMACBList()
         {
             return wdhDAO.getATMACBList(xml);
         }
@@ -321,6 +321,10 @@ namespace NigelFinanceManage.Service
         public DataTable getWithdrawalData(string id)
         {
             return wdhDAO.getDataList(xml, id);
+        }
+        public List<FinanceInfo> getWithdrawalList(string accId)
+        {
+            return wdhDAO.getList(xml, accId);
         }
 
         public bool addWithdrawalLog(FinanceInfo wdh, String id)
