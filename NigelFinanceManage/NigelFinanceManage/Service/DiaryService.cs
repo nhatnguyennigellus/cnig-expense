@@ -154,6 +154,11 @@ namespace NigelFinanceManage.Service
             return dt;
         }
 
+        public Income getIncomeById(string accId, string id)
+        {
+            return incDAO.getById(xml, id, accId);
+        }
+
         public List<FinanceInfo> getIncomeList(string accId)
         {
             return incDAO.getList(xml, accId);
@@ -272,6 +277,12 @@ namespace NigelFinanceManage.Service
 
             return dtOut;
         }
+
+        public Payment getPaymentById(string id, string accId)
+        {
+            return payDAO.getById(xml, id, accId);
+        }
+
         public bool addPaymentLog(FinanceInfo payment, String id)
         {
             return payDAO.add(xml, payment, id);
@@ -293,6 +304,11 @@ namespace NigelFinanceManage.Service
         public DataTable getPlanData(string id)
         {
             return planDAO.getDataList(xml, id);
+        }
+
+        public Plan getPlanById(string accId, string id)
+        {
+            return planDAO.getById(xml, id, accId);
         }
         
         public bool addPlanLog(FinanceInfo plan, String id)
@@ -322,6 +338,12 @@ namespace NigelFinanceManage.Service
         {
             return wdhDAO.getDataList(xml, id);
         }
+
+        public Withdrawal getWithdrawalById(string id, string accId)
+        {
+            return wdhDAO.getById(xml, id, accId);
+        }
+
         public List<FinanceInfo> getWithdrawalList(string accId)
         {
             return wdhDAO.getList(xml, accId);

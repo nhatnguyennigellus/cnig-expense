@@ -39,6 +39,7 @@
             this.sttMain = new System.Windows.Forms.ToolStripStatusLabel();
             this.tabWithdrawal = new System.Windows.Forms.TabControl();
             this.tabIncome = new System.Windows.Forms.TabPage();
+            this.dtpIncDate = new System.Windows.Forms.DateTimePicker();
             this.label19 = new System.Windows.Forms.Label();
             this.dgvIncome = new System.Windows.Forms.DataGridView();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -51,7 +52,6 @@
             this.dtpIncFrom = new System.Windows.Forms.DateTimePicker();
             this.panel1 = new System.Windows.Forms.Panel();
             this.txtIncTotal = new System.Windows.Forms.TextBox();
-            this.btnIncRemove = new System.Windows.Forms.Button();
             this.btnIncViewAll = new System.Windows.Forms.Button();
             this.btnIncModify = new System.Windows.Forms.Button();
             this.btnIncAdd = new System.Windows.Forms.Button();
@@ -81,7 +81,6 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.btnPayToPlan = new System.Windows.Forms.Button();
             this.txtPayTotal = new System.Windows.Forms.TextBox();
-            this.btnPayRemove = new System.Windows.Forms.Button();
             this.btnPayViewAll = new System.Windows.Forms.Button();
             this.btnPayModify = new System.Windows.Forms.Button();
             this.btnPayAdd = new System.Windows.Forms.Button();
@@ -132,6 +131,7 @@
             this.dtpBizDate = new System.Windows.Forms.DateTimePicker();
             this.label11 = new System.Windows.Forms.Label();
             this.btnLogout = new System.Windows.Forms.Button();
+            this.dtpPayDate = new System.Windows.Forms.DateTimePicker();
             this.statusStrip1.SuspendLayout();
             this.tabWithdrawal.SuspendLayout();
             this.tabIncome.SuspendLayout();
@@ -254,6 +254,7 @@
             // 
             // tabIncome
             // 
+            this.tabIncome.Controls.Add(this.dtpIncDate);
             this.tabIncome.Controls.Add(this.label19);
             this.tabIncome.Controls.Add(this.dgvIncome);
             this.tabIncome.Controls.Add(this.panel2);
@@ -272,6 +273,14 @@
             this.tabIncome.TabIndex = 0;
             this.tabIncome.Text = "Income";
             this.tabIncome.UseVisualStyleBackColor = true;
+            // 
+            // dtpIncDate
+            // 
+            this.dtpIncDate.Enabled = false;
+            this.dtpIncDate.Location = new System.Drawing.Point(407, 8);
+            this.dtpIncDate.Name = "dtpIncDate";
+            this.dtpIncDate.Size = new System.Drawing.Size(200, 23);
+            this.dtpIncDate.TabIndex = 18;
             // 
             // label19
             // 
@@ -297,6 +306,7 @@
             this.dgvIncome.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvIncome.Size = new System.Drawing.Size(653, 235);
             this.dgvIncome.TabIndex = 4;
+            this.dgvIncome.SelectionChanged += new System.EventHandler(this.dgvIncome_SelectionChanged);
             // 
             // panel2
             // 
@@ -395,7 +405,6 @@
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.panel1.Controls.Add(this.txtIncTotal);
-            this.panel1.Controls.Add(this.btnIncRemove);
             this.panel1.Controls.Add(this.btnIncViewAll);
             this.panel1.Controls.Add(this.btnIncModify);
             this.panel1.Controls.Add(this.btnIncAdd);
@@ -416,15 +425,6 @@
             this.txtIncTotal.TabIndex = 4;
             this.txtIncTotal.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
-            // btnIncRemove
-            // 
-            this.btnIncRemove.Location = new System.Drawing.Point(238, 5);
-            this.btnIncRemove.Name = "btnIncRemove";
-            this.btnIncRemove.Size = new System.Drawing.Size(75, 23);
-            this.btnIncRemove.TabIndex = 3;
-            this.btnIncRemove.Text = "Remove";
-            this.btnIncRemove.UseVisualStyleBackColor = true;
-            // 
             // btnIncViewAll
             // 
             this.btnIncViewAll.Location = new System.Drawing.Point(5, 5);
@@ -437,12 +437,14 @@
             // 
             // btnIncModify
             // 
+            this.btnIncModify.Enabled = false;
             this.btnIncModify.Location = new System.Drawing.Point(160, 5);
             this.btnIncModify.Name = "btnIncModify";
             this.btnIncModify.Size = new System.Drawing.Size(75, 23);
             this.btnIncModify.TabIndex = 2;
             this.btnIncModify.Text = "Modify";
             this.btnIncModify.UseVisualStyleBackColor = true;
+            this.btnIncModify.Click += new System.EventHandler(this.btnIncModify_Click);
             // 
             // btnIncAdd
             // 
@@ -519,6 +521,7 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.dtpPayDate);
             this.tabPage2.Controls.Add(this.btnPlanToPay);
             this.tabPage2.Controls.Add(this.btnPlanImport);
             this.tabPage2.Controls.Add(this.label10);
@@ -602,10 +605,12 @@
             this.dgvPayment.Location = new System.Drawing.Point(3, 197);
             this.dgvPayment.MultiSelect = false;
             this.dgvPayment.Name = "dgvPayment";
+            this.dgvPayment.ReadOnly = true;
             this.dgvPayment.RowHeadersVisible = false;
             this.dgvPayment.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvPayment.Size = new System.Drawing.Size(395, 247);
             this.dgvPayment.TabIndex = 14;
+            this.dgvPayment.SelectionChanged += new System.EventHandler(this.dgvPayment_SelectionChanged);
             // 
             // panel4
             // 
@@ -713,7 +718,6 @@
             this.panel3.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.panel3.Controls.Add(this.btnPayToPlan);
             this.panel3.Controls.Add(this.txtPayTotal);
-            this.panel3.Controls.Add(this.btnPayRemove);
             this.panel3.Controls.Add(this.btnPayViewAll);
             this.panel3.Controls.Add(this.btnPayModify);
             this.panel3.Controls.Add(this.btnPayAdd);
@@ -724,7 +728,7 @@
             // 
             // btnPayToPlan
             // 
-            this.btnPayToPlan.Location = new System.Drawing.Point(315, 5);
+            this.btnPayToPlan.Location = new System.Drawing.Point(238, 5);
             this.btnPayToPlan.Name = "btnPayToPlan";
             this.btnPayToPlan.Size = new System.Drawing.Size(75, 23);
             this.btnPayToPlan.TabIndex = 4;
@@ -733,20 +737,13 @@
             // 
             // txtPayTotal
             // 
-            this.txtPayTotal.Location = new System.Drawing.Point(549, 4);
+            this.txtPayTotal.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtPayTotal.ForeColor = System.Drawing.Color.OrangeRed;
+            this.txtPayTotal.Location = new System.Drawing.Point(549, 3);
             this.txtPayTotal.Name = "txtPayTotal";
             this.txtPayTotal.ReadOnly = true;
-            this.txtPayTotal.Size = new System.Drawing.Size(100, 23);
+            this.txtPayTotal.Size = new System.Drawing.Size(100, 27);
             this.txtPayTotal.TabIndex = 4;
-            // 
-            // btnPayRemove
-            // 
-            this.btnPayRemove.Location = new System.Drawing.Point(238, 5);
-            this.btnPayRemove.Name = "btnPayRemove";
-            this.btnPayRemove.Size = new System.Drawing.Size(75, 23);
-            this.btnPayRemove.TabIndex = 3;
-            this.btnPayRemove.Text = "Remove";
-            this.btnPayRemove.UseVisualStyleBackColor = true;
             // 
             // btnPayViewAll
             // 
@@ -760,12 +757,14 @@
             // 
             // btnPayModify
             // 
+            this.btnPayModify.Enabled = false;
             this.btnPayModify.Location = new System.Drawing.Point(160, 5);
             this.btnPayModify.Name = "btnPayModify";
             this.btnPayModify.Size = new System.Drawing.Size(75, 23);
             this.btnPayModify.TabIndex = 2;
             this.btnPayModify.Text = "Modify";
             this.btnPayModify.UseVisualStyleBackColor = true;
+            this.btnPayModify.Click += new System.EventHandler(this.btnPayModify_Click);
             // 
             // btnPayAdd
             // 
@@ -818,6 +817,7 @@
             this.txtPayAmount.Name = "txtPayAmount";
             this.txtPayAmount.Size = new System.Drawing.Size(100, 23);
             this.txtPayAmount.TabIndex = 0;
+            this.txtPayAmount.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPayAmount_KeyPress);
             // 
             // tabPlan
             // 
@@ -1264,6 +1264,14 @@
             this.btnLogout.UseVisualStyleBackColor = true;
             this.btnLogout.Click += new System.EventHandler(this.btnLogout_Click);
             // 
+            // dtpPayDate
+            // 
+            this.dtpPayDate.Enabled = false;
+            this.dtpPayDate.Location = new System.Drawing.Point(197, 8);
+            this.dtpPayDate.Name = "dtpPayDate";
+            this.dtpPayDate.Size = new System.Drawing.Size(200, 23);
+            this.dtpPayDate.TabIndex = 19;
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -1346,7 +1354,6 @@
         private System.Windows.Forms.ComboBox cbIncDescTemp;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.TextBox txtIncTotal;
-        private System.Windows.Forms.Button btnIncRemove;
         private System.Windows.Forms.Button btnIncViewAll;
         private System.Windows.Forms.Button btnIncModify;
         private System.Windows.Forms.Button btnIncAdd;
@@ -1365,7 +1372,6 @@
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Button btnPayToPlan;
         private System.Windows.Forms.TextBox txtPayTotal;
-        private System.Windows.Forms.Button btnPayRemove;
         private System.Windows.Forms.Button btnPayViewAll;
         private System.Windows.Forms.Button btnPayModify;
         private System.Windows.Forms.Button btnPayAdd;
@@ -1427,5 +1433,7 @@
         private System.Windows.Forms.Label label21;
         private System.Windows.Forms.Button btnLogout;
         private System.Windows.Forms.ToolStripStatusLabel sttMain;
+        private System.Windows.Forms.DateTimePicker dtpIncDate;
+        private System.Windows.Forms.DateTimePicker dtpPayDate;
     }
 }

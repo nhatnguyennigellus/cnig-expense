@@ -325,6 +325,12 @@ namespace NigelFinanceManage
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
             {
                 e.Handled = true;
+                errorMessage("Please enter number only!");
+
+            }
+            else
+            {
+                errorMessage("");
             }
         }
 
@@ -598,10 +604,97 @@ namespace NigelFinanceManage
                 cbATMACB.Items.Clear();
                 foreach (string atm in service.getATMACBList())
                 {
-                    
                     cbATMACB.Items.Add(atm);
                 }
             }
+        }
+
+        private void dgvIncome_SelectionChanged(object sender, EventArgs e)
+        {
+            btnIncModify.Enabled = true;
+            dtpIncDate.Enabled = true;
+
+            if (dgvIncome.CurrentCell != null)
+            {
+                txtIncAmount.Text = dgvIncome.CurrentRow.Cells[1].Value.ToString();
+                dtpIncDate.Value = DateTime.Parse(dgvIncome.CurrentRow.Cells[2].Value.ToString());
+                txtIncDesc.Text = dgvIncome.CurrentRow.Cells[3].Value.ToString();
+            }
+        }
+
+        private void btnIncModify_Click(object sender, EventArgs e)
+        {
+            int oldIncome = int.Parse(dgvIncome.CurrentRow.Cells[1].Value.ToString());
+            string id = dgvIncome.CurrentRow.Cells[0].Value.ToString();
+
+            FinanceInfo info = service.getIncomeById(account.Id, id);
+            info.Amount = int.Parse(txtIncAmount.Text);
+            info.Description = txtIncDesc.Text;
+            info.DateExpense = dtpIncDate.Value;
+
+            
+
+            if (service.modifyIncome(info, account.Id))
+            {
+                successMessage("Income log updated!");
+                btnIncModify.Enabled = false;
+                dtpIncDate.Enabled = false;
+                int oldBalance = int.Parse(txtBank.Text);
+                int newBalance = oldBalance - oldIncome
+                    + int.Parse(txtIncAmount.Text);
+                txtBank.Text = newBalance.ToString();
+                dtpIncDate.Enabled = false;
+            }
+            else
+            {
+                errorMessage("Error occurs!");
+            }
+        }
+
+        private void btnPayModify_Click(object sender, EventArgs e)
+        {
+            int oldPayment = int.Parse(dgvPayment.CurrentRow.Cells[1].Value.ToString());
+            string id = dgvPayment.CurrentRow.Cells[0].Value.ToString();
+
+            FinanceInfo info = service.getPaymentById(id, account.Id);
+            info.Amount = int.Parse(txtPayAmount.Text);
+            info.Description = txtPayDesc.Text;
+            info.DateExpense = dtpPayDate.Value;
+
+            if (service.modifyPayment(info, account.Id))
+            {
+                successMessage("Payment log updated!");
+                btnPayModify.Enabled = false;
+                dtpPayDate.Enabled = false;
+                int oldBalance = int.Parse(txtCash.Text);
+                int newBalance = oldBalance + oldPayment
+                    - int.Parse(txtPayAmount.Text);
+                txtCash.Text = newBalance.ToString();
+                dtpPayDate.Enabled = false;
+
+            }
+            else
+            {
+                errorMessage("Error occurs!");
+            }
+        }
+
+        private void dgvPayment_SelectionChanged(object sender, EventArgs e)
+        {
+            btnPayModify.Enabled = true;
+            dtpPayDate.Enabled = true;
+
+            if (dgvPayment.CurrentCell != null)
+            {
+                txtPayAmount.Text = dgvPayment.CurrentRow.Cells[1].Value.ToString();
+                dtpPayDate.Value = DateTime.Parse(dgvPayment.CurrentRow.Cells[2].Value.ToString());
+                txtPayDesc.Text = dgvPayment.CurrentRow.Cells[3].Value.ToString();
+            }
+        }
+
+        private void txtPayAmount_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            CheckNumPress(e);
         }
     }
 }
