@@ -306,6 +306,11 @@ namespace NigelFinanceManage.Service
             return planDAO.getDataList(xml, id);
         }
 
+        public List<FinanceInfo> getPlanList(string accId)
+        {
+            return planDAO.getList(xml, accId);
+        }
+
         public Plan getPlanById(string accId, string id)
         {
             return planDAO.getById(xml, id, accId);

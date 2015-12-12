@@ -854,12 +854,13 @@
             this.dgvPlan.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
             this.dgvPlan.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvPlan.Location = new System.Drawing.Point(3, 266);
-            this.dgvPlan.MultiSelect = false;
             this.dgvPlan.Name = "dgvPlan";
+            this.dgvPlan.ReadOnly = true;
             this.dgvPlan.RowHeadersVisible = false;
             this.dgvPlan.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvPlan.Size = new System.Drawing.Size(654, 175);
             this.dgvPlan.TabIndex = 17;
+            this.dgvPlan.SelectionChanged += new System.EventHandler(this.dgvPlan_SelectionChanged);
             // 
             // panel6
             // 
@@ -962,6 +963,7 @@
             this.btnPlanRemove.TabIndex = 3;
             this.btnPlanRemove.Text = "Remove";
             this.btnPlanRemove.UseVisualStyleBackColor = true;
+            this.btnPlanRemove.Click += new System.EventHandler(this.btnPlanRemove_Click);
             // 
             // btnPlanViewAll
             // 
@@ -981,6 +983,7 @@
             this.btnPlanModify.TabIndex = 2;
             this.btnPlanModify.Text = "Modify";
             this.btnPlanModify.UseVisualStyleBackColor = true;
+            this.btnPlanModify.Click += new System.EventHandler(this.btnPlanModify_Click);
             // 
             // btnPlanAdd
             // 

@@ -401,7 +401,6 @@ namespace NigelFinanceManage
 
         private void refreshPlanList(DataTable dt)
         {
-
             if (dt.Rows.Count == 0)
             {
                 errorMessage("No data");
@@ -504,7 +503,7 @@ namespace NigelFinanceManage
 
             int amount = int.Parse(txtPlanAmount.Text);
 
-            string id = service.generateId(Plan.PREFIX, service.getPaymentList(lbID.Text));
+            string id = service.generateId(Plan.PREFIX, service.getPlanList(lbID.Text));
             string description = txtPlanDesc.Text;
 
             Plan plan = new Plan()
@@ -695,6 +694,58 @@ namespace NigelFinanceManage
         private void txtPayAmount_KeyPress(object sender, KeyPressEventArgs e)
         {
             CheckNumPress(e);
+        }
+
+        private void btnPlanModify_Click(object sender, EventArgs e)
+        {
+            string id = dgvPlan.CurrentRow.Cells[0].Value.ToString();
+
+            FinanceInfo info = service.getPlanById(account.Id, id);
+            info.Amount = int.Parse(txtPlanAmount.Text);
+            info.Description = txtPlanDesc.Text;
+
+            if (service.modifyPlan(info, account.Id))
+            {
+                successMessage("Plan modified!");
+                DataTable dt = service.getPlanData(lbID.Text);
+                dgvPlan.DataSource = dt;
+
+                refreshPlanList(dt);
+            }
+            else
+            {
+                errorMessage("Error occurs");
+            }
+        }
+
+        private void dgvPlan_SelectionChanged(object sender, EventArgs e)
+        {
+            btnPlanModify.Enabled = true;
+
+            if (dgvPlan.CurrentCell != null)
+            {
+                txtPlanAmount.Text = dgvPlan.CurrentRow.Cells[1].Value.ToString();
+                txtPlanDesc.Text = dgvPlan.CurrentRow.Cells[3].Value.ToString();
+            }
+        }
+
+        private void btnPlanRemove_Click(object sender, EventArgs e)
+        {
+            string id = dgvPlan.CurrentRow.Cells[0].Value.ToString();
+
+            FinanceInfo info = service.getPlanById(account.Id, id);
+            if (service.removePlan(info, lbID.Text))
+            {
+                successMessage("Plan removed!");
+                DataTable dt = service.getPlanData(lbID.Text);
+                dgvPlan.DataSource = dt;
+
+                refreshPlanList(dt);
+            }
+            else
+            {
+                errorMessage("Error occurs");
+            }
         }
     }
 }
