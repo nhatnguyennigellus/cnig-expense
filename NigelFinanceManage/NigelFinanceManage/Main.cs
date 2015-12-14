@@ -747,5 +747,58 @@ namespace NigelFinanceManage
                 errorMessage("Error occurs");
             }
         }
+
+        private void btnPlanToPay_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnWdhModify_Click(object sender, EventArgs e)
+        {
+            int oldWdh = int.Parse(dgvWdh.CurrentRow.Cells[1].Value.ToString());
+            int chgWdh =  int.Parse(txtWdhAmount.Text);
+            string id = dgvWdh.CurrentRow.Cells[0].Value.ToString();
+
+            FinanceInfo info = service.getWithdrawalById(id, account.Id);
+            info.Amount = int.Parse(txtWdhAmount.Text);
+            info.Description = txtATMOther.Text;
+            info.DateExpense = dtpIncDate.Value;
+
+            if (service.modifyWithdrawal(info, lbID.Text))
+            {
+                successMessage("Withdrawal Log modified!");
+                DataTable dt = service.getWithdrawalData(lbID.Text);
+                dgvWdh.DataSource = dt;
+
+                int oldBalance = int.Parse(txtBank.Text);
+                int newBalance = oldBalance + oldWdh - chgWdh;
+                int oldCash = int.Parse(txtCash.Text);
+                int newCash = oldCash - oldWdh + chgWdh;
+
+                txtBank.Text = newBalance + "";
+                txtCash.Text = newCash + "";
+                service.updateBudget(lbID.Text, int.Parse(txtBank.Text), "Bank");
+                service.updateBudget(lbID.Text, int.Parse(txtCash.Text), "Cash");
+            }
+            else
+            {
+                errorMessage("Error occur!");
+            }
+
+            
+        }
+
+        private void dgvWdh_SelectionChanged(object sender, EventArgs e)
+        {
+            btnWdhModify.Enabled = true;
+            dtpWdh.Enabled = true;
+
+            if (dgvWdh.CurrentCell != null)
+            {
+                txtWdhAmount.Text = dgvWdh.CurrentRow.Cells[1].Value.ToString();
+                dtpWdh.Value = DateTime.Parse(dgvWdh.CurrentRow.Cells[2].Value.ToString());
+                txtATMOther.Text = dgvWdh.CurrentRow.Cells[3].Value.ToString();
+            }
+        }
     }
 }

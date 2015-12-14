@@ -132,6 +132,7 @@
             this.label11 = new System.Windows.Forms.Label();
             this.btnLogout = new System.Windows.Forms.Button();
             this.dtpPayDate = new System.Windows.Forms.DateTimePicker();
+            this.dtpWdh = new System.Windows.Forms.DateTimePicker();
             this.statusStrip1.SuspendLayout();
             this.tabWithdrawal.SuspendLayout();
             this.tabIncome.SuspendLayout();
@@ -551,6 +552,7 @@
             this.btnPlanToPay.TabIndex = 5;
             this.btnPlanToPay.Text = "Implement";
             this.btnPlanToPay.UseVisualStyleBackColor = true;
+            this.btnPlanToPay.Click += new System.EventHandler(this.btnPlanToPay_Click);
             // 
             // btnPlanImport
             // 
@@ -1029,6 +1031,7 @@
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.dtpWdh);
             this.tabPage3.Controls.Add(this.label21);
             this.tabPage3.Controls.Add(this.dgvWdh);
             this.tabPage3.Controls.Add(this.panel8);
@@ -1060,12 +1063,18 @@
             // 
             // dgvWdh
             // 
+            this.dgvWdh.AllowUserToAddRows = false;
+            this.dgvWdh.AllowUserToDeleteRows = false;
+            this.dgvWdh.AllowUserToResizeRows = false;
             this.dgvWdh.BackgroundColor = System.Drawing.SystemColors.Control;
             this.dgvWdh.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvWdh.Location = new System.Drawing.Point(3, 131);
             this.dgvWdh.Name = "dgvWdh";
+            this.dgvWdh.ReadOnly = true;
+            this.dgvWdh.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvWdh.Size = new System.Drawing.Size(654, 242);
             this.dgvWdh.TabIndex = 24;
+            this.dgvWdh.SelectionChanged += new System.EventHandler(this.dgvWdh_SelectionChanged);
             // 
             // panel8
             // 
@@ -1100,12 +1109,14 @@
             // 
             // btnWdhModify
             // 
+            this.btnWdhModify.Enabled = false;
             this.btnWdhModify.Location = new System.Drawing.Point(160, 5);
             this.btnWdhModify.Name = "btnWdhModify";
             this.btnWdhModify.Size = new System.Drawing.Size(75, 23);
             this.btnWdhModify.TabIndex = 2;
             this.btnWdhModify.Text = "Modify";
             this.btnWdhModify.UseVisualStyleBackColor = true;
+            this.btnWdhModify.Click += new System.EventHandler(this.btnWdhModify_Click);
             // 
             // btnWdhAdd
             // 
@@ -1275,6 +1286,14 @@
             this.dtpPayDate.Size = new System.Drawing.Size(200, 23);
             this.dtpPayDate.TabIndex = 19;
             // 
+            // dtpWdh
+            // 
+            this.dtpWdh.Enabled = false;
+            this.dtpWdh.Location = new System.Drawing.Point(8, 35);
+            this.dtpWdh.Name = "dtpWdh";
+            this.dtpWdh.Size = new System.Drawing.Size(200, 23);
+            this.dtpWdh.TabIndex = 26;
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -1438,5 +1457,6 @@
         private System.Windows.Forms.ToolStripStatusLabel sttMain;
         private System.Windows.Forms.DateTimePicker dtpIncDate;
         private System.Windows.Forms.DateTimePicker dtpPayDate;
+        private System.Windows.Forms.DateTimePicker dtpWdh;
     }
 }
