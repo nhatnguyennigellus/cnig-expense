@@ -800,5 +800,33 @@ namespace NigelFinanceManage
                 txtATMOther.Text = dgvWdh.CurrentRow.Cells[3].Value.ToString();
             }
         }
+
+        private void btnWdhRemove_Click(object sender, EventArgs e)
+        {
+            string id = dgvWdh.CurrentRow.Cells[0].Value.ToString();
+            int oldWdh = int.Parse(dgvWdh.CurrentRow.Cells[1].Value.ToString());
+            string oldATM = dgvWdh.CurrentRow.Cells[3].Value.ToString();
+            FinanceInfo info = service.getWithdrawalById(id, lbID.Text);
+
+            if (service.removeWithdrawal(info, lbID.Text))
+            {
+                successMessage("Withdrawal Log removed!");
+
+                DataTable dt = service.getWithdrawalData(lbID.Text);
+                dgvWdh.DataSource = dt;
+
+                int oldBalance = int.Parse(txtBank.Text);
+                int oldCash = int.Parse(txtCash.Text);
+                int newBalance = oldBalance + oldWdh;
+                int extra = oldATM.Contains("ACB") ? 1100 : 3300;
+                int newCash = oldCash - oldWdh + extra;
+                txtCash.Text = newCash.ToString();
+                txtBank.Text = newBalance.ToString();
+            }
+            else
+            {
+                errorMessage("Error occurs!");
+            }
+        }
     }
 }

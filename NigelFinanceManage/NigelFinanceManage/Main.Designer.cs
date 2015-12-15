@@ -63,6 +63,7 @@
             this.txtIncDesc = new System.Windows.Forms.TextBox();
             this.txtIncAmount = new System.Windows.Forms.TextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.dtpPayDate = new System.Windows.Forms.DateTimePicker();
             this.btnPlanToPay = new System.Windows.Forms.Button();
             this.btnPlanImport = new System.Windows.Forms.Button();
             this.label10 = new System.Windows.Forms.Label();
@@ -109,6 +110,7 @@
             this.txtPlanDesc = new System.Windows.Forms.TextBox();
             this.txtPlanAmount = new System.Windows.Forms.TextBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.dtpWdh = new System.Windows.Forms.DateTimePicker();
             this.label21 = new System.Windows.Forms.Label();
             this.dgvWdh = new System.Windows.Forms.DataGridView();
             this.panel8 = new System.Windows.Forms.Panel();
@@ -131,8 +133,6 @@
             this.dtpBizDate = new System.Windows.Forms.DateTimePicker();
             this.label11 = new System.Windows.Forms.Label();
             this.btnLogout = new System.Windows.Forms.Button();
-            this.dtpPayDate = new System.Windows.Forms.DateTimePicker();
-            this.dtpWdh = new System.Windows.Forms.DateTimePicker();
             this.statusStrip1.SuspendLayout();
             this.tabWithdrawal.SuspendLayout();
             this.tabIncome.SuspendLayout();
@@ -543,6 +543,14 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Payment";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // dtpPayDate
+            // 
+            this.dtpPayDate.Enabled = false;
+            this.dtpPayDate.Location = new System.Drawing.Point(197, 8);
+            this.dtpPayDate.Name = "dtpPayDate";
+            this.dtpPayDate.Size = new System.Drawing.Size(200, 23);
+            this.dtpPayDate.TabIndex = 19;
             // 
             // btnPlanToPay
             // 
@@ -1051,6 +1059,14 @@
             this.tabPage3.Text = "Withdrawal";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
+            // dtpWdh
+            // 
+            this.dtpWdh.Enabled = false;
+            this.dtpWdh.Location = new System.Drawing.Point(8, 35);
+            this.dtpWdh.Name = "dtpWdh";
+            this.dtpWdh.Size = new System.Drawing.Size(200, 23);
+            this.dtpWdh.TabIndex = 26;
+            // 
             // label21
             // 
             this.label21.AutoSize = true;
@@ -1096,6 +1112,7 @@
             this.btnWdhRemove.TabIndex = 3;
             this.btnWdhRemove.Text = "Remove";
             this.btnWdhRemove.UseVisualStyleBackColor = true;
+            this.btnWdhRemove.Click += new System.EventHandler(this.btnWdhRemove_Click);
             // 
             // btnWdhViewAll
             // 
@@ -1277,22 +1294,6 @@
             this.btnLogout.Text = "Logout";
             this.btnLogout.UseVisualStyleBackColor = true;
             this.btnLogout.Click += new System.EventHandler(this.btnLogout_Click);
-            // 
-            // dtpPayDate
-            // 
-            this.dtpPayDate.Enabled = false;
-            this.dtpPayDate.Location = new System.Drawing.Point(197, 8);
-            this.dtpPayDate.Name = "dtpPayDate";
-            this.dtpPayDate.Size = new System.Drawing.Size(200, 23);
-            this.dtpPayDate.TabIndex = 19;
-            // 
-            // dtpWdh
-            // 
-            this.dtpWdh.Enabled = false;
-            this.dtpWdh.Location = new System.Drawing.Point(8, 35);
-            this.dtpWdh.Name = "dtpWdh";
-            this.dtpWdh.Size = new System.Drawing.Size(200, 23);
-            this.dtpWdh.TabIndex = 26;
             // 
             // Main
             // 
