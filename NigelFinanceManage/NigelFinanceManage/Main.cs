@@ -381,6 +381,7 @@ namespace NigelFinanceManage
 
                 txtPayAmount.Text = "";
                 txtPayDesc.Text = "";
+                txtCash.Text = account.Balance.ToString();
             }
             else
             {
@@ -750,7 +751,40 @@ namespace NigelFinanceManage
 
         private void btnPlanToPay_Click(object sender, EventArgs e)
         {
+            string planId = dgvPayPlan.CurrentRow.Cells[0].Value.ToString();
+            FinanceInfo plan = service.getPlanById(lbID.Text, planId);
+            Payment payment = new Payment();
+            payment.Id = service.generateId(Payment.PREFIX, service.getPaymentList(lbID.Text));
+            service.p2P(plan, payment);
 
+            if (int.Parse(txtCash.Text) - plan.Amount < 0)
+            {
+                errorMessage("Not enough budget");
+                return;
+            }
+
+            if (service.addPaymentLog(payment, lbID.Text))
+            {
+                successMessage("Plan implemented!");
+                DataTable dtPay = service.getPaymentData(lbID.Text);
+                txtPayTotal.Text = calculateTotal(dtPay).ToString();
+                account.CashWithdraw -= plan.Amount;
+                txtCash.Text = account.CashWithdraw.ToString();
+                service.updateBudget(lbID.Text, account.CashWithdraw, "Cash");
+                txtPayAmount.Text = "";
+                txtPayDesc.Text = "";
+
+                service.removePlan(plan, lbID.Text);
+                DataTable dtPlan = service.getPlanData(lbID.Text);
+                dgvPayPlan.DataSource = dtPlan;
+                dgvPayment.DataSource = dtPay;
+                txtCash.Text = account.Balance.ToString();
+                refreshPlanList(dtPlan);
+            }
+            else
+            {
+                errorMessage("Error occurred!");
+            }
         }
 
         private void btnWdhModify_Click(object sender, EventArgs e)
@@ -826,6 +860,40 @@ namespace NigelFinanceManage
             else
             {
                 errorMessage("Error occurs!");
+            }
+        }
+
+        private void btnPayToPlan_Click(object sender, EventArgs e)
+        {
+            int delPayment = int.Parse(dgvPayment.CurrentRow.Cells[1].Value.ToString());
+            string payId = dgvPayment.CurrentRow.Cells[0].Value.ToString();
+            Payment payment = service.getPaymentById(payId, lbID.Text);
+
+            if (service.removePayment(payment, lbID.Text))
+            {
+                successMessage("Payment info is rolled back to plan item!");
+
+                int oldCash = int.Parse(txtCash.Text);
+                int newCash = oldCash + delPayment;
+                account.CashWithdraw = newCash;
+                txtCash.Text = newCash.ToString();
+                service.updateBudget(lbID.Text, newCash, "Cash");
+
+                Plan plan = new Plan();
+                plan.Id = service.generateId(Plan.PREFIX, service.getPlanList(lbID.Text));
+                service.p2P(payment, plan);
+                service.addPlanLog(plan, lbID.Text);
+
+                txtCash.Text = account.Balance.ToString();
+                DataTable dtPlan = service.getPlanData(lbID.Text);
+                dgvPayPlan.DataSource = dtPlan;
+                refreshPlanList(dtPlan);
+                DataTable dtPay = service.getPlanData(lbID.Text);
+                dgvPayment.DataSource = dtPay;
+            }
+            else
+            {
+                errorMessage("Error occurred!");
             }
         }
     }

@@ -744,6 +744,7 @@
             this.btnPayToPlan.TabIndex = 4;
             this.btnPayToPlan.Text = "To Plan";
             this.btnPayToPlan.UseVisualStyleBackColor = true;
+            this.btnPayToPlan.Click += new System.EventHandler(this.btnPayToPlan_Click);
             // 
             // txtPayTotal
             // 

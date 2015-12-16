@@ -331,6 +331,14 @@ namespace NigelFinanceManage.Service
             return planDAO.remove(xml, plan, accId);
         }
 
+        public void p2P(FinanceInfo src, FinanceInfo dest)
+        {
+            dest.DateExpense = DateTime.Now;
+            dest.Amount = src.Amount;
+            dest.Currency = src.Currency;
+            dest.Description = src.Description;
+        }
+
         /**
          * Withdrawal Service
          */
