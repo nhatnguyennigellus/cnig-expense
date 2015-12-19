@@ -133,6 +133,16 @@
             this.dtpBizDate = new System.Windows.Forms.DateTimePicker();
             this.label11 = new System.Windows.Forms.Label();
             this.btnLogout = new System.Windows.Forms.Button();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.logoutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.configurationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.miQE = new System.Windows.Forms.ToolStripMenuItem();
+            this.addBankToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.reminderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1.SuspendLayout();
             this.tabWithdrawal.SuspendLayout();
             this.tabIncome.SuspendLayout();
@@ -152,6 +162,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvWdh)).BeginInit();
             this.panel8.SuspendLayout();
             this.panel7.SuspendLayout();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // label4
@@ -159,7 +170,7 @@
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.Maroon;
-            this.label4.Location = new System.Drawing.Point(14, 10);
+            this.label4.Location = new System.Drawing.Point(14, 29);
             this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(156, 23);
@@ -171,7 +182,7 @@
             this.txtBank.BackColor = System.Drawing.SystemColors.Menu;
             this.txtBank.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtBank.ForeColor = System.Drawing.Color.Green;
-            this.txtBank.Location = new System.Drawing.Point(247, 7);
+            this.txtBank.Location = new System.Drawing.Point(247, 26);
             this.txtBank.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.txtBank.Name = "txtBank";
             this.txtBank.ReadOnly = true;
@@ -184,7 +195,7 @@
             this.txtCash.BackColor = System.Drawing.SystemColors.Menu;
             this.txtCash.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtCash.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.txtCash.Location = new System.Drawing.Point(435, 7);
+            this.txtCash.Location = new System.Drawing.Point(435, 26);
             this.txtCash.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtCash.Name = "txtCash";
             this.txtCash.ReadOnly = true;
@@ -195,7 +206,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(206, 16);
+            this.label1.Location = new System.Drawing.Point(206, 35);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(34, 15);
             this.label1.TabIndex = 11;
@@ -204,7 +215,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(395, 16);
+            this.label2.Location = new System.Drawing.Point(395, 35);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(34, 15);
             this.label2.TabIndex = 12;
@@ -214,7 +225,7 @@
             // 
             this.lbID.AutoSize = true;
             this.lbID.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbID.Location = new System.Drawing.Point(15, 53);
+            this.lbID.Location = new System.Drawing.Point(15, 72);
             this.lbID.Name = "lbID";
             this.lbID.Size = new System.Drawing.Size(40, 15);
             this.lbID.TabIndex = 13;
@@ -225,7 +236,7 @@
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.lbStatus,
             this.sttMain});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 554);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 568);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(668, 22);
             this.statusStrip1.TabIndex = 14;
@@ -247,7 +258,7 @@
             this.tabWithdrawal.Controls.Add(this.tabPage2);
             this.tabWithdrawal.Controls.Add(this.tabPlan);
             this.tabWithdrawal.Controls.Add(this.tabPage3);
-            this.tabWithdrawal.Location = new System.Drawing.Point(0, 76);
+            this.tabWithdrawal.Location = new System.Drawing.Point(0, 92);
             this.tabWithdrawal.Name = "tabWithdrawal";
             this.tabWithdrawal.SelectedIndex = 0;
             this.tabWithdrawal.Size = new System.Drawing.Size(668, 475);
@@ -968,6 +979,7 @@
             // 
             // btnPlanRemove
             // 
+            this.btnPlanRemove.Enabled = false;
             this.btnPlanRemove.Location = new System.Drawing.Point(238, 5);
             this.btnPlanRemove.Name = "btnPlanRemove";
             this.btnPlanRemove.Size = new System.Drawing.Size(75, 23);
@@ -988,6 +1000,7 @@
             // 
             // btnPlanModify
             // 
+            this.btnPlanModify.Enabled = false;
             this.btnPlanModify.Location = new System.Drawing.Point(160, 5);
             this.btnPlanModify.Name = "btnPlanModify";
             this.btnPlanModify.Size = new System.Drawing.Size(75, 23);
@@ -1107,6 +1120,7 @@
             // 
             // btnWdhRemove
             // 
+            this.btnWdhRemove.Enabled = false;
             this.btnWdhRemove.Location = new System.Drawing.Point(238, 5);
             this.btnWdhRemove.Name = "btnWdhRemove";
             this.btnWdhRemove.Size = new System.Drawing.Size(75, 23);
@@ -1272,7 +1286,7 @@
             // 
             // dtpBizDate
             // 
-            this.dtpBizDate.Location = new System.Drawing.Point(281, 47);
+            this.dtpBizDate.Location = new System.Drawing.Point(281, 66);
             this.dtpBizDate.Name = "dtpBizDate";
             this.dtpBizDate.Size = new System.Drawing.Size(200, 23);
             this.dtpBizDate.TabIndex = 0;
@@ -1280,7 +1294,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(191, 53);
+            this.label11.Location = new System.Drawing.Point(191, 72);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(84, 15);
             this.label11.TabIndex = 17;
@@ -1288,7 +1302,7 @@
             // 
             // btnLogout
             // 
-            this.btnLogout.Location = new System.Drawing.Point(581, 12);
+            this.btnLogout.Location = new System.Drawing.Point(581, 31);
             this.btnLogout.Name = "btnLogout";
             this.btnLogout.Size = new System.Drawing.Size(75, 23);
             this.btnLogout.TabIndex = 18;
@@ -1296,16 +1310,93 @@
             this.btnLogout.UseVisualStyleBackColor = true;
             this.btnLogout.Click += new System.EventHandler(this.btnLogout_Click);
             // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.fileToolStripMenuItem,
+            this.configurationToolStripMenuItem,
+            this.helpToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(668, 24);
+            this.menuStrip1.TabIndex = 19;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // fileToolStripMenuItem
+            // 
+            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.logoutToolStripMenuItem,
+            this.exitToolStripMenuItem});
+            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
+            this.fileToolStripMenuItem.Text = "File";
+            // 
+            // logoutToolStripMenuItem
+            // 
+            this.logoutToolStripMenuItem.Name = "logoutToolStripMenuItem";
+            this.logoutToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
+            this.logoutToolStripMenuItem.Text = "Logout";
+            // 
+            // exitToolStripMenuItem
+            // 
+            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
+            this.exitToolStripMenuItem.Text = "Exit";
+            // 
+            // configurationToolStripMenuItem
+            // 
+            this.configurationToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.miQE,
+            this.addBankToolStripMenuItem,
+            this.reminderToolStripMenuItem});
+            this.configurationToolStripMenuItem.Name = "configurationToolStripMenuItem";
+            this.configurationToolStripMenuItem.Size = new System.Drawing.Size(93, 20);
+            this.configurationToolStripMenuItem.Text = "Configuration";
+            // 
+            // miQE
+            // 
+            this.miQE.Name = "miQE";
+            this.miQE.Size = new System.Drawing.Size(152, 22);
+            this.miQE.Text = "Quick Entry";
+            this.miQE.Click += new System.EventHandler(this.miQE_Click);
+            // 
+            // addBankToolStripMenuItem
+            // 
+            this.addBankToolStripMenuItem.Name = "addBankToolStripMenuItem";
+            this.addBankToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.addBankToolStripMenuItem.Text = "Add Bank";
+            // 
+            // reminderToolStripMenuItem
+            // 
+            this.reminderToolStripMenuItem.Name = "reminderToolStripMenuItem";
+            this.reminderToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.reminderToolStripMenuItem.Text = "Reminder";
+            // 
+            // helpToolStripMenuItem
+            // 
+            this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.aboutToolStripMenuItem});
+            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+            this.helpToolStripMenuItem.Text = "Help";
+            // 
+            // aboutToolStripMenuItem
+            // 
+            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
+            this.aboutToolStripMenuItem.Text = "About";
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(668, 576);
+            this.ClientSize = new System.Drawing.Size(668, 590);
             this.Controls.Add(this.btnLogout);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.dtpBizDate);
             this.Controls.Add(this.tabWithdrawal);
             this.Controls.Add(this.statusStrip1);
+            this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.lbID);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -1313,6 +1404,8 @@
             this.Controls.Add(this.txtBank);
             this.Controls.Add(this.label4);
             this.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MainMenuStrip = this.menuStrip1;
             this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.MaximizeBox = false;
             this.Name = "Main";
@@ -1348,6 +1441,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvWdh)).EndInit();
             this.panel8.ResumeLayout(false);
             this.panel7.ResumeLayout(false);
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1460,5 +1555,15 @@
         private System.Windows.Forms.DateTimePicker dtpIncDate;
         private System.Windows.Forms.DateTimePicker dtpPayDate;
         private System.Windows.Forms.DateTimePicker dtpWdh;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem logoutToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem configurationToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem miQE;
+        private System.Windows.Forms.ToolStripMenuItem addBankToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem reminderToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
     }
 }

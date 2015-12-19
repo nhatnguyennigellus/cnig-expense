@@ -19,6 +19,7 @@ namespace NigelFinanceManage.Service
         PaymentDAO payDAO = new PaymentDAO();
         PlanDAO planDAO = new PlanDAO();
         WithdrawalDAO wdhDAO = new WithdrawalDAO();
+        QuickEntryDAO qeDAO = new QuickEntryDAO();
 
         public DiaryService()
         {
@@ -362,9 +363,9 @@ namespace NigelFinanceManage.Service
             return wdhDAO.getList(xml, accId);
         }
 
-        public bool addWithdrawalLog(FinanceInfo wdh, String id)
+        public bool addWithdrawalLog(FinanceInfo wdh, String accId)
         {
-            return wdhDAO.add(xml, wdh, id);
+            return wdhDAO.add(xml, wdh, accId);
         }
 
         public bool modifyWithdrawal(FinanceInfo wdh, String accId)
@@ -396,6 +397,52 @@ namespace NigelFinanceManage.Service
                 row["ATM"] = info.Description;
             }
             return dt;
+        }
+
+        /**
+         * Quick Entry
+         */
+        public int generateQEId(string accId)
+        {
+            int idx = 0;
+
+            List<QuickEntry> list = qeDAO.getList(xml, accId);
+            if (list.Count > 0)
+            {
+                idx = list[list.Count - 1].Id + 1;
+            }
+
+            return idx;
+        }
+
+        public DataTable getQEData(string id)
+        {
+            return qeDAO.getDataList(xml, id);
+        }
+
+        public DataTable getQEDataByType(string accId, string type)
+        {
+            return qeDAO.getDataListByType(xml, accId, type);
+        }
+
+        public QuickEntry getById(string accId, string id)
+        {
+            return qeDAO.getById(xml, id, accId);
+        }
+
+        public bool addQE(QuickEntry qe, string accId)
+        {
+            return qeDAO.add(xml, qe, accId);
+        }
+
+        public bool modifyQE(QuickEntry qe, string accId)
+        {
+            return qeDAO.modify(xml, qe, accId);
+        }
+
+        public bool removeQE(QuickEntry qe, string accId)
+        {
+            return qeDAO.remove(xml, qe, accId);
         }
     }
 }

@@ -17,6 +17,7 @@ namespace NigelFinanceManage
         Account account = new Account();
         Login frmLogin = new Login();
         DiaryService service = new DiaryService();
+        int database = -1;
         public Main()
         {
             InitializeComponent();
@@ -29,6 +30,7 @@ namespace NigelFinanceManage
             this.frmLogin = frmLogin;
             this.service = service;
             frmLogin.Hide();
+            this.database = database;
             service.chooseDatabase(database);
         }
 
@@ -620,6 +622,10 @@ namespace NigelFinanceManage
                 dtpIncDate.Value = DateTime.Parse(dgvIncome.CurrentRow.Cells[2].Value.ToString());
                 txtIncDesc.Text = dgvIncome.CurrentRow.Cells[3].Value.ToString();
             }
+            else
+            {
+                errorMessage("No row selected!");
+            }
         }
 
         private void btnIncModify_Click(object sender, EventArgs e)
@@ -690,6 +696,10 @@ namespace NigelFinanceManage
                 dtpPayDate.Value = DateTime.Parse(dgvPayment.CurrentRow.Cells[2].Value.ToString());
                 txtPayDesc.Text = dgvPayment.CurrentRow.Cells[3].Value.ToString();
             }
+            else
+            {
+                errorMessage("No row selected!");
+            }
         }
 
         private void txtPayAmount_KeyPress(object sender, KeyPressEventArgs e)
@@ -727,6 +737,10 @@ namespace NigelFinanceManage
             {
                 txtPlanAmount.Text = dgvPlan.CurrentRow.Cells[1].Value.ToString();
                 txtPlanDesc.Text = dgvPlan.CurrentRow.Cells[3].Value.ToString();
+            }
+            else
+            {
+                errorMessage("No row selected!");
             }
         }
 
@@ -833,6 +847,10 @@ namespace NigelFinanceManage
                 dtpWdh.Value = DateTime.Parse(dgvWdh.CurrentRow.Cells[2].Value.ToString());
                 txtATMOther.Text = dgvWdh.CurrentRow.Cells[3].Value.ToString();
             }
+            else
+            {
+                errorMessage("No row selected!");
+            }
         }
 
         private void btnWdhRemove_Click(object sender, EventArgs e)
@@ -895,6 +913,12 @@ namespace NigelFinanceManage
             {
                 errorMessage("Error occurred!");
             }
+        }
+
+        private void miQE_Click(object sender, EventArgs e)
+        {
+            QE qeForm = new QE(account, service);
+            qeForm.Show();
         }
     }
 }
