@@ -53,13 +53,15 @@ namespace NigelFinanceManage
             sttMain.Text = "Welcome, " + account.Name;
         }
 
-        private void getIncPayTemp()
+        public void getIncPayTemp()
         {
-            foreach (FinanceInfo info in service.getIncomeList(account.Id))
+            cbIncDescTemp.Items.Clear();
+            cbPayDescTemp.Items.Clear();
+            foreach (QuickEntry qeInc in service.getQEDataByType(account.Id, "Income"))
             {
-                cbIncDescTemp.Items.Add(info.Description);
+                cbIncDescTemp.Items.Add(qeInc.Description);
             }
-            foreach (FinanceInfo info in service.getPaymentList(account.Id))
+            foreach (QuickEntry info in service.getQEDataByType(account.Id, "Payment"))
             {
                 cbPayDescTemp.Items.Add(info.Description);
             }
@@ -917,7 +919,7 @@ namespace NigelFinanceManage
 
         private void miQE_Click(object sender, EventArgs e)
         {
-            QE qeForm = new QE(account, service);
+            QE qeForm = new QE(account, service, this);
             qeForm.Show();
         }
     }

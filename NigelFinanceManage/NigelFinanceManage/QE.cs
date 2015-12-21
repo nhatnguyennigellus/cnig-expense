@@ -16,17 +16,19 @@ namespace NigelFinanceManage
     {
         Account account = new Account();
         DiaryService service = new DiaryService();
+        Main main;
         public QE()
         {
             InitializeComponent();
         }
 
-        public QE(Account account, DiaryService service)
+        public QE(Account account, DiaryService service, Main main)
         {
             InitializeComponent();
             this.account = account;
             this.service = service;
             cbQEType.SelectedIndex = 0;
+            this.main = main;
         }
 
         private void errorMessage(string message)
@@ -93,6 +95,7 @@ namespace NigelFinanceManage
             {
                 errorMessage("Error occurs!");
             }
+            main.getIncPayTemp();
         }
 
         private void btnQEModify_Click(object sender, EventArgs e)
@@ -123,6 +126,7 @@ namespace NigelFinanceManage
             {
                 errorMessage("Error occurs!");
             }
+            main.getIncPayTemp();
         }
 
         private void dgvQE_SelectionChanged(object sender, EventArgs e)
@@ -156,6 +160,7 @@ namespace NigelFinanceManage
             {
                 errorMessage("Error occurs!");
             }
+            main.getIncPayTemp();
         }
     }
 }

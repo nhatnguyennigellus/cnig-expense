@@ -30,22 +30,28 @@ namespace NigelFinanceManage.DAO
             return dt;
         }
 
-        public DataTable getDataListByType(XmlDataSource xml, string accId, string type)
+        public List<QuickEntry> getDataListByType(XmlDataSource xml, string accId, string type)
         {
-            DataTable dt = new DataTable();
-
             XmlDocument doc = xml.getXmlDocument();
             XmlNode root = doc.DocumentElement;
 
             string xpath = "/my-expense/expense-data/data[@profile-id='" + accId
                 + "']/quick-entry/item[@type='" + type + "']";
             XmlNodeList nodeList = root.SelectNodes(xpath);
-            if (nodeList.Count > 0)
+            List<QuickEntry> list = new List<QuickEntry>();
+            foreach (XmlElement ele in nodeList)
             {
-                dt = this.createDataTable(nodeList);
+                QuickEntry info = new QuickEntry
+                {
+                    Id = int.Parse(ele.GetAttribute("id")),
+                    Type = ele.GetAttribute("type"),
+                    Description = ele.GetAttribute("description"),
+                };
+
+                list.Add(info);
             }
 
-            return dt;
+            return list;
         }
 
         public List<QuickEntry> getList(XmlDataSource xml, string accId)

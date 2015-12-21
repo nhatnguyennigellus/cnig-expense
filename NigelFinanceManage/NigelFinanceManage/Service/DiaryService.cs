@@ -420,7 +420,7 @@ namespace NigelFinanceManage.Service
             return qeDAO.getDataList(xml, id);
         }
 
-        public DataTable getQEDataByType(string accId, string type)
+        public List<QuickEntry> getQEDataByType(string accId, string type)
         {
             return qeDAO.getDataListByType(xml, accId, type);
         }
