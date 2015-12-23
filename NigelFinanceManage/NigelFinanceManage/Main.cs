@@ -187,26 +187,26 @@ namespace NigelFinanceManage
 
         private void cbPaySrchType_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (cbIncSrchType.SelectedIndex == 0) // Day range
+            if (cbPaySrchType.SelectedIndex == 0) // Day range
             {
-                dtpIncFrom.Enabled = true;
-                dtpIncTo.Enabled = true;
-                cbIncMonth.Enabled = false;
-                cbIncYear.Enabled = false;
+                dtpPayFrom.Enabled = true;
+                dtpPayTo.Enabled = true;
+                cbPayMonth.Enabled = false;
+                cbPayYear.Enabled = false;
             }
-            else if (cbIncSrchType.SelectedIndex == 2) // Month
+            else if (cbPaySrchType.SelectedIndex == 2) // Month
             {
-                dtpIncFrom.Enabled = false;
-                dtpIncTo.Enabled = false;
-                cbIncMonth.Enabled = true;
-                cbIncYear.Enabled = true;
+                dtpPayFrom.Enabled = false;
+                dtpPayTo.Enabled = false;
+                cbPayMonth.Enabled = true;
+                cbPayYear.Enabled = true;
             }
-            else if (cbIncSrchType.SelectedIndex == 1) // Date
+            else if (cbPaySrchType.SelectedIndex == 1) // Date
             {
-                dtpIncFrom.Enabled = true;
-                dtpIncTo.Enabled = false;
-                cbIncMonth.Enabled = false;
-                cbIncYear.Enabled = false;
+                dtpPayFrom.Enabled = true;
+                dtpPayTo.Enabled = false;
+                cbPayMonth.Enabled = false;
+                cbPayYear.Enabled = false;
             }
         }
 
@@ -921,6 +921,19 @@ namespace NigelFinanceManage
         {
             QE qeForm = new QE(account, service, this);
             qeForm.Show();
+        }
+
+        private void dtpBizDate_ValueChanged(object sender, EventArgs e)
+        {
+            DataTable dt = service.getPaymentDataByDate(lbID.Text, dtpBizDate.Value);
+            if (dt.Rows.Count > 0)
+            {
+                pnDate.BackColor = Color.Green;
+            }
+            else
+            {
+                pnDate.BackColor = Color.DarkRed;
+            }
         }
     }
 }

@@ -142,7 +142,7 @@ namespace NigelFinanceManage.Service
             dt.Columns.Add("Description");
             foreach (FinanceInfo info in list)
             {
-                if (info.DateExpense == date)
+                if (info.DateExpense.ToShortDateString().Equals(date.ToShortDateString()))
                 {
                     DataRow row = dt.NewRow();
                     dt.Rows.Add(row);
@@ -249,7 +249,7 @@ namespace NigelFinanceManage.Service
             dt.Columns.Add("Description");
             foreach (FinanceInfo info in list)
             {
-                if (info.DateExpense == date)
+                if (info.DateExpense.ToShortDateString().Equals(date.ToShortDateString()))
                 {
                     DataRow row = dt.NewRow();
                     dt.Rows.Add(row);

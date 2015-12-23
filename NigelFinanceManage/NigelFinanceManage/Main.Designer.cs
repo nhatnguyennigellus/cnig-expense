@@ -143,6 +143,7 @@
             this.reminderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pnDate = new System.Windows.Forms.Panel();
             this.statusStrip1.SuspendLayout();
             this.tabWithdrawal.SuspendLayout();
             this.tabIncome.SuspendLayout();
@@ -533,6 +534,7 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.pnDate);
             this.tabPage2.Controls.Add(this.dtpPayDate);
             this.tabPage2.Controls.Add(this.btnPlanToPay);
             this.tabPage2.Controls.Add(this.btnPlanImport);
@@ -1286,10 +1288,13 @@
             // 
             // dtpBizDate
             // 
+            this.dtpBizDate.CalendarTitleBackColor = System.Drawing.SystemColors.ControlText;
+            this.dtpBizDate.CalendarTitleForeColor = System.Drawing.SystemColors.ActiveCaption;
             this.dtpBizDate.Location = new System.Drawing.Point(281, 66);
             this.dtpBizDate.Name = "dtpBizDate";
             this.dtpBizDate.Size = new System.Drawing.Size(200, 23);
             this.dtpBizDate.TabIndex = 0;
+            this.dtpBizDate.ValueChanged += new System.EventHandler(this.dtpBizDate_ValueChanged);
             // 
             // label11
             // 
@@ -1356,20 +1361,20 @@
             // miQE
             // 
             this.miQE.Name = "miQE";
-            this.miQE.Size = new System.Drawing.Size(152, 22);
+            this.miQE.Size = new System.Drawing.Size(135, 22);
             this.miQE.Text = "Quick Entry";
             this.miQE.Click += new System.EventHandler(this.miQE_Click);
             // 
             // addBankToolStripMenuItem
             // 
             this.addBankToolStripMenuItem.Name = "addBankToolStripMenuItem";
-            this.addBankToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.addBankToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
             this.addBankToolStripMenuItem.Text = "Add Bank";
             // 
             // reminderToolStripMenuItem
             // 
             this.reminderToolStripMenuItem.Name = "reminderToolStripMenuItem";
-            this.reminderToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.reminderToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
             this.reminderToolStripMenuItem.Text = "Reminder";
             // 
             // helpToolStripMenuItem
@@ -1385,6 +1390,14 @@
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
             this.aboutToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
             this.aboutToolStripMenuItem.Text = "About";
+            // 
+            // pnDate
+            // 
+            this.pnDate.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.pnDate.Location = new System.Drawing.Point(406, 8);
+            this.pnDate.Name = "pnDate";
+            this.pnDate.Size = new System.Drawing.Size(30, 23);
+            this.pnDate.TabIndex = 20;
             // 
             // Main
             // 
@@ -1565,5 +1578,6 @@
         private System.Windows.Forms.ToolStripMenuItem reminderToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
+        private System.Windows.Forms.Panel pnDate;
     }
 }
