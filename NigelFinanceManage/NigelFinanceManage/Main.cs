@@ -1,4 +1,5 @@
-﻿using NigelFinanceManage.Entity;
+﻿using Microsoft.Win32;
+using NigelFinanceManage.Entity;
 using NigelFinanceManage.Service;
 using System;
 using System.Collections.Generic;
@@ -26,6 +27,10 @@ namespace NigelFinanceManage
         public Main(Account account, Login frmLogin, DiaryService service, int database)
         {
             InitializeComponent();
+            using (RegistryKey key = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true))
+            {
+                key.SetValue("Nigel Finance Diary", "\"" + Application.ExecutablePath + "\"");
+            }
             this.account = account;
             this.frmLogin = frmLogin;
             this.service = service;
@@ -385,7 +390,7 @@ namespace NigelFinanceManage
 
                 txtPayAmount.Text = "";
                 txtPayDesc.Text = "";
-                txtCash.Text = account.Balance.ToString();
+                txtCash.Text = account.CashWithdraw.ToString();
             }
             else
             {
