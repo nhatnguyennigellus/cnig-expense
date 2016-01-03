@@ -32,6 +32,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="GemBox.Spreadsheet, Version=39.3.30.1125, Culture=neutral, PublicKeyToken=b1b72c69714d4847, processorArchitecture=MSIL">
+      <HintPath>..\packages\GemBox.Spreadsheet.39.3.30.1125\lib\net30\GemBox.Spreadsheet.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
@@ -52,6 +56,7 @@
     <Compile Include="DAO\PlanDAO.cs" />
     <Compile Include="DAO\QuickEntryDAO.cs" />
     <Compile Include="DAO\WithdrawalDAO.cs" />
+    <Compile Include="Data\ExcelOutput.cs" />
     <Compile Include="Entity\Account.cs" />
     <Compile Include="Entity\FinanceInfo.cs" />
     <Compile Include="Entity\Income.cs" />
@@ -81,6 +86,8 @@
       <DependentUpon>QE.cs</DependentUpon>
     </Compile>
     <Compile Include="Service\DiaryService.cs" />
+    <Compile Include="Service\ReportTemplate.cs" />
+    <Compile Include="Service\MonthlyReport.cs" />
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
     </EmbeddedResource>
@@ -100,6 +107,7 @@
       <DependentUpon>QE.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="ClassDiagram1.cd" />
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -111,7 +119,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Util\" />

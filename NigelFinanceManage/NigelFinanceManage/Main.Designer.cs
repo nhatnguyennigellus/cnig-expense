@@ -63,6 +63,7 @@
             this.txtIncDesc = new System.Windows.Forms.TextBox();
             this.txtIncAmount = new System.Windows.Forms.TextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.pnDate = new System.Windows.Forms.Panel();
             this.dtpPayDate = new System.Windows.Forms.DateTimePicker();
             this.btnPlanToPay = new System.Windows.Forms.Button();
             this.btnPlanImport = new System.Windows.Forms.Button();
@@ -143,7 +144,6 @@
             this.reminderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.pnDate = new System.Windows.Forms.Panel();
             this.statusStrip1.SuspendLayout();
             this.tabWithdrawal.SuspendLayout();
             this.tabIncome.SuspendLayout();
@@ -376,6 +376,7 @@
             this.btnIncReport.TabIndex = 6;
             this.btnIncReport.Text = "Report";
             this.btnIncReport.UseVisualStyleBackColor = true;
+            this.btnIncReport.Click += new System.EventHandler(this.btnIncReport_Click);
             // 
             // btnIncSrch
             // 
@@ -557,6 +558,14 @@
             this.tabPage2.Text = "Payment";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // pnDate
+            // 
+            this.pnDate.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.pnDate.Location = new System.Drawing.Point(406, 8);
+            this.pnDate.Name = "pnDate";
+            this.pnDate.Size = new System.Drawing.Size(30, 23);
+            this.pnDate.TabIndex = 20;
+            // 
             // dtpPayDate
             // 
             this.dtpPayDate.Enabled = false;
@@ -698,6 +707,7 @@
             this.btnPayReport.TabIndex = 7;
             this.btnPayReport.Text = "Report";
             this.btnPayReport.UseVisualStyleBackColor = true;
+            this.btnPayReport.Click += new System.EventHandler(this.btnPayReport_Click);
             // 
             // btnPaySrch
             // 
@@ -1214,6 +1224,7 @@
             this.btnWdhReport.TabIndex = 3;
             this.btnWdhReport.Text = "Report";
             this.btnWdhReport.UseVisualStyleBackColor = true;
+            this.btnWdhReport.Click += new System.EventHandler(this.btnWdhReport_Click);
             // 
             // btnWdhSrch
             // 
@@ -1390,14 +1401,6 @@
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
             this.aboutToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
             this.aboutToolStripMenuItem.Text = "About";
-            // 
-            // pnDate
-            // 
-            this.pnDate.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.pnDate.Location = new System.Drawing.Point(406, 8);
-            this.pnDate.Name = "pnDate";
-            this.pnDate.Size = new System.Drawing.Size(30, 23);
-            this.pnDate.TabIndex = 20;
             // 
             // Main
             // 

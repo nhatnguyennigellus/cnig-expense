@@ -47,6 +47,7 @@ namespace NigelFinanceManage
 
             cbAddTo.SelectedIndex = 0;
             cbIncSrchType.SelectedIndex = 0;
+            cbPaySrchType.SelectedIndex = 0;
             cbWdhMonth.SelectedIndex = 0;
             cbWdhYear.SelectedIndex = 0;
             cbIncMonth.SelectedIndex = 0;
@@ -112,7 +113,8 @@ namespace NigelFinanceManage
             else if (cbIncSrchType.SelectedIndex == 2)
             {
                 dtInc = service.getIncomeDataByMonth
-                    (account.Id, dtpIncFrom.Value.Month, dtpIncTo.Value.Year);
+                    (account.Id, int.Parse(cbIncMonth.SelectedItem.ToString()),
+                        int.Parse(cbIncYear.SelectedItem.ToString()));
             }
             else if (cbIncSrchType.SelectedIndex == 1)
             {
@@ -226,7 +228,8 @@ namespace NigelFinanceManage
             else if (cbPaySrchType.SelectedIndex == 2)
             {
                 dtPay = service.getPaymentDataByMonth
-                    (account.Id, dtpPayFrom.Value.Month, dtpPayTo.Value.Year);
+                    (account.Id, int.Parse(cbPayMonth.SelectedItem.ToString()),
+                        int.Parse(cbPayYear.SelectedItem.ToString()));
             }
             else if (cbPaySrchType.SelectedIndex == 1)
             {
@@ -939,6 +942,42 @@ namespace NigelFinanceManage
             {
                 pnDate.BackColor = Color.DarkRed;
             }
+        }
+
+        private void btnPayReport_Click(object sender, EventArgs e)
+        {
+            DataTable dtPay = service.getPaymentDataByMonth
+                    (account.Id, int.Parse(cbPayMonth.SelectedItem.ToString()),
+                        int.Parse(cbPayYear.SelectedItem.ToString()));
+            MonthlyReport report = new MonthlyReport("Payment",
+                                        int.Parse(cbPayMonth.SelectedItem.ToString()),
+                                        int.Parse(cbPayYear.SelectedItem.ToString()),
+                                        dtPay);
+            report.generateReport();
+        }
+
+        private void btnIncReport_Click(object sender, EventArgs e)
+        {
+            DataTable dtInc = service.getIncomeDataByMonth
+                    (account.Id, int.Parse(cbIncMonth.SelectedItem.ToString()),
+                        int.Parse(cbIncYear.SelectedItem.ToString()));
+            MonthlyReport report = new MonthlyReport("Income",
+                                        int.Parse(cbIncMonth.SelectedItem.ToString()),
+                                        int.Parse(cbIncYear.SelectedItem.ToString()),
+                                        dtInc);
+            report.generateReport();
+        }
+
+        private void btnWdhReport_Click(object sender, EventArgs e)
+        {
+            DataTable dtWdh = service.getWithdrawalDataByMonth
+                    (account.Id, int.Parse(cbWdhMonth.SelectedItem.ToString()),
+                        int.Parse(cbWdhYear.SelectedItem.ToString()));
+            MonthlyReport report = new MonthlyReport("Withdraw",
+                                        int.Parse(cbWdhMonth.SelectedItem.ToString()),
+                                        int.Parse(cbWdhYear.SelectedItem.ToString()),
+                                        dtWdh);
+            report.generateReport();
         }
     }
 }

@@ -166,10 +166,5 @@ namespace NigelFinanceManage.DAO
             return list;
         }
 
-
-        public List<FinanceInfo> getList(XmlNodeList list)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
