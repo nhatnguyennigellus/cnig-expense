@@ -85,6 +85,7 @@
     <Compile Include="QE.Designer.cs">
       <DependentUpon>QE.cs</DependentUpon>
     </Compile>
+    <Compile Include="Service\DateReport.cs" />
     <Compile Include="Service\DayRangeReport.cs" />
     <Compile Include="Service\DiaryService.cs" />
     <Compile Include="Service\ReportTemplate.cs" />

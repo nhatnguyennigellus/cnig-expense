@@ -964,10 +964,11 @@ namespace NigelFinanceManage
                                         int.Parse(cbPayYear.SelectedItem.ToString()),
                                         dtPay);
             }
-            //else if (cbPaySrchType.SelectedIndex == 1)
-            //{
-            //    dtPay = service.getPaymentDataByDate(account.Id, dtpPayFrom.Value);
-            //}
+            else if (cbPaySrchType.SelectedIndex == 1)
+            {
+                dtPay = service.getPaymentDataByDate(account.Id, dtpPayFrom.Value);
+                report = new DateReport("Payment", dtpPayFrom.Value, dtPay);
+            }
             report.generateReport();
         }
 
@@ -990,10 +991,11 @@ namespace NigelFinanceManage
                 dtInc = service.getIncomeDataByRange(account.Id, dtpIncFrom.Value, dtpIncTo.Value);
                 report = new DayRangeReport("Income", dtpIncFrom.Value, dtpIncTo.Value, dtInc);
             }
-            //else if (cbIncSrchType.SelectedIndex == 1)
-            //{
-            //    dtInc = service.getIncomeDataByDate(account.Id, dtpIncFrom.Value);
-            //}
+            else if (cbIncSrchType.SelectedIndex == 1)
+            {
+                dtInc = service.getIncomeDataByDate(account.Id, dtpIncFrom.Value);
+                report = new DateReport("Income", dtpIncFrom.Value, dtInc);
+            }
             report.generateReport();
         }
 
