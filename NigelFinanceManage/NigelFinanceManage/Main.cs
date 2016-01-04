@@ -946,25 +946,54 @@ namespace NigelFinanceManage
 
         private void btnPayReport_Click(object sender, EventArgs e)
         {
-            DataTable dtPay = service.getPaymentDataByMonth
+            ReportTemplate report = null;
+            DataTable dtPay = new DataTable();
+            if (cbPaySrchType.SelectedIndex == 0)
+            {
+                dtPay = service.getPaymentDataByRange
+                    (account.Id, dtpPayFrom.Value, dtpPayTo.Value);
+                report = new DayRangeReport("Payment", dtpPayFrom.Value, dtpPayTo.Value, dtPay);
+            }
+            else if (cbPaySrchType.SelectedIndex == 2)
+            {
+                dtPay = service.getPaymentDataByMonth
                     (account.Id, int.Parse(cbPayMonth.SelectedItem.ToString()),
                         int.Parse(cbPayYear.SelectedItem.ToString()));
-            MonthlyReport report = new MonthlyReport("Payment",
+                report = new MonthlyReport("Payment",
                                         int.Parse(cbPayMonth.SelectedItem.ToString()),
                                         int.Parse(cbPayYear.SelectedItem.ToString()),
                                         dtPay);
+            }
+            //else if (cbPaySrchType.SelectedIndex == 1)
+            //{
+            //    dtPay = service.getPaymentDataByDate(account.Id, dtpPayFrom.Value);
+            //}
             report.generateReport();
         }
 
         private void btnIncReport_Click(object sender, EventArgs e)
         {
-            DataTable dtInc = service.getIncomeDataByMonth
+            DataTable dtInc = null;
+            ReportTemplate report = null;
+            if (cbIncSrchType.SelectedIndex == 2)
+            {
+                dtInc = service.getIncomeDataByMonth
                     (account.Id, int.Parse(cbIncMonth.SelectedItem.ToString()),
                         int.Parse(cbIncYear.SelectedItem.ToString()));
-            MonthlyReport report = new MonthlyReport("Income",
+                report = new MonthlyReport("Income",
                                         int.Parse(cbIncMonth.SelectedItem.ToString()),
                                         int.Parse(cbIncYear.SelectedItem.ToString()),
                                         dtInc);
+            }
+            else if (cbIncSrchType.SelectedIndex == 0)
+            {
+                dtInc = service.getIncomeDataByRange(account.Id, dtpIncFrom.Value, dtpIncTo.Value);
+                report = new DayRangeReport("Income", dtpIncFrom.Value, dtpIncTo.Value, dtInc);
+            }
+            //else if (cbIncSrchType.SelectedIndex == 1)
+            //{
+            //    dtInc = service.getIncomeDataByDate(account.Id, dtpIncFrom.Value);
+            //}
             report.generateReport();
         }
 
