@@ -95,6 +95,7 @@ namespace NigelFinanceManage.Service
             dt.Columns.Add("Amount");
             dt.Columns.Add("Date");
             dt.Columns.Add("Description");
+            dt.Columns.Add("Budget");
             foreach (FinanceInfo info in list)
             {
                 DataRow row = dt.NewRow();
@@ -103,6 +104,7 @@ namespace NigelFinanceManage.Service
                 row["Amount"] = info.Amount.ToString();
                 row["Date"] = info.DateExpense.ToString("dd.MM.yyyy");
                 row["Description"] = info.Description;
+                row["Budget"] = info.Budget.ToString();
             }
             return dt;
         }
@@ -116,6 +118,7 @@ namespace NigelFinanceManage.Service
             dt.Columns.Add("Amount");
             dt.Columns.Add("Date");
             dt.Columns.Add("Description");
+            dt.Columns.Add("Budget");
             foreach (FinanceInfo info in list)
             {
                 if (info.DateExpense >= dateFrom && info.DateExpense <= dateTo)
@@ -125,7 +128,8 @@ namespace NigelFinanceManage.Service
                     row["ID"] = info.Id;
                     row["Amount"] = info.Amount.ToString();
                     row["Date"] = info.DateExpense.ToString("dd.MM.yyyy");
-                    row["Description"] = info.Description; 
+                    row["Description"] = info.Description;
+                    row["Budget"] = info.Budget.ToString();
                 }
             }
             return dt;
@@ -140,6 +144,7 @@ namespace NigelFinanceManage.Service
             dt.Columns.Add("Amount");
             dt.Columns.Add("Date");
             dt.Columns.Add("Description");
+            dt.Columns.Add("Budget");
             foreach (FinanceInfo info in list)
             {
                 if (info.DateExpense.ToShortDateString().Equals(date.ToShortDateString()))
@@ -150,6 +155,7 @@ namespace NigelFinanceManage.Service
                     row["Amount"] = info.Amount.ToString();
                     row["Date"] = info.DateExpense.ToString("dd.MM.yyyy");
                     row["Description"] = info.Description;
+                    row["Budget"] = info.Budget.ToString();
                 }
             }
             return dt;
@@ -202,6 +208,7 @@ namespace NigelFinanceManage.Service
             dt.Columns.Add("Amount");
             dt.Columns.Add("Date");
             dt.Columns.Add("Description");
+            dt.Columns.Add("Budget");
             foreach (FinanceInfo info in list)
             {
                 DataRow row = dt.NewRow();
@@ -210,6 +217,7 @@ namespace NigelFinanceManage.Service
                 row["Amount"] = info.Amount.ToString();
                 row["Date"] = info.DateExpense.ToString("dd.MM.yyyy");
                 row["Description"] = info.Description;
+                row["Budget"] = info.Budget.ToString();
             }
             return dt;
         }
@@ -223,6 +231,7 @@ namespace NigelFinanceManage.Service
             dt.Columns.Add("Amount");
             dt.Columns.Add("Date");
             dt.Columns.Add("Description");
+            dt.Columns.Add("Budget");
             foreach (FinanceInfo info in list)
             {
                 if (info.DateExpense >= dateFrom && info.DateExpense <= dateTo)
@@ -233,6 +242,7 @@ namespace NigelFinanceManage.Service
                     row["Amount"] = info.Amount.ToString();
                     row["Date"] = info.DateExpense.ToString("dd.MM.yyyy");
                     row["Description"] = info.Description;
+                    row["Budget"] = info.Budget.ToString();
                 }
             }
             return dt;
@@ -247,6 +257,7 @@ namespace NigelFinanceManage.Service
             dt.Columns.Add("Amount");
             dt.Columns.Add("Date");
             dt.Columns.Add("Description");
+            dt.Columns.Add("Budget");
             foreach (FinanceInfo info in list)
             {
                 if (info.DateExpense.ToShortDateString().Equals(date.ToShortDateString()))
@@ -257,6 +268,7 @@ namespace NigelFinanceManage.Service
                     row["Amount"] = info.Amount.ToString();
                     row["Date"] = info.DateExpense.ToString("dd.MM.yyyy");
                     row["Description"] = info.Description;
+                    row["Budget"] = info.Budget.ToString();
                 }
             }
             return dt;
@@ -338,6 +350,7 @@ namespace NigelFinanceManage.Service
             dest.Amount = src.Amount;
             dest.Currency = src.Currency;
             dest.Description = src.Description;
+            dest.Budget = src.Budget;
         }
 
         /**

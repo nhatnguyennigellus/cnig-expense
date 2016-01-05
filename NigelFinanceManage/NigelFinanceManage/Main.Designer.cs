@@ -144,6 +144,8 @@
             this.reminderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cbPayBy = new System.Windows.Forms.ComboBox();
+            this.label22 = new System.Windows.Forms.Label();
             this.statusStrip1.SuspendLayout();
             this.tabWithdrawal.SuspendLayout();
             this.tabIncome.SuspendLayout();
@@ -535,6 +537,8 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.cbPayBy);
+            this.tabPage2.Controls.Add(this.label22);
             this.tabPage2.Controls.Add(this.pnDate);
             this.tabPage2.Controls.Add(this.dtpPayDate);
             this.tabPage2.Controls.Add(this.btnPlanToPay);
@@ -1402,6 +1406,26 @@
             this.aboutToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
             this.aboutToolStripMenuItem.Text = "About";
             // 
+            // cbPayBy
+            // 
+            this.cbPayBy.FormattingEnabled = true;
+            this.cbPayBy.Items.AddRange(new object[] {
+            "Bank",
+            "Cash"});
+            this.cbPayBy.Location = new System.Drawing.Point(514, 8);
+            this.cbPayBy.Name = "cbPayBy";
+            this.cbPayBy.Size = new System.Drawing.Size(100, 23);
+            this.cbPayBy.TabIndex = 21;
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Location = new System.Drawing.Point(459, 11);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(43, 15);
+            this.label22.TabIndex = 22;
+            this.label22.Text = "Pay by";
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -1582,5 +1606,7 @@
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
         private System.Windows.Forms.Panel pnDate;
+        private System.Windows.Forms.ComboBox cbPayBy;
+        private System.Windows.Forms.Label label22;
     }
 }

@@ -55,6 +55,7 @@ namespace NigelFinanceManage.DAO
             dt.Columns.Add("Amount");
             dt.Columns.Add("Date");
             dt.Columns.Add("Description");
+            dt.Columns.Add("Budget");
             foreach (XmlElement ele in list)
             {
                 DataRow row = dt.NewRow();
@@ -63,6 +64,7 @@ namespace NigelFinanceManage.DAO
                 row["Amount"] = ele.GetAttribute("amount");
                 row["Date"] = ele.GetAttribute("dateExpense");
                 row["Description"] = ele.GetAttribute("description");
+                row["Budget"] = ele.GetAttribute("budget");
             }
             return dt;
         }
@@ -85,7 +87,8 @@ namespace NigelFinanceManage.DAO
                 Amount = int.Parse(ndInc.Attributes["amount"].Value),
                 Currency = ndInc.Attributes["currency"].Value,
                 DateExpense = DateTime.Parse(ndInc.Attributes["dateExpense"].Value),
-                Description = ndInc.Attributes["description"].Value
+                Description = ndInc.Attributes["description"].Value,
+                Budget = int.Parse(ndInc.Attributes["budget"].Value)
             };
 
             return income;
@@ -104,6 +107,7 @@ namespace NigelFinanceManage.DAO
             ele.SetAttribute("currency", newInfo.Currency);
             ele.SetAttribute("dateExpense", newInfo.DateExpense.ToString("dd.MM.yyyy"));
             ele.SetAttribute("description", newInfo.Description);
+            ele.SetAttribute("budget", newInfo.Budget.ToString());
 
             eleList.AppendChild(ele);
             doc.Save(xml.XmlPath);
@@ -121,6 +125,7 @@ namespace NigelFinanceManage.DAO
             ele.Attributes["currency"].Value = mdfInfo.Currency;
             ele.Attributes["dateExpense"].Value = mdfInfo.DateExpense.ToString("dd.MM.yyyy");
             ele.Attributes["description"].Value = mdfInfo.Description;
+            ele.Attributes["budget"].Value = mdfInfo.Budget.ToString();
 
             doc.Save(xml.XmlPath);
 
@@ -159,6 +164,7 @@ namespace NigelFinanceManage.DAO
                     Currency = ele.GetAttribute("currency"),
                     DateExpense = DateTime.Parse(ele.GetAttribute("dateExpense").ToString()),
                     Description = ele.GetAttribute("description"),
+                    Budget = int.Parse(ele.GetAttribute("budget"))
                 };
 
                 list.Add(info);

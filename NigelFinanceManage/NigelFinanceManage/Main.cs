@@ -46,6 +46,7 @@ namespace NigelFinanceManage
             lbID.Text = account.Id;
 
             cbAddTo.SelectedIndex = 0;
+            cbPayBy.SelectedIndex = 1;
             cbIncSrchType.SelectedIndex = 0;
             cbPaySrchType.SelectedIndex = 0;
             cbWdhMonth.SelectedIndex = 0;
@@ -379,7 +380,8 @@ namespace NigelFinanceManage
                 Amount = amount,
                 Description = desc,
                 DateExpense = date,
-                Currency = account.Currency
+                Currency = account.Currency,
+                Budget = cbPayBy.SelectedIndex
             };
             if (service.addPaymentLog(payment, lbID.Text))
             {
@@ -387,13 +389,23 @@ namespace NigelFinanceManage
 
                 DataTable dt = service.getPaymentData(lbID.Text);
                 txtPayTotal.Text = calculateTotal(dt).ToString();
-                account.CashWithdraw -= amount;
-                txtCash.Text = account.CashWithdraw.ToString();
-                service.updateBudget(lbID.Text, account.CashWithdraw, "Cash");
 
+                if (cbPayBy.SelectedItem.ToString().Equals("Bank"))
+                {
+                    account.Balance -= amount;
+                    txtBank.Text = account.Balance.ToString();
+                    service.updateBudget(lbID.Text, account.Balance,
+                        cbPayBy.SelectedItem.ToString());
+                }
+                else if (cbPayBy.SelectedItem.ToString().Equals("Cash"))
+                {
+                    account.CashWithdraw -= amount;
+                    txtCash.Text = account.CashWithdraw.ToString();
+                    service.updateBudget(lbID.Text, account.CashWithdraw,
+                        cbPayBy.SelectedItem.ToString());
+                }
                 txtPayAmount.Text = "";
                 txtPayDesc.Text = "";
-                txtCash.Text = account.CashWithdraw.ToString();
             }
             else
             {
@@ -631,6 +643,7 @@ namespace NigelFinanceManage
                 txtIncAmount.Text = dgvIncome.CurrentRow.Cells[1].Value.ToString();
                 dtpIncDate.Value = DateTime.Parse(dgvIncome.CurrentRow.Cells[2].Value.ToString());
                 txtIncDesc.Text = dgvIncome.CurrentRow.Cells[3].Value.ToString();
+                cbAddTo.SelectedIndex = int.Parse(dgvIncome.CurrentRow.Cells[4].Value.ToString());
             }
             else
             {
@@ -648,8 +661,6 @@ namespace NigelFinanceManage
             info.Description = txtIncDesc.Text;
             info.DateExpense = dtpIncDate.Value;
 
-            
-
             if (service.modifyIncome(info, account.Id))
             {
                 successMessage("Income log updated!");
@@ -659,6 +670,12 @@ namespace NigelFinanceManage
                 int newBalance = oldBalance - oldIncome
                     + int.Parse(txtIncAmount.Text);
                 txtBank.Text = newBalance.ToString();
+
+                if (cbAddTo.SelectedIndex == 0)
+                    service.updateBudget(lbID.Text, int.Parse(txtBank.Text), "Bank");
+                else
+                    service.updateBudget(lbID.Text, int.Parse(txtCash.Text), "Cash");
+
                 dtpIncDate.Enabled = false;
             }
             else
@@ -688,6 +705,10 @@ namespace NigelFinanceManage
                 txtCash.Text = newBalance.ToString();
                 dtpPayDate.Enabled = false;
 
+                if (cbPayBy.SelectedIndex == 0)
+                    service.updateBudget(lbID.Text, int.Parse(txtBank.Text), "Bank");
+                else
+                    service.updateBudget(lbID.Text, int.Parse(txtCash.Text), "Cash");
             }
             else
             {
@@ -705,6 +726,7 @@ namespace NigelFinanceManage
                 txtPayAmount.Text = dgvPayment.CurrentRow.Cells[1].Value.ToString();
                 dtpPayDate.Value = DateTime.Parse(dgvPayment.CurrentRow.Cells[2].Value.ToString());
                 txtPayDesc.Text = dgvPayment.CurrentRow.Cells[3].Value.ToString();
+                cbPayBy.SelectedIndex = int.Parse(dgvPayment.CurrentRow.Cells[4].Value.ToString());
             }
             else
             {

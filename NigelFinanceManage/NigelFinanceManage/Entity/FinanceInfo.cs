@@ -45,6 +45,13 @@ namespace NigelFinanceManage.Entity
             set { description = value; }
         }
 
+        private int budget;
+        public int Budget
+        {
+            get { return budget; }
+            set { budget = value; }
+        }
+
         public FinanceInfo() {
 
         }
@@ -55,6 +62,16 @@ namespace NigelFinanceManage.Entity
             this.currency = currency;
             this.dateExpense = dateExpense;
             this.description = description;
+        }
+
+        public void ExpenseInfo(String id, int amount, String currency, DateTime dateExpense, String description, int budget)
+        {
+            this.id = id;
+            this.amount = amount;
+            this.currency = currency;
+            this.dateExpense = dateExpense;
+            this.description = description;
+            this.budget = budget;
         }
     }
 }
