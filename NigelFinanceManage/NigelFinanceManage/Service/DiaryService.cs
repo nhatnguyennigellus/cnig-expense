@@ -102,7 +102,7 @@ namespace NigelFinanceManage.Service
                 dt.Rows.Add(row);
                 row["ID"] = info.Id;
                 row["Amount"] = info.Amount.ToString();
-                row["Date"] = info.DateExpense.ToString("dd.MM.yyyy");
+                row["Date"] = info.DateExpense.ToString("yyyy.MM.dd");
                 row["Description"] = info.Description;
                 row["Budget"] = info.Budget.ToString();
             }
@@ -127,7 +127,7 @@ namespace NigelFinanceManage.Service
                     dt.Rows.Add(row);
                     row["ID"] = info.Id;
                     row["Amount"] = info.Amount.ToString();
-                    row["Date"] = info.DateExpense.ToString("dd.MM.yyyy");
+                    row["Date"] = info.DateExpense.ToString("yyyy.MM.dd");
                     row["Description"] = info.Description;
                     row["Budget"] = info.Budget.ToString();
                 }
@@ -153,7 +153,7 @@ namespace NigelFinanceManage.Service
                     dt.Rows.Add(row);
                     row["ID"] = info.Id;
                     row["Amount"] = info.Amount.ToString();
-                    row["Date"] = info.DateExpense.ToString("dd.MM.yyyy");
+                    row["Date"] = info.DateExpense.ToString("yyyy.MM.dd");
                     row["Description"] = info.Description;
                     row["Budget"] = info.Budget.ToString();
                 }
@@ -215,7 +215,7 @@ namespace NigelFinanceManage.Service
                 dt.Rows.Add(row);
                 row["ID"] = info.Id;
                 row["Amount"] = info.Amount.ToString();
-                row["Date"] = info.DateExpense.ToString("dd.MM.yyyy");
+                row["Date"] = info.DateExpense.ToString("yyyy.MM.dd");
                 row["Description"] = info.Description;
                 row["Budget"] = info.Budget.ToString();
             }
@@ -240,7 +240,7 @@ namespace NigelFinanceManage.Service
                     dt.Rows.Add(row);
                     row["ID"] = info.Id;
                     row["Amount"] = info.Amount.ToString();
-                    row["Date"] = info.DateExpense.ToString("dd.MM.yyyy");
+                    row["Date"] = info.DateExpense.ToString("yyyy.MM.dd");
                     row["Description"] = info.Description;
                     row["Budget"] = info.Budget.ToString();
                 }
@@ -266,7 +266,7 @@ namespace NigelFinanceManage.Service
                     dt.Rows.Add(row);
                     row["ID"] = info.Id;
                     row["Amount"] = info.Amount.ToString();
-                    row["Date"] = info.DateExpense.ToString("dd.MM.yyyy");
+                    row["Date"] = info.DateExpense.ToString("yyyy.MM.dd");
                     row["Description"] = info.Description;
                     row["Budget"] = info.Budget.ToString();
                 }
@@ -406,7 +406,7 @@ namespace NigelFinanceManage.Service
                 dt.Rows.Add(row);
                 row["ID"] = info.Id;
                 row["Amount"] = info.Amount.ToString();
-                row["Date"] = info.DateExpense.ToString("dd.MM.yyyy");
+                row["Date"] = info.DateExpense.ToString("yyyy.MM.dd");
                 row["ATM"] = info.Description;
             }
             return dt;
@@ -457,5 +457,6 @@ namespace NigelFinanceManage.Service
         {
             return qeDAO.remove(xml, qe, accId);
         }
+
     }
 }

@@ -42,7 +42,7 @@ namespace NigelFinanceManage.Service
         {
             worksheet.Cells[row, 0].Value = financeType.ToUpper() + " DATE REPORT";
             worksheet.Cells[row++, 0].Style.Font.Weight = ExcelFont.BoldWeight;
-            worksheet.Cells[row, 2].Value = date.ToString("dd.MM.yyyy");
+            worksheet.Cells[row, 2].Value = date.ToString("yyyy.MM.dd");
             worksheet.Cells[row++, 2].Style.Font.Italic = true;
         }
 

@@ -66,6 +66,7 @@ namespace NigelFinanceManage.DAO
                 row["Description"] = ele.GetAttribute("description");
                 row["Budget"] = ele.GetAttribute("budget");
             }
+            dt.DefaultView.Sort = "Date ASC";
             return dt;
         }
 
@@ -105,7 +106,7 @@ namespace NigelFinanceManage.DAO
             ele.SetAttribute("id", newInfo.Id);
             ele.SetAttribute("amount", newInfo.Amount.ToString());
             ele.SetAttribute("currency", newInfo.Currency);
-            ele.SetAttribute("dateExpense", newInfo.DateExpense.ToString("dd.MM.yyyy"));
+            ele.SetAttribute("dateExpense", newInfo.DateExpense.ToString("yyyy.MM.dd"));
             ele.SetAttribute("description", newInfo.Description);
             ele.SetAttribute("budget", newInfo.Budget.ToString());
 
@@ -123,7 +124,7 @@ namespace NigelFinanceManage.DAO
 
             ele.Attributes["amount"].Value = mdfInfo.Amount.ToString();
             ele.Attributes["currency"].Value = mdfInfo.Currency;
-            ele.Attributes["dateExpense"].Value = mdfInfo.DateExpense.ToString("dd.MM.yyyy");
+            ele.Attributes["dateExpense"].Value = mdfInfo.DateExpense.ToString("yyyy.MM.dd");
             ele.Attributes["description"].Value = mdfInfo.Description;
             ele.Attributes["budget"].Value = mdfInfo.Budget.ToString();
 

@@ -12,7 +12,7 @@ namespace NigelFinanceManage.DAO
 {
     public class PlanDAO : IFinanceDAO<Plan>
     {
-        public DataTable createDataTable(System.Xml.XmlNodeList list)
+        public DataTable createDataTable(XmlNodeList list)
         {
             DataTable dt = new DataTable();
 
@@ -28,7 +28,8 @@ namespace NigelFinanceManage.DAO
                 row["Amount"] = ele.GetAttribute("amount");
                 row["Date"] = ele.GetAttribute("dateExpense");
                 row["Description"] = ele.GetAttribute("description");
-            }
+            } 
+            dt.DefaultView.Sort = "Date ASC";
             return dt;
         }
 
@@ -46,7 +47,7 @@ namespace NigelFinanceManage.DAO
             {
                 dt = this.createDataTable(nodeList);
             }
-
+            dt.DefaultView.Sort = "Date ASC";
             return dt;
         }
 
@@ -85,7 +86,7 @@ namespace NigelFinanceManage.DAO
             ele.SetAttribute("id", newInfo.Id);
             ele.SetAttribute("amount", newInfo.Amount.ToString());
             ele.SetAttribute("currency", newInfo.Currency);
-            ele.SetAttribute("dateExpense", newInfo.DateExpense.ToString("dd.MM.yyyy"));
+            ele.SetAttribute("dateExpense", newInfo.DateExpense.ToString("yyyy.MM.dd"));
             ele.SetAttribute("description", newInfo.Description);
 
             eleList.AppendChild(ele);
@@ -102,7 +103,7 @@ namespace NigelFinanceManage.DAO
 
             ele.Attributes["amount"].Value = mdfInfo.Amount.ToString();
             ele.Attributes["currency"].Value = mdfInfo.Currency;
-            ele.Attributes["dateExpense"].Value = mdfInfo.DateExpense.ToString("dd.MM.yyyy");
+            ele.Attributes["dateExpense"].Value = mdfInfo.DateExpense.ToString("yyyy.MM.dd");
             ele.Attributes["description"].Value = mdfInfo.Description;
 
             doc.Save(xml.XmlPath);
