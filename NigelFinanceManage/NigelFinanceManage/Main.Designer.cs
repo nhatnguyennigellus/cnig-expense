@@ -63,6 +63,8 @@
             this.txtIncDesc = new System.Windows.Forms.TextBox();
             this.txtIncAmount = new System.Windows.Forms.TextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.cbPayBy = new System.Windows.Forms.ComboBox();
+            this.label22 = new System.Windows.Forms.Label();
             this.pnDate = new System.Windows.Forms.Panel();
             this.dtpPayDate = new System.Windows.Forms.DateTimePicker();
             this.btnPlanToPay = new System.Windows.Forms.Button();
@@ -144,8 +146,6 @@
             this.reminderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.cbPayBy = new System.Windows.Forms.ComboBox();
-            this.label22 = new System.Windows.Forms.Label();
             this.statusStrip1.SuspendLayout();
             this.tabWithdrawal.SuspendLayout();
             this.tabIncome.SuspendLayout();
@@ -561,6 +561,26 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Payment";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // cbPayBy
+            // 
+            this.cbPayBy.FormattingEnabled = true;
+            this.cbPayBy.Items.AddRange(new object[] {
+            "Bank",
+            "Cash"});
+            this.cbPayBy.Location = new System.Drawing.Point(514, 8);
+            this.cbPayBy.Name = "cbPayBy";
+            this.cbPayBy.Size = new System.Drawing.Size(100, 23);
+            this.cbPayBy.TabIndex = 21;
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Location = new System.Drawing.Point(459, 11);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(43, 15);
+            this.label22.TabIndex = 22;
+            this.label22.Text = "Pay by";
             // 
             // pnDate
             // 
@@ -1354,14 +1374,16 @@
             // logoutToolStripMenuItem
             // 
             this.logoutToolStripMenuItem.Name = "logoutToolStripMenuItem";
-            this.logoutToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
+            this.logoutToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.logoutToolStripMenuItem.Text = "Logout";
+            this.logoutToolStripMenuItem.Click += new System.EventHandler(this.logoutToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.exitToolStripMenuItem.Text = "Exit";
+            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
             // configurationToolStripMenuItem
             // 
@@ -1405,26 +1427,6 @@
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
             this.aboutToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
             this.aboutToolStripMenuItem.Text = "About";
-            // 
-            // cbPayBy
-            // 
-            this.cbPayBy.FormattingEnabled = true;
-            this.cbPayBy.Items.AddRange(new object[] {
-            "Bank",
-            "Cash"});
-            this.cbPayBy.Location = new System.Drawing.Point(514, 8);
-            this.cbPayBy.Name = "cbPayBy";
-            this.cbPayBy.Size = new System.Drawing.Size(100, 23);
-            this.cbPayBy.TabIndex = 21;
-            // 
-            // label22
-            // 
-            this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(459, 11);
-            this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(43, 15);
-            this.label22.TabIndex = 22;
-            this.label22.Text = "Pay by";
             // 
             // Main
             // 
