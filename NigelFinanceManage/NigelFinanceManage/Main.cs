@@ -236,6 +236,7 @@ namespace NigelFinanceManage
             {
                 dtPay = service.getPaymentDataByDate(account.Id, dtpPayFrom.Value);
             }
+            dtPay.DefaultView.RowFilter = "Description like '%" + txtPaySrch.Text + "%'";
             dgvPayment.DataSource = dtPay;
             txtPayTotal.Text = calculateTotal(dtPay).ToString();
             dgvPayment.Columns[1].DefaultCellStyle.Alignment = 

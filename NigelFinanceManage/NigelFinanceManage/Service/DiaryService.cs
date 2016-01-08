@@ -274,23 +274,6 @@ namespace NigelFinanceManage.Service
             return dt;
         }
 
-        public DataTable getPaymentDataByDesc(DataTable dt, string keyword)
-        {
-            DataTable dtOut = new DataTable();
-
-            foreach (DataRow rowNew in dt.Rows)
-            {
-                if (rowNew["Description"].ToString().Contains(keyword))
-                {
-                    DataRow row = rowNew;
-                    dt.Rows.Add(row);
-                    
-                }
-            }
-
-            return dtOut;
-        }
-
         public Payment getPaymentById(string id, string accId)
         {
             return payDAO.getById(xml, id, accId);
