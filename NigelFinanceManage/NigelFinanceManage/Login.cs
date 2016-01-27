@@ -22,6 +22,11 @@ namespace NigelFinanceManage
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
+            login();
+        }
+
+        private void login()
+        {
             string id = txtUsername.Text;
             string pin = txtPassword.Text;
             if (service.isAuthenticated(id, pin))
@@ -40,12 +45,36 @@ namespace NigelFinanceManage
 
         private void Login_Load(object sender, EventArgs e)
         {
-            cbDB.SelectedIndex = 0;
+            cbDB.SelectedIndex = 1;
         }
 
         private void cbDB_SelectedIndexChanged(object sender, EventArgs e)
         {
             service.chooseDatabase(cbDB.SelectedIndex);
+        }
+
+        private void Login_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Enter)
+            {
+                login();
+            }
+        }
+
+        private void txtPassword_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Enter)
+            {
+                login();
+            }
+        }
+
+        private void txtUsername_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Enter)
+            {
+                login();
+            }
         }
     }
 }

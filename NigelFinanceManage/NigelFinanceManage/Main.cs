@@ -364,12 +364,26 @@ namespace NigelFinanceManage
             }
 
             int amount = int.Parse(txtPayAmount.Text);
-            if (int.Parse(txtCash.Text) - amount < 0)
+            switch (cbPayBy.SelectedIndex)
             {
-                errorMessage("Not enough budget!");
-                txtPayAmount.Focus();
-                return;
+                case 0:
+                    if (int.Parse(txtBank.Text) - amount < 0)
+                    {
+                        errorMessage("Not enough budget!");
+                        txtPayAmount.Focus();
+                        return;
+                    }
+                    break;
+                case 1:
+                    if (int.Parse(txtCash.Text) - amount < 0)
+                    {
+                        errorMessage("Not enough budget!");
+                        txtPayAmount.Focus();
+                        return;
+                    }
+                    break;
             }
+           
 
             string id = service.generateId(Payment.PREFIX, service.getPaymentList(lbID.Text));
             

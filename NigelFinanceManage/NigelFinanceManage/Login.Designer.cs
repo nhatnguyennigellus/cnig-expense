@@ -66,6 +66,7 @@
             this.txtUsername.Size = new System.Drawing.Size(128, 23);
             this.txtUsername.TabIndex = 2;
             this.txtUsername.Text = "nhat4492";
+            this.txtUsername.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtUsername_KeyUp);
             // 
             // txtPassword
             // 
@@ -74,7 +75,8 @@
             this.txtPassword.PasswordChar = '*';
             this.txtPassword.Size = new System.Drawing.Size(128, 23);
             this.txtPassword.TabIndex = 3;
-            this.txtPassword.Text = "nigel4492@";
+            this.txtPassword.Text = "nigel4492";
+            this.txtPassword.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtPassword_KeyUp);
             // 
             // label3
             // 
@@ -151,6 +153,7 @@
             this.Name = "Login";
             this.Text = "Login";
             this.Load += new System.EventHandler(this.Login_Load);
+            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Login_KeyUp);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
