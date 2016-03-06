@@ -300,9 +300,7 @@ namespace NigelFinanceManage
             {
                 successMessage("Income log added!");
 
-                DataTable dt =  service.getIncomeData(lbID.Text);
-                dgvIncome.DataSource = dt;
-                txtIncTotal.Text = calculateTotal(dt).ToString();
+                
 
                 if (cbAddTo.SelectedItem.ToString().Equals("Bank"))
                 {
@@ -322,6 +320,8 @@ namespace NigelFinanceManage
                 txtIncAmount.Text = "";
                 txtIncDesc.Text = "";
 
+                DataTable dt = service.getIncomeData(lbID.Text);
+                txtIncTotal.Text = calculateTotal(dt).ToString();
             }
             else
             {
