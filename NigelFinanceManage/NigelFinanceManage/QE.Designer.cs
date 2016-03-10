@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(QE));
             this.cbQEType = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
             this.txtQEDesc = new System.Windows.Forms.TextBox();
@@ -183,6 +184,7 @@
             this.Controls.Add(this.label5);
             this.Controls.Add(this.txtQEDesc);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "QE";
             this.Text = "Quick Entry";

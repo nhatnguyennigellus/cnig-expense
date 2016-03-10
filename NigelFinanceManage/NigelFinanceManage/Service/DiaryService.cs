@@ -121,7 +121,8 @@ namespace NigelFinanceManage.Service
             dt.Columns.Add("Budget");
             foreach (FinanceInfo info in list)
             {
-                if (info.DateExpense >= dateFrom && info.DateExpense <= dateTo)
+                if (info.DateExpense >= dateFrom.AddDays(-1) 
+                    && info.DateExpense <= dateTo.AddDays(1))
                 {
                     DataRow row = dt.NewRow();
                     dt.Rows.Add(row);
@@ -234,7 +235,8 @@ namespace NigelFinanceManage.Service
             dt.Columns.Add("Budget");
             foreach (FinanceInfo info in list)
             {
-                if (info.DateExpense >= dateFrom && info.DateExpense <= dateTo)
+                if (info.DateExpense >= dateFrom.AddDays(-1) 
+                    && info.DateExpense <= dateTo.AddDays(1))
                 {
                     DataRow row = dt.NewRow();
                     dt.Rows.Add(row);
