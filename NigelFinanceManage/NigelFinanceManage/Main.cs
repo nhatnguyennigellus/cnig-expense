@@ -658,7 +658,7 @@ namespace NigelFinanceManage
                 txtIncAmount.Text = dgvIncome.CurrentRow.Cells[1].Value.ToString();
                 dtpIncDate.Value = DateTime.Parse(dgvIncome.CurrentRow.Cells[2].Value.ToString());
                 txtIncDesc.Text = dgvIncome.CurrentRow.Cells[3].Value.ToString();
-                cbAddTo.SelectedIndex = int.Parse(dgvIncome.CurrentRow.Cells[4].Value.ToString());
+                cbAddTo.SelectedIndex = dgvIncome.CurrentRow.Cells[4].Value.ToString() == "Bank" ? 0 : 1;
             }
             else
             {
@@ -741,7 +741,7 @@ namespace NigelFinanceManage
                 txtPayAmount.Text = dgvPayment.CurrentRow.Cells[1].Value.ToString();
                 dtpPayDate.Value = DateTime.Parse(dgvPayment.CurrentRow.Cells[2].Value.ToString());
                 txtPayDesc.Text = dgvPayment.CurrentRow.Cells[3].Value.ToString();
-                cbPayBy.SelectedIndex = int.Parse(dgvPayment.CurrentRow.Cells[4].Value.ToString());
+                cbPayBy.SelectedIndex = dgvPayment.CurrentRow.Cells[4].Value.ToString() == "Bank" ? 0 : 1;
             }
             else
             {

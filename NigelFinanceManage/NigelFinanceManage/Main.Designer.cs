@@ -144,7 +144,6 @@
             this.configurationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.miQE = new System.Windows.Forms.ToolStripMenuItem();
             this.addBankToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.reminderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1.SuspendLayout();
@@ -1390,8 +1389,7 @@
             // 
             this.configurationToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.miQE,
-            this.addBankToolStripMenuItem,
-            this.reminderToolStripMenuItem});
+            this.addBankToolStripMenuItem});
             this.configurationToolStripMenuItem.Name = "configurationToolStripMenuItem";
             this.configurationToolStripMenuItem.Size = new System.Drawing.Size(93, 20);
             this.configurationToolStripMenuItem.Text = "Configuration";
@@ -1399,21 +1397,15 @@
             // miQE
             // 
             this.miQE.Name = "miQE";
-            this.miQE.Size = new System.Drawing.Size(135, 22);
+            this.miQE.Size = new System.Drawing.Size(152, 22);
             this.miQE.Text = "Quick Entry";
             this.miQE.Click += new System.EventHandler(this.miQE_Click);
             // 
             // addBankToolStripMenuItem
             // 
             this.addBankToolStripMenuItem.Name = "addBankToolStripMenuItem";
-            this.addBankToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
+            this.addBankToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.addBankToolStripMenuItem.Text = "Add Bank";
-            // 
-            // reminderToolStripMenuItem
-            // 
-            this.reminderToolStripMenuItem.Name = "reminderToolStripMenuItem";
-            this.reminderToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
-            this.reminderToolStripMenuItem.Text = "Reminder";
             // 
             // helpToolStripMenuItem
             // 
@@ -1606,7 +1598,6 @@
         private System.Windows.Forms.ToolStripMenuItem configurationToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem miQE;
         private System.Windows.Forms.ToolStripMenuItem addBankToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem reminderToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
         private System.Windows.Forms.Panel pnDate;

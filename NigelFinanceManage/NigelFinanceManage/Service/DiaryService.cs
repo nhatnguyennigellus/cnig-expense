@@ -104,7 +104,7 @@ namespace NigelFinanceManage.Service
                 row["Amount"] = info.Amount.ToString();
                 row["Date"] = info.DateExpense.ToString("yyyy.MM.dd");
                 row["Description"] = info.Description;
-                row["Budget"] = info.Budget.ToString();
+                row["Budget"] = info.Budget.ToString() == "0" ? "Bank" : "Cash";
             }
             return dt;
         }
@@ -130,7 +130,7 @@ namespace NigelFinanceManage.Service
                     row["Amount"] = info.Amount.ToString();
                     row["Date"] = info.DateExpense.ToString("yyyy.MM.dd");
                     row["Description"] = info.Description;
-                    row["Budget"] = info.Budget.ToString();
+                    row["Budget"] = info.Budget.ToString() == "0" ? "Bank" : "Cash";
                 }
             }
             return dt;
@@ -156,7 +156,7 @@ namespace NigelFinanceManage.Service
                     row["Amount"] = info.Amount.ToString();
                     row["Date"] = info.DateExpense.ToString("yyyy.MM.dd");
                     row["Description"] = info.Description;
-                    row["Budget"] = info.Budget.ToString();
+                    row["Budget"] = info.Budget.ToString() == "0" ? "Bank" : "Cash";
                 }
             }
             return dt;
@@ -218,7 +218,7 @@ namespace NigelFinanceManage.Service
                 row["Amount"] = info.Amount.ToString();
                 row["Date"] = info.DateExpense.ToString("yyyy.MM.dd");
                 row["Description"] = info.Description;
-                row["Budget"] = info.Budget.ToString();
+                row["Budget"] = info.Budget.ToString() == "0" ? "Bank" : "Cash";
             }
             return dt;
         }
@@ -244,7 +244,7 @@ namespace NigelFinanceManage.Service
                     row["Amount"] = info.Amount.ToString();
                     row["Date"] = info.DateExpense.ToString("yyyy.MM.dd");
                     row["Description"] = info.Description;
-                    row["Budget"] = info.Budget.ToString();
+                    row["Budget"] = info.Budget.ToString() == "0" ? "Bank" : "Cash";
                 }
             }
             return dt;
@@ -270,7 +270,7 @@ namespace NigelFinanceManage.Service
                     row["Amount"] = info.Amount.ToString();
                     row["Date"] = info.DateExpense.ToString("yyyy.MM.dd");
                     row["Description"] = info.Description;
-                    row["Budget"] = info.Budget.ToString();
+                    row["Budget"] = info.Budget.ToString() == "0" ? "Bank" : "Cash";
                 }
             }
             return dt;
