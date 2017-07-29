@@ -16,7 +16,7 @@ namespace NigelFinanceManage
         DiaryService service;
         public Login()
         {
-            service = new DiaryService();
+            service = DiaryService.getInstance();
             InitializeComponent();
         }
 
@@ -45,7 +45,7 @@ namespace NigelFinanceManage
 
         private void Login_Load(object sender, EventArgs e)
         {
-            cbDB.SelectedIndex = 1;
+            cbDB.SelectedIndex = 0;
         }
 
         private void cbDB_SelectedIndexChanged(object sender, EventArgs e)
@@ -75,6 +75,12 @@ namespace NigelFinanceManage
             {
                 login();
             }
+        }
+
+        private void btnAddAcc_Click(object sender, EventArgs e)
+        {
+            AddAccount frm = new AddAccount(this, service, cbDB.SelectedIndex);
+            frm.Show();
         }
     }
 }

@@ -39,6 +39,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.sttLogin = new System.Windows.Forms.ToolStripStatusLabel();
+            this.btnAddAcc = new System.Windows.Forms.Button();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -102,7 +103,7 @@
             // 
             // btnLogin
             // 
-            this.btnLogin.Location = new System.Drawing.Point(119, 232);
+            this.btnLogin.Location = new System.Drawing.Point(77, 231);
             this.btnLogin.Name = "btnLogin";
             this.btnLogin.Size = new System.Drawing.Size(87, 27);
             this.btnLogin.TabIndex = 6;
@@ -136,11 +137,22 @@
             this.sttLogin.Name = "sttLogin";
             this.sttLogin.Size = new System.Drawing.Size(0, 17);
             // 
+            // btnAddAcc
+            // 
+            this.btnAddAcc.Location = new System.Drawing.Point(170, 231);
+            this.btnAddAcc.Name = "btnAddAcc";
+            this.btnAddAcc.Size = new System.Drawing.Size(87, 27);
+            this.btnAddAcc.TabIndex = 9;
+            this.btnAddAcc.Text = "Add Account";
+            this.btnAddAcc.UseVisualStyleBackColor = true;
+            this.btnAddAcc.Click += new System.EventHandler(this.btnAddAcc_Click);
+            // 
             // Login
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(331, 301);
+            this.Controls.Add(this.btnAddAcc);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.btnLogin);
@@ -175,6 +187,7 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel sttLogin;
+        private System.Windows.Forms.Button btnAddAcc;
     }
 }
 

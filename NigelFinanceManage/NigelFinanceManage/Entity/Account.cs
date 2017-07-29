@@ -13,7 +13,7 @@ namespace NigelFinanceManage.Entity
 
         }
 
-        public Account(String id, String name, String bank, int balance, int cashWithdraw, String currency)
+        public Account(String id, String name, String bank, int balance, int cashWithdraw, String currency, string pin)
         {
             this.id = id;
             this.name = name;
@@ -21,6 +21,7 @@ namespace NigelFinanceManage.Entity
             this.balance = balance;
             this.cashWithdraw = cashWithdraw;
             this.currency = currency;
+            this.pin = pin;
         }
 
         private String id;
@@ -64,5 +65,13 @@ namespace NigelFinanceManage.Entity
             get { return currency; }
             set { currency = value; }
         }
+
+        private string pin;
+        public string Pin
+        {
+            get { return pin; }
+            set { pin = value; }
+        }
+
     }
 }

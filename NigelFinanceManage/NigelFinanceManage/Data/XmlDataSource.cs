@@ -13,11 +13,7 @@ namespace NigelFinanceManage.Data
     {
         private static XmlDataSource xmlInstance = null;
         private XmlDocument doc;
-        public XmlDocument Doc
-        {
-            get { return doc; }
-        }
-
+        
         private string xmlPath;
         public string XmlPath
         {
@@ -36,7 +32,8 @@ namespace NigelFinanceManage.Data
             doc.Load(xmlPath);
         }
 
-        public static XmlDataSource getInstance() {
+        public static XmlDataSource getInstance()
+        {
             if (xmlInstance == null)
             {
                 xmlInstance = new XmlDataSource();

@@ -49,6 +49,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddAccount.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddAccount.Designer.cs">
+      <DependentUpon>AddAccount.cs</DependentUpon>
+    </Compile>
     <Compile Include="AddATM.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -56,6 +62,7 @@
       <DependentUpon>AddATM.cs</DependentUpon>
     </Compile>
     <Compile Include="DAO\AccountDAO.cs" />
+    <Compile Include="DAO\BankDAO.cs" />
     <Compile Include="DAO\IFinanceDAO.cs" />
     <Compile Include="DAO\IncomeDAO.cs" />
     <Compile Include="DAO\PaymentDAO.cs" />
@@ -97,6 +104,9 @@
     <Compile Include="Service\DiaryService.cs" />
     <Compile Include="Service\ReportTemplate.cs" />
     <Compile Include="Service\MonthlyReport.cs" />
+    <EmbeddedResource Include="AddAccount.resx">
+      <DependentUpon>AddAccount.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="AddATM.resx">
       <DependentUpon>AddATM.cs</DependentUpon>
     </EmbeddedResource>

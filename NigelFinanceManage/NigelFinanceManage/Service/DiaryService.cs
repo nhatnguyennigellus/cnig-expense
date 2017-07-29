@@ -13,6 +13,7 @@ namespace NigelFinanceManage.Service
 {
     public class DiaryService
     {
+        private static DiaryService instance = null;
         private XmlDataSource xml;
         AccountDAO accDAO = new AccountDAO();
         IncomeDAO incDAO = new IncomeDAO();
@@ -20,12 +21,21 @@ namespace NigelFinanceManage.Service
         PlanDAO planDAO = new PlanDAO();
         WithdrawalDAO wdhDAO = new WithdrawalDAO();
         QuickEntryDAO qeDAO = new QuickEntryDAO();
+        BankDAO bankDAO = new BankDAO();
 
-        public DiaryService()
+        protected DiaryService()
         {
             xml = XmlDataSource.getInstance();
         }
 
+        public static DiaryService getInstance()
+        {
+            if (instance == null)
+            {
+                instance = new DiaryService();
+            }
+            return instance;
+        }
         public void chooseDatabase(int dbIdx)
         {
             if (dbIdx == 0)
@@ -76,6 +86,26 @@ namespace NigelFinanceManage.Service
         public bool updateBudget(string id, int newAmount, string budget)
         {
             return accDAO.updateBudget(xml, id, newAmount, budget);
+        }
+
+        public bool existedAccount(string id)
+        {
+            return accDAO.existedAccount(xml, id);
+        }
+
+        public bool addAccount(Account account)
+        {
+            return accDAO.addAccount(xml, account);
+        }
+
+        public bool addProfile(Account account)
+        {
+            return accDAO.addProfile(xml, account);
+        }
+         
+        public bool modifyAccount(Account account)
+        {
+            return accDAO.modifyAccount(xml, account);
         }
 
         /**
@@ -479,6 +509,18 @@ namespace NigelFinanceManage.Service
         {
             return wdhDAO.removeATM(xml, atmName, account);
         }
+        
+        /*
+         * Bank
+         */
+        public bool existedBank(string bank)
+        {
+            return bankDAO.existedBank(xml, bank);
+        }
 
+        public bool addBank(Bank bank)
+        {
+            return bankDAO.addBank(xml, bank);
+        }
     }
 }

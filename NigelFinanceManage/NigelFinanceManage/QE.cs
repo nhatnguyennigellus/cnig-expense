@@ -15,7 +15,7 @@ namespace NigelFinanceManage
     public partial class QE : Form
     {
         Account account = new Account();
-        DiaryService service = new DiaryService();
+        DiaryService service;
         Main main;
         public QE()
         {

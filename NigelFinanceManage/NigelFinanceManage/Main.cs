@@ -17,7 +17,7 @@ namespace NigelFinanceManage
     {
         Account account = new Account();
         Login frmLogin = new Login();
-        DiaryService service = new DiaryService();
+        DiaryService service;
         int database = -1;
         public Main()
         {
@@ -98,6 +98,11 @@ namespace NigelFinanceManage
             if (dtInc != null)
             {
                 dgvIncome.DataSource = dtInc;
+            }
+            if (dtInc.Rows.Count == 0)
+            {
+                errorMessage("No data!");
+                return;
             }
             dgvIncome.Columns[1].DefaultCellStyle.Alignment = 
                 DataGridViewContentAlignment.MiddleRight;
@@ -185,6 +190,11 @@ namespace NigelFinanceManage
             if (dtPay != null)
             {
                 dgvPayment.DataSource = dtPay;
+            }
+            if (dtPay.Rows.Count == 0)
+            {
+                errorMessage("No data!");
+                return;
             }
             dgvPayment.Columns[1].DefaultCellStyle.Alignment = 
                 DataGridViewContentAlignment.MiddleRight;

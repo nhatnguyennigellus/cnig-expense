@@ -31,5 +31,13 @@ namespace NigelFinanceManage.Entity
             get { return outerWdhFee; }
             set { outerWdhFee = value; }
         }
+
+        private string currency;
+
+        public string Currency
+        {
+            get { return currency; }
+            set { currency = value; }
+        }
     }
 }

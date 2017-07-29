@@ -1,1 +1,16 @@
 E:\HCMUS\Project and Program\FinanceManage\cnig-expense\NigelFinanceManage\NigelFinanceManage\bin\Debug\NigelFinanceManage.exe.config
+E:\PROJECTS\Repositories\cnig-expense\NigelFinanceManage\NigelFinanceManage\bin\Debug\NigelFinanceManage.exe
+E:\PROJECTS\Repositories\cnig-expense\NigelFinanceManage\NigelFinanceManage\bin\Debug\NigelFinanceManage.exe.config
+E:\PROJECTS\Repositories\cnig-expense\NigelFinanceManage\NigelFinanceManage\bin\Debug\NigelFinanceManage.pdb
+E:\PROJECTS\Repositories\cnig-expense\NigelFinanceManage\NigelFinanceManage\bin\Debug\GemBox.Spreadsheet.dll
+E:\PROJECTS\Repositories\cnig-expense\NigelFinanceManage\NigelFinanceManage\bin\Debug\GemBox.Spreadsheet.xml
+E:\PROJECTS\Repositories\cnig-expense\NigelFinanceManage\NigelFinanceManage\obj\Debug\NigelFinanceManage.csprojResolveAssemblyReference.cache
+E:\PROJECTS\Repositories\cnig-expense\NigelFinanceManage\NigelFinanceManage\obj\Debug\NigelFinanceManage.AddATM.resources
+E:\PROJECTS\Repositories\cnig-expense\NigelFinanceManage\NigelFinanceManage\obj\Debug\NigelFinanceManage.Login.resources
+E:\PROJECTS\Repositories\cnig-expense\NigelFinanceManage\NigelFinanceManage\obj\Debug\NigelFinanceManage.Main.resources
+E:\PROJECTS\Repositories\cnig-expense\NigelFinanceManage\NigelFinanceManage\obj\Debug\NigelFinanceManage.Properties.Resources.resources
+E:\PROJECTS\Repositories\cnig-expense\NigelFinanceManage\NigelFinanceManage\obj\Debug\NigelFinanceManage.QE.resources
+E:\PROJECTS\Repositories\cnig-expense\NigelFinanceManage\NigelFinanceManage\obj\Debug\NigelFinanceManage.csproj.GenerateResource.Cache
+E:\PROJECTS\Repositories\cnig-expense\NigelFinanceManage\NigelFinanceManage\obj\Debug\NigelFinanceManage.exe
+E:\PROJECTS\Repositories\cnig-expense\NigelFinanceManage\NigelFinanceManage\obj\Debug\NigelFinanceManage.pdb
+E:\PROJECTS\Repositories\cnig-expense\NigelFinanceManage\NigelFinanceManage\obj\Debug\NigelFinanceManage.AddAccount.resources
