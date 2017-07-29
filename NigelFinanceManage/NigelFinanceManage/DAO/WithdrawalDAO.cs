@@ -85,13 +85,14 @@ namespace NigelFinanceManage.DAO
                 Amount = int.Parse(ndWdh.Attributes["amount"].Value),
                 Currency = ndWdh.Attributes["currency"].Value,
                 DateExpense = DateTime.Parse(ndWdh.Attributes["date"].Value),
-                Description = ndWdh.Attributes["atm"].Value
+                Description = ndWdh.Attributes["atm"].Value,
+                Extra = int.Parse(ndWdh.Attributes["extra"].Value)
             };
 
             return withdr;
         }
 
-        public bool add(XmlDataSource xml, FinanceInfo newInfo, string accId)
+        public bool add(XmlDataSource xml, Withdrawal newInfo, string accId)
         {
             XmlDocument doc = xml.getXmlDocument();
 
@@ -104,13 +105,14 @@ namespace NigelFinanceManage.DAO
             ele.SetAttribute("currency", newInfo.Currency);
             ele.SetAttribute("date", newInfo.DateExpense.ToString("yyyy.MM.dd"));
             ele.SetAttribute("atm", newInfo.Description);
+            ele.SetAttribute("extra", newInfo.Extra.ToString());
 
             eleList.AppendChild(ele);
             doc.Save(xml.XmlPath);
             return true;
         }
 
-        public bool modify(XmlDataSource xml, FinanceInfo mdfInfo, string accId)
+        public bool modify(XmlDataSource xml, Withdrawal mdfInfo, string accId)
         {
             XmlDocument doc = xml.getXmlDocument();
             string xpath = "/my-expense/expense-data/data[@profile-id='" + accId
@@ -121,6 +123,7 @@ namespace NigelFinanceManage.DAO
             ele.Attributes["currency"].Value = mdfInfo.Currency;
             ele.Attributes["date"].Value = mdfInfo.DateExpense.ToString("yyyy.MM.dd");
             ele.Attributes["atm"].Value = mdfInfo.Description;
+            ele.Attributes["extra"].Value = mdfInfo.Extra.ToString();
 
             doc.Save(xml.XmlPath);
 
@@ -152,13 +155,14 @@ namespace NigelFinanceManage.DAO
             List<FinanceInfo> list = new List<FinanceInfo>();
             foreach (XmlElement ele in nodeList)
             {
-                Income info = new Income
+                Withdrawal info = new Withdrawal
                 {
                     Id = ele.GetAttribute("id"),
                     Amount = int.Parse(ele.GetAttribute("amount")),
                     Currency = ele.GetAttribute("currency"),
                     DateExpense = DateTime.Parse(ele.GetAttribute("date").ToString()),
                     Description = ele.GetAttribute("atm"),
+                    Extra = int.Parse(ele.GetAttribute("extra"))
                 };
 
                 list.Add(info);
@@ -167,11 +171,11 @@ namespace NigelFinanceManage.DAO
             return list;
         }
 
-        public List<String> getATMACBList(XmlDataSource xml)
+        public List<String> getATMListByBank(XmlDataSource xml, String bank)
         {
             List<String> list = new List<String>();
             XmlDocument doc = xml.getXmlDocument();
-            string xpath = "/my-expense/atm-acb/atm";
+            string xpath = "/my-expense/banks/bank[@name='" + bank + "']/atm";
             XmlNode root = doc.DocumentElement;
             XmlNodeList nodeList = root.SelectNodes(xpath);
             foreach (XmlElement ele in nodeList)
@@ -182,5 +186,100 @@ namespace NigelFinanceManage.DAO
             return list;
         }
 
+        public List<String> getATMOtherList(XmlDataSource xml, Account account)
+        {
+            List<String> list = new List<String>();
+            XmlDocument doc = xml.getXmlDocument();
+            string xpath = "/my-expense/expense-data/data[@profile-id = '"
+                + account.Id + "']/atm-other/atm";
+            XmlNode root = doc.DocumentElement;
+            XmlNodeList nodeList = root.SelectNodes(xpath);
+            foreach (XmlElement ele in nodeList)
+            {
+                list.Add(ele.GetAttribute("name"));
+            }
+
+            return list;
+        }
+
+        public int getWithdrawFee(XmlDataSource xml, String bank, int io)
+        {
+            List<String> list = new List<String>();
+            XmlDocument doc = xml.getXmlDocument();
+            string xpath = "/my-expense/banks/bank[@name='" + bank + "']";
+            XmlNode root = doc.DocumentElement;
+            XmlNodeList nodeList = root.SelectNodes(xpath);
+            foreach (XmlElement ele in nodeList)
+            {
+                return io == Withdrawal.INNER_FEE ?
+                    int.Parse(ele.GetAttribute("inner-wdh-fee")) : 
+                    int.Parse(ele.GetAttribute("outer-wdh-fee"));
+            }
+
+            return 0;
+        }
+
+        public bool addATM(XmlDataSource xml, string atmName, string bank)
+        {
+            XmlDocument doc = xml.getXmlDocument();
+
+            string xpath = "/my-expense/banks/bank[@name ='" + bank + "']";
+            XmlElement eleList = (XmlElement)doc.SelectSingleNode(xpath);
+            XmlElement ele = doc.CreateElement("atm");
+
+            ele.SetAttribute("name", atmName);
+
+            eleList.AppendChild(ele);
+            doc.Save(xml.XmlPath);
+            return true;
+        }
+
+        public bool addATM(XmlDataSource xml, string atmName, Account account)
+        {
+            XmlDocument doc = xml.getXmlDocument();
+
+            string xpath = "/my-expense/expense-data/data[@profile-id = '" 
+                +  account.Id + "']/atm-other";
+            XmlElement eleList = (XmlElement)doc.SelectSingleNode(xpath);
+            XmlElement ele = doc.CreateElement("atm");
+
+            ele.SetAttribute("name", atmName);
+
+            eleList.AppendChild(ele);
+            doc.Save(xml.XmlPath);
+            return true;
+        }
+
+        public bool removeATM(XmlDataSource xml, string atmName, Account account)
+        {
+            XmlDocument doc = xml.getXmlDocument();
+            string xpath = "/my-expense/expense-data/data[@profile-id = '"
+                + account.Id + "']/atm-other/atm[@name = '" + atmName + "']";
+            XmlNode ele = doc.SelectSingleNode(xpath);
+            ele.ParentNode.RemoveChild(ele);
+            doc.Save(xml.XmlPath);
+            return true;
+        }
+
+        public bool removeATM(XmlDataSource xml, string atmName, string bank)
+        {
+            XmlDocument doc = xml.getXmlDocument();
+            string xpath = "/my-expense/banks/bank[@name ='" + bank + "']/atm[@name = '" + atmName + "']";
+            XmlNode ele = doc.SelectSingleNode(xpath);
+            ele.ParentNode.RemoveChild(ele);
+            doc.Save(xml.XmlPath);
+            return true;
+        }
+
+
+        public bool add(XmlDataSource xml, FinanceInfo newInfo, string accId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool modify(XmlDataSource xml, FinanceInfo mdfInfo, string accId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

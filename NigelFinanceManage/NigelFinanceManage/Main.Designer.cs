@@ -64,6 +64,8 @@
             this.txtIncDesc = new System.Windows.Forms.TextBox();
             this.txtIncAmount = new System.Windows.Forms.TextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.cbPayType = new System.Windows.Forms.ComboBox();
+            this.label24 = new System.Windows.Forms.Label();
             this.cbPayBy = new System.Windows.Forms.ComboBox();
             this.label22 = new System.Windows.Forms.Label();
             this.pnDate = new System.Windows.Forms.Panel();
@@ -114,6 +116,8 @@
             this.txtPlanDesc = new System.Windows.Forms.TextBox();
             this.txtPlanAmount = new System.Windows.Forms.TextBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.txtATMOther = new System.Windows.Forms.TextBox();
+            this.cbOtherATM = new System.Windows.Forms.ComboBox();
             this.dtpWdh = new System.Windows.Forms.DateTimePicker();
             this.label21 = new System.Windows.Forms.Label();
             this.dgvWdh = new System.Windows.Forms.DataGridView();
@@ -132,7 +136,6 @@
             this.cbATMACB = new System.Windows.Forms.ComboBox();
             this.label17 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
-            this.txtATMOther = new System.Windows.Forms.TextBox();
             this.txtWdhAmount = new System.Windows.Forms.TextBox();
             this.dtpBizDate = new System.Windows.Forms.DateTimePicker();
             this.label11 = new System.Windows.Forms.Label();
@@ -537,6 +540,8 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.cbPayType);
+            this.tabPage2.Controls.Add(this.label24);
             this.tabPage2.Controls.Add(this.cbPayBy);
             this.tabPage2.Controls.Add(this.label22);
             this.tabPage2.Controls.Add(this.pnDate);
@@ -562,13 +567,30 @@
             this.tabPage2.Text = "Payment";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // cbPayType
+            // 
+            this.cbPayType.FormattingEnabled = true;
+            this.cbPayType.Location = new System.Drawing.Point(509, 35);
+            this.cbPayType.Name = "cbPayType";
+            this.cbPayType.Size = new System.Drawing.Size(121, 23);
+            this.cbPayType.TabIndex = 24;
+            // 
+            // label24
+            // 
+            this.label24.AutoSize = true;
+            this.label24.Location = new System.Drawing.Point(449, 40);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(54, 15);
+            this.label24.TabIndex = 23;
+            this.label24.Text = "Pay Type";
+            // 
             // cbPayBy
             // 
             this.cbPayBy.FormattingEnabled = true;
             this.cbPayBy.Items.AddRange(new object[] {
             "Bank",
             "Cash"});
-            this.cbPayBy.Location = new System.Drawing.Point(514, 8);
+            this.cbPayBy.Location = new System.Drawing.Point(530, 8);
             this.cbPayBy.Name = "cbPayBy";
             this.cbPayBy.Size = new System.Drawing.Size(100, 23);
             this.cbPayBy.TabIndex = 21;
@@ -576,7 +598,7 @@
             // label22
             // 
             this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(459, 11);
+            this.label22.Location = new System.Drawing.Point(473, 11);
             this.label22.Name = "label22";
             this.label22.Size = new System.Drawing.Size(43, 15);
             this.label22.TabIndex = 22;
@@ -837,7 +859,7 @@
             // cbPayDescTemp
             // 
             this.cbPayDescTemp.FormattingEnabled = true;
-            this.cbPayDescTemp.Location = new System.Drawing.Point(406, 35);
+            this.cbPayDescTemp.Location = new System.Drawing.Point(304, 35);
             this.cbPayDescTemp.MaxDropDownItems = 50;
             this.cbPayDescTemp.Name = "cbPayDescTemp";
             this.cbPayDescTemp.Size = new System.Drawing.Size(121, 23);
@@ -866,7 +888,7 @@
             // 
             this.txtPayDesc.Location = new System.Drawing.Point(85, 35);
             this.txtPayDesc.Name = "txtPayDesc";
-            this.txtPayDesc.Size = new System.Drawing.Size(312, 23);
+            this.txtPayDesc.Size = new System.Drawing.Size(215, 23);
             this.txtPayDesc.TabIndex = 3;
             // 
             // txtPayAmount
@@ -1089,6 +1111,8 @@
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.txtATMOther);
+            this.tabPage3.Controls.Add(this.cbOtherATM);
             this.tabPage3.Controls.Add(this.dtpWdh);
             this.tabPage3.Controls.Add(this.label21);
             this.tabPage3.Controls.Add(this.dgvWdh);
@@ -1099,7 +1123,6 @@
             this.tabPage3.Controls.Add(this.cbATMACB);
             this.tabPage3.Controls.Add(this.label17);
             this.tabPage3.Controls.Add(this.label18);
-            this.tabPage3.Controls.Add(this.txtATMOther);
             this.tabPage3.Controls.Add(this.txtWdhAmount);
             this.tabPage3.Location = new System.Drawing.Point(4, 24);
             this.tabPage3.Name = "tabPage3";
@@ -1109,10 +1132,26 @@
             this.tabPage3.Text = "Withdrawal";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
+            // txtATMOther
+            // 
+            this.txtATMOther.Enabled = false;
+            this.txtATMOther.Location = new System.Drawing.Point(94, 93);
+            this.txtATMOther.Name = "txtATMOther";
+            this.txtATMOther.Size = new System.Drawing.Size(217, 23);
+            this.txtATMOther.TabIndex = 30;
+            // 
+            // cbOtherATM
+            // 
+            this.cbOtherATM.FormattingEnabled = true;
+            this.cbOtherATM.Location = new System.Drawing.Point(94, 64);
+            this.cbOtherATM.Name = "cbOtherATM";
+            this.cbOtherATM.Size = new System.Drawing.Size(241, 23);
+            this.cbOtherATM.TabIndex = 29;
+            // 
             // dtpWdh
             // 
             this.dtpWdh.Enabled = false;
-            this.dtpWdh.Location = new System.Drawing.Point(8, 35);
+            this.dtpWdh.Location = new System.Drawing.Point(205, 6);
             this.dtpWdh.Name = "dtpWdh";
             this.dtpWdh.Size = new System.Drawing.Size(200, 23);
             this.dtpWdh.TabIndex = 26;
@@ -1121,7 +1160,7 @@
             // 
             this.label21.AutoSize = true;
             this.label21.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label21.Location = new System.Drawing.Point(268, 113);
+            this.label21.Location = new System.Drawing.Point(268, 175);
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(113, 15);
             this.label21.TabIndex = 25;
@@ -1134,7 +1173,7 @@
             this.dgvWdh.AllowUserToResizeRows = false;
             this.dgvWdh.BackgroundColor = System.Drawing.SystemColors.Control;
             this.dgvWdh.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvWdh.Location = new System.Drawing.Point(3, 131);
+            this.dgvWdh.Location = new System.Drawing.Point(3, 199);
             this.dgvWdh.Name = "dgvWdh";
             this.dgvWdh.ReadOnly = true;
             this.dgvWdh.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
@@ -1149,7 +1188,7 @@
             this.panel8.Controls.Add(this.btnWdhViewAll);
             this.panel8.Controls.Add(this.btnWdhModify);
             this.panel8.Controls.Add(this.btnWdhAdd);
-            this.panel8.Location = new System.Drawing.Point(333, 64);
+            this.panel8.Location = new System.Drawing.Point(333, 131);
             this.panel8.Name = "panel8";
             this.panel8.Size = new System.Drawing.Size(324, 32);
             this.panel8.TabIndex = 23;
@@ -1203,7 +1242,7 @@
             this.panel7.Controls.Add(this.cbWdhMonth);
             this.panel7.Controls.Add(this.btnWdhReport);
             this.panel7.Controls.Add(this.btnWdhSrch);
-            this.panel7.Location = new System.Drawing.Point(3, 64);
+            this.panel7.Location = new System.Drawing.Point(3, 131);
             this.panel7.Name = "panel7";
             this.panel7.Size = new System.Drawing.Size(327, 32);
             this.panel7.TabIndex = 22;
@@ -1263,17 +1302,18 @@
             // rbATMOther
             // 
             this.rbATMOther.AutoSize = true;
-            this.rbATMOther.Location = new System.Drawing.Point(338, 39);
+            this.rbATMOther.Location = new System.Drawing.Point(70, 68);
             this.rbATMOther.Name = "rbATMOther";
             this.rbATMOther.Size = new System.Drawing.Size(14, 13);
             this.rbATMOther.TabIndex = 3;
             this.rbATMOther.TabStop = true;
             this.rbATMOther.UseVisualStyleBackColor = true;
+            this.rbATMOther.CheckedChanged += new System.EventHandler(this.rbATMOther_CheckedChanged);
             // 
             // rbATMACB
             // 
             this.rbATMACB.AutoSize = true;
-            this.rbATMACB.Location = new System.Drawing.Point(338, 10);
+            this.rbATMACB.Location = new System.Drawing.Point(70, 39);
             this.rbATMACB.Name = "rbATMACB";
             this.rbATMACB.Size = new System.Drawing.Size(14, 13);
             this.rbATMACB.TabIndex = 1;
@@ -1284,7 +1324,7 @@
             // cbATMACB
             // 
             this.cbATMACB.FormattingEnabled = true;
-            this.cbATMACB.Location = new System.Drawing.Point(362, 6);
+            this.cbATMACB.Location = new System.Drawing.Point(94, 35);
             this.cbATMACB.Name = "cbATMACB";
             this.cbATMACB.Size = new System.Drawing.Size(241, 23);
             this.cbATMACB.TabIndex = 2;
@@ -1292,7 +1332,7 @@
             // label17
             // 
             this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(274, 9);
+            this.label17.Location = new System.Drawing.Point(5, 38);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(30, 15);
             this.label17.TabIndex = 18;
@@ -1307,16 +1347,9 @@
             this.label18.TabIndex = 17;
             this.label18.Text = "Amount";
             // 
-            // txtATMOther
-            // 
-            this.txtATMOther.Location = new System.Drawing.Point(362, 35);
-            this.txtATMOther.Name = "txtATMOther";
-            this.txtATMOther.Size = new System.Drawing.Size(241, 23);
-            this.txtATMOther.TabIndex = 4;
-            // 
             // txtWdhAmount
             // 
-            this.txtWdhAmount.Location = new System.Drawing.Point(105, 6);
+            this.txtWdhAmount.Location = new System.Drawing.Point(94, 6);
             this.txtWdhAmount.Name = "txtWdhAmount";
             this.txtWdhAmount.Size = new System.Drawing.Size(100, 23);
             this.txtWdhAmount.TabIndex = 0;
@@ -1397,15 +1430,16 @@
             // miQE
             // 
             this.miQE.Name = "miQE";
-            this.miQE.Size = new System.Drawing.Size(152, 22);
+            this.miQE.Size = new System.Drawing.Size(135, 22);
             this.miQE.Text = "Quick Entry";
             this.miQE.Click += new System.EventHandler(this.miQE_Click);
             // 
             // addBankToolStripMenuItem
             // 
             this.addBankToolStripMenuItem.Name = "addBankToolStripMenuItem";
-            this.addBankToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.addBankToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
             this.addBankToolStripMenuItem.Text = "Add Bank";
+            this.addBankToolStripMenuItem.Click += new System.EventHandler(this.addBankToolStripMenuItem_Click);
             // 
             // helpToolStripMenuItem
             // 
@@ -1566,7 +1600,6 @@
         private System.Windows.Forms.ComboBox cbATMACB;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Label label18;
-        private System.Windows.Forms.TextBox txtATMOther;
         private System.Windows.Forms.TextBox txtWdhAmount;
         private System.Windows.Forms.ComboBox cbIncYear;
         private System.Windows.Forms.ComboBox cbIncMonth;
@@ -1603,5 +1636,9 @@
         private System.Windows.Forms.Panel pnDate;
         private System.Windows.Forms.ComboBox cbPayBy;
         private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.ComboBox cbOtherATM;
+        private System.Windows.Forms.TextBox txtATMOther;
+        private System.Windows.Forms.ComboBox cbPayType;
+        private System.Windows.Forms.Label label24;
     }
 }

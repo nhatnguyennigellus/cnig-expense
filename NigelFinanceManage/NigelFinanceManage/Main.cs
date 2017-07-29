@@ -37,6 +37,7 @@ namespace NigelFinanceManage
             frmLogin.Hide();
             this.database = database;
             service.chooseDatabase(database);
+            loadPayType();
         }
 
         private void Main_Load(object sender, EventArgs e)
@@ -47,6 +48,7 @@ namespace NigelFinanceManage
 
             cbAddTo.SelectedIndex = 0;
             cbPayBy.SelectedIndex = 1;
+            cbPayType.SelectedIndex = 0;
             cbIncSrchType.SelectedIndex = 0;
             cbPaySrchType.SelectedIndex = 0;
             cbWdhMonth.SelectedIndex = 0;
@@ -578,7 +580,7 @@ namespace NigelFinanceManage
                 txtPlanAmount.Focus();
                 return;
             }
-            if (txtATMOther.Text == "" && rbATMOther.Checked == true)
+            if (cbOtherATM.SelectedItem.ToString().Equals("") && rbATMOther.Checked == true)
             {
                 errorMessage("ATM is required!");
                 return;
@@ -598,12 +600,12 @@ namespace NigelFinanceManage
             if (rbATMACB.Checked == true)
             {
                 description = cbATMACB.SelectedItem.ToString();
-                extraWdh += 1100;
+                extraWdh += service.getWdhFee(account.Bank, Withdrawal.INNER_FEE);
             }
             else if (rbATMOther.Checked == true)
             {
-                description = txtATMOther.Text;
-                extraWdh += 3300;
+                description = cbOtherATM.SelectedItem.ToString();
+                extraWdh += service.getWdhFee(account.Bank, Withdrawal.OUTER_FEE);
             }
             amount += extraWdh;
             Withdrawal wdh = new Withdrawal
@@ -612,7 +614,8 @@ namespace NigelFinanceManage
                 Amount = amount,
                 Currency = account.Currency,
                 DateExpense = dtpBizDate.Value,
-                Description = description
+                Description = description,
+                Extra = extraWdh
             };
 
             if (service.addWithdrawalLog(wdh, lbID.Text))
@@ -638,14 +641,7 @@ namespace NigelFinanceManage
 
         private void rbATMACB_CheckedChanged(object sender, EventArgs e)
         {
-            if (rbATMACB.Checked)
-            {
-                cbATMACB.Items.Clear();
-                foreach (string atm in service.getATMACBList())
-                {
-                    cbATMACB.Items.Add(atm);
-                }
-            }
+            loadATMACB();
         }
 
         private void dgvIncome_SelectionChanged(object sender, EventArgs e)
@@ -854,7 +850,7 @@ namespace NigelFinanceManage
             int chgWdh =  int.Parse(txtWdhAmount.Text);
             string id = dgvWdh.CurrentRow.Cells[0].Value.ToString();
 
-            FinanceInfo info = service.getWithdrawalById(id, account.Id);
+            Withdrawal info = service.getWithdrawalById(id, account.Id);
             info.Amount = int.Parse(txtWdhAmount.Text);
             info.Description = txtATMOther.Text;
             info.DateExpense = dtpIncDate.Value;
@@ -874,6 +870,7 @@ namespace NigelFinanceManage
                 txtCash.Text = newCash + "";
                 service.updateBudget(lbID.Text, int.Parse(txtBank.Text), "Bank");
                 service.updateBudget(lbID.Text, int.Parse(txtCash.Text), "Cash");
+                txtATMOther.Enabled = false;
             }
             else
             {
@@ -887,6 +884,7 @@ namespace NigelFinanceManage
         {
             btnWdhModify.Enabled = true;
             dtpWdh.Enabled = true;
+            txtATMOther.Enabled = true;
 
             if (dgvWdh.CurrentCell != null)
             {
@@ -905,7 +903,7 @@ namespace NigelFinanceManage
             string id = dgvWdh.CurrentRow.Cells[0].Value.ToString();
             int oldWdh = int.Parse(dgvWdh.CurrentRow.Cells[1].Value.ToString());
             string oldATM = dgvWdh.CurrentRow.Cells[3].Value.ToString();
-            FinanceInfo info = service.getWithdrawalById(id, lbID.Text);
+            Withdrawal info = service.getWithdrawalById(id, lbID.Text);
 
             if (service.removeWithdrawal(info, lbID.Text))
             {
@@ -917,7 +915,7 @@ namespace NigelFinanceManage
                 int oldBalance = int.Parse(txtBank.Text);
                 int oldCash = int.Parse(txtCash.Text);
                 int newBalance = oldBalance + oldWdh;
-                int extra = oldATM.Contains("ACB") ? 1100 : 3300;
+                int extra = info.Extra;
                 int newCash = oldCash - oldWdh + extra;
                 txtCash.Text = newCash.ToString();
                 txtBank.Text = newBalance.ToString();
@@ -1057,6 +1055,50 @@ namespace NigelFinanceManage
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        private void rbATMOther_CheckedChanged(object sender, EventArgs e)
+        {
+            loadATMOther();
+        }
+
+        internal void loadATMOther()
+        {
+            if (rbATMOther.Checked)
+            {
+                cbOtherATM.Items.Clear();
+                foreach (string atm in service.getOtherATMList(account))
+                {
+                    cbOtherATM.Items.Add(atm);
+                }
+            }
+        }
+
+        internal void loadATMACB()
+        {
+            if (rbATMACB.Checked)
+            {
+                cbATMACB.Items.Clear();
+                foreach (string atm in service.getATMListByBank(account.Bank))
+                {
+                    cbATMACB.Items.Add(atm);
+                }
+            }
+        }
+
+        private void loadPayType()
+        {
+            cbPayType.Items.Clear();
+            foreach(string type in service.getPayType())
+            {
+                cbPayType.Items.Add(type);
+            }
+        }
+
+        private void addBankToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AddATM addAtmForm = new AddATM(service, account, this);
+            addAtmForm.Show();
         }
     }
 }

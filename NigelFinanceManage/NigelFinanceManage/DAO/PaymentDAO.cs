@@ -173,5 +173,19 @@ namespace NigelFinanceManage.DAO
             return list;
         }
 
+        public List<string> getPayType(XmlDataSource xml)
+        {
+            List<string> list = new List<String>();
+            XmlDocument doc = xml.getXmlDocument();
+            string xpath = "/my-expense/payment-type/type";
+            XmlNode root = doc.DocumentElement;
+            XmlNodeList nodeList = root.SelectNodes(xpath);
+            foreach (XmlElement ele in nodeList)
+            {
+                list.Add(ele.GetAttribute("name"));
+            }
+
+            return list;
+        }
     }
 }

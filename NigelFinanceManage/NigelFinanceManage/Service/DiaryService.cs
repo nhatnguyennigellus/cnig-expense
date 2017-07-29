@@ -296,6 +296,10 @@ namespace NigelFinanceManage.Service
             return payDAO.remove(xml, payment, accId);
         }
 
+        public List<string> getPayType()
+        {
+            return payDAO.getPayType(xml);
+        }
         /**
          * Plan Service
          */
@@ -341,11 +345,7 @@ namespace NigelFinanceManage.Service
         /**
          * Withdrawal Service
          */
-        public List<string> getATMACBList()
-        {
-            return wdhDAO.getATMACBList(xml);
-        }
-
+        
         public DataTable getWithdrawalData(string id)
         {
             return wdhDAO.getDataList(xml, id);
@@ -361,12 +361,12 @@ namespace NigelFinanceManage.Service
             return wdhDAO.getList(xml, accId);
         }
 
-        public bool addWithdrawalLog(FinanceInfo wdh, String accId)
+        public bool addWithdrawalLog(Withdrawal wdh, String accId)
         {
             return wdhDAO.add(xml, wdh, accId);
         }
 
-        public bool modifyWithdrawal(FinanceInfo wdh, String accId)
+        public bool modifyWithdrawal(Withdrawal wdh, String accId)
         {
             return wdhDAO.modify(xml, wdh, accId);
         }
@@ -441,6 +441,43 @@ namespace NigelFinanceManage.Service
         public bool removeQE(QuickEntry qe, string accId)
         {
             return qeDAO.remove(xml, qe, accId);
+        }
+
+        /**
+         * ATM
+         **/
+        public List<String> getOtherATMList(Account account)
+        {
+            return wdhDAO.getATMOtherList(xml, account);
+        }
+
+        public List<String> getATMListByBank(String bank)
+        {
+            return wdhDAO.getATMListByBank(xml, bank);
+        }
+
+        public int getWdhFee(String bank, int io)
+        {
+            return wdhDAO.getWithdrawFee(xml, bank, io);
+        }
+
+        public bool addATM(string atmName, string bank)
+        {
+            return wdhDAO.addATM(xml, atmName, bank);
+        }
+
+        public bool addATM(string atmName, Account account)
+        {
+            return wdhDAO.addATM(xml, atmName, account);
+        }
+
+        public bool removeATM(string atmName, string bank)
+        {
+            return wdhDAO.removeATM(xml, atmName, bank);
+        }
+        public bool removeATM(string atmName, Account account)
+        {
+            return wdhDAO.removeATM(xml, atmName, account);
         }
 
     }
