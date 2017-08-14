@@ -145,8 +145,6 @@ namespace NigelFinanceManage.DAO
 
         public List<FinanceInfo> getList(XmlDataSource xml, string accId)
         {
-            DataTable dt = new DataTable();
-
             XmlDocument doc = xml.getXmlDocument();
             XmlNode root = doc.DocumentElement;
 

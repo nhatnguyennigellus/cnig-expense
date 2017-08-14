@@ -24,8 +24,15 @@ namespace NigelFinanceManage.Service
             SpreadsheetInfo.SetLicense("FREE-LIMITED-KEY");
             SpreadsheetInfo.FreeLimitReached +=
              (sender, e) => e.FreeLimitReachedAction = FreeLimitReachedAction.ContinueAsTrial;
-            output = new ExcelOutput
-                ("Report_" + financeType + "_" + year + "_" + month + ".xls");
+            output = new ExcelOutput();
+
+            string filename = output.MonthlyFilename
+                .Replace("[0]", financeType)
+                .Replace("[1]", year.ToString())
+                .Replace("[2]", month.ToString());
+            output.FileName = output.Path + filename + output.Extension;
+                //("Report_" + financeType + "_" + year + "_" + month + ".xls");
+
             this.workbook = new ExcelFile();
             this.worksheet = workbook.Worksheets.Add("Report");
             this.month = month;
@@ -40,7 +47,7 @@ namespace NigelFinanceManage.Service
         }
         public override void printTitle()
         {
-            worksheet.Cells[row, 0].Value = financeType.ToUpper() + " MONTHLY REPORT";
+            worksheet.Cells[row, 0].Value = financeType.ToUpper() + " " + output.MonthlyTitle;
             worksheet.Cells[row++, 0].Style.Font.Weight = ExcelFont.BoldWeight;
             worksheet.Cells[row, 2].Value = month + "." + year;
             worksheet.Cells[row++, 2].Style.Font.Italic = true;

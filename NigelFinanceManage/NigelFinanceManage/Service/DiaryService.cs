@@ -38,11 +38,11 @@ namespace NigelFinanceManage.Service
         }
         public void chooseDatabase(int dbIdx)
         {
-            if (dbIdx == 0)
+            if (dbIdx == XMLXpathConfig.SANDBOX)
             {
                 xml.XmlPath = ConfigurationManager.AppSettings.Get("SandboxDb");
             }
-            else
+            else if (dbIdx == XMLXpathConfig.HOUSE)
             {
                 xml.XmlPath = ConfigurationManager.AppSettings.Get("HouseDb");
             }

@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<config>
+  <xml>
+    <sandbox-db>C:\Users\Nhat Nguyen\Dropbox\\MyExpenseDB\\MyExpSandbox.xml</sandbox-db>
+    <house-db>C:\Users\Nhat Nguyen\Dropbox\\MyExpenseDB\\MyExpData.xml</house-db>
+  </xml>
+  <database>
+  </database>
+  <xpaths>
+    <dao name="AccountDAO">
+      <xpath method="getAccountById" path="/my-expense/account/profile[contains(@id, '{0}')]" params="1" />
+      <xpath method="isAuthenticated" path="/my-expense/account/profile[@id = '{0}' and @pin = '{1}']" params="2" />
+      <xpath method="updateBudget" path="/my-expense/account/profile[@id = '{0}']" params="1" />
+      <xpath method="existedAccount" path="/my-expense/account/profile[contains(@id, '{0}')]" params="1" />
+      <xpath method="addAccount" path="/my-expense/account" params="0" />
+      <xpath method="addProfile" path="/my-expense/expense-data" params="0" />
+      <xpath method="modifyAccount" path="/my-expense/account/profile[@id = '{0}']" params="1" />
+    </dao>
+  </xpaths>
+  <excel-output>
+    <output-path>E:\PROJECTS\\Report</output-path>
+    <extension>.xls</extension>
+    <day-range report="Report_[0]_[1]_[2]" param="3" title="DAY RANGE REPORT" />
+    <monthly report="Report_[0]_[1]_[2]" param="2" title="MONTHLY REPORT" />
+    <date report="Report_[0]_[1]" param="2" title="DATE REPORT" />
+    <date-format>yyyyMMdd</date-format>
+  </excel-output>
+  <errors>
+    <error code="E0001" description="No data" />
+    <error code="M0001" description="Data loaded" />
+    <error code="M0002" description="Account registered!" />
+    <error code="M0003" description="Added new ATM!" />
+    <error code="E0002" description="Amount is required!" />
+    <error code="E0003" description="ATM is required!" />
+    <error code="E0004" description="ATM Name is required!" />
+    <error code="M0004" description="Bank added!" />
+    <error code="E0005" description="Bank balance is required!" />
+    <error code="E0006" description="Bank name is required!" />
+    <error code="E0007" description="Cannot remove this ATM! Maybe this ATM name does not exist!" />
+    <error code="E0008" description="Cash amount is required!" />
+    <error code="M0005" description="Data loaded!" />
+    <error code="M0006" description="DB XML Path updated!" />
+    <error code="E0009" description="Description is required!" />
+    <error code="M0007" description="Error added!" />
+    <error code="E0010" description="Error Description is required!" />
+    <error code="E0011" description="Error occurred!" />
+    <error code="M0008" description="Error removed!" />
+    <error code="M0009" description="Error updated!" />
+    <error code="E0012" description="Excel output configured failed!" />
+    <error code="M0010" description="Excel output configured successfully!" />
+    <error code="E0013" description="Existed Account!" />
+    <error code="E0014" description="Field must be entered!" />
+    <error code="M0011" description="Income log added!" />
+    <error code="M0012" description="Income log updated!" />
+    <error code="E0015" description="Inner Wdh Fee is required!" />
+    <error code="E0016" description="Invalid ID or PIN!" />
+    <error code="E0017" description="Method name is required!" />
+    <error code="E0018" description="Must not &lt; 0!" />
+    <error code="E0019" description="Must not &lt;= 0!" />
+    <error code="E0020" description="Name is required!" />
+    <error code="E0021" description="No of Params is required!" />
+    <error code="E0022" description="No row selected!" />
+    <error code="E0023" description="Not enough budget!" />
+    <error code="E0024" description="Outer Wdh Fee  is required!" />
+    <error code="E0025" description="Path does not exist!" />
+    <error code="M0013" description="Path exists!" />
+    <error code="M0014" description="Payment info is rolled back to plan item!" />
+    <error code="M0015" description="Payment log added!" />
+    <error code="M0016" description="Payment log updated!" />
+    <error code="E0026" description="PIN is required!" />
+    <error code="E0027" description="PIN mismatch!" />
+    <error code="M0017" description="Plan added!" />
+    <error code="M0018" description="Plan implemented!" />
+    <error code="M0019" description="Plan modified!" />
+    <error code="E0028" description="Please enter number only!" />
+    <error code="M0020" description="Quick Entry added!" />
+    <error code="M0021" description="Quick Entry modified!" />
+    <error code="M0022" description="Quick Entry removed!" />
+    <error code="M0023" description="Removed ATM" />
+    <error code="E0029" description="Username is required!" />
+    <error code="M0024" description="Withdrawal Log added!" />
+    <error code="M0025" description="Withdrawal Log modified!" />
+    <error code="M0026" description="Withdrawal Log removed!" />
+    <error code="M0027" description="Xpath added!" />
+    <error code="E0030" description="XPath is required!" />
+    <error code="M0030" description="Plan removed!" />
+    <error code="M0031" description="Xpath removed!" />
+    <error code="M0028" description="Xpath updated!" />
+    <error code="M0029" description="File exists!" />
+    <error code="E0031" description="File does not exist!" />
+  </errors>
+</config>

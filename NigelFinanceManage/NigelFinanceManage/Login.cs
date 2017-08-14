@@ -1,4 +1,5 @@
-﻿using NigelFinanceManage.Service;
+﻿using NigelFinanceManage.Data;
+using NigelFinanceManage.Service;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,9 +15,11 @@ namespace NigelFinanceManage
     public partial class Login : Form
     {
         DiaryService service;
+        AdminService admin;
         public Login()
         {
             service = DiaryService.getInstance();
+            admin = AdminService.getInstance();
             InitializeComponent();
         }
 
@@ -32,12 +35,17 @@ namespace NigelFinanceManage
             if (service.isAuthenticated(id, pin))
             {
                 Main frm = new Main(service.getAccountById(id), this, service,
-                    cbDB.SelectedIndex);
+                    admin, cbDB.SelectedIndex);
                 frm.Show();
+            }
+            else if (id == "admin" && pin == "admin")
+            {
+                AdminConfig frmAdmin = new AdminConfig(this, admin);
+                frmAdmin.Show();
             }
             else
             {
-                sttLogin.Text = "Invalid ID or PIN!";
+                sttLogin.Text = admin.getError(ErrorCodes.e0016);
                 sttLogin.ForeColor = Color.DarkRed;
                 statusStrip1.Refresh();
             }
@@ -79,7 +87,7 @@ namespace NigelFinanceManage
 
         private void btnAddAcc_Click(object sender, EventArgs e)
         {
-            AddAccount frm = new AddAccount(this, service, cbDB.SelectedIndex);
+            AddAccount frm = new AddAccount(this, service, admin, cbDB.SelectedIndex);
             frm.Show();
         }
     }

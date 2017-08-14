@@ -1,4 +1,5 @@
-﻿using NigelFinanceManage.Entity;
+﻿using NigelFinanceManage.Data;
+using NigelFinanceManage.Entity;
 using NigelFinanceManage.Service;
 using System;
 using System.Collections.Generic;
@@ -16,17 +17,19 @@ namespace NigelFinanceManage
     {
         Account account = new Account();
         DiaryService service;
+        AdminService admin;
         Main main;
         public AddATM()
         {
             InitializeComponent();
         }
 
-        public AddATM(DiaryService service, Account account, Main main)
+        public AddATM(DiaryService service, AdminService admin, Account account, Main main)
         {
             InitializeComponent();
             this.account = account;
             this.service = service;
+            this.admin = admin;
             this.main = main;
 
             lbBank.Text = account.Bank;
@@ -58,7 +61,7 @@ namespace NigelFinanceManage
             // Validation
             if (txtATM.Text == "")
             {
-                errorMessage("ATM Name is required!");
+                errorMessage(ErrorCodes.e0004);
                 txtATM.Focus();
                 return;
             }
@@ -74,7 +77,7 @@ namespace NigelFinanceManage
             }
             if (isOK)
             {
-                successMessage("Added new ATM!");
+                successMessage(ErrorCodes.m0003);
                 loadATMList();
                 txtATM.Text = "";
                 main.loadATMACB();
@@ -82,7 +85,7 @@ namespace NigelFinanceManage
             }
             else
             {
-                errorMessage("Error occurs!");
+                errorMessage(ErrorCodes.e0011);
             }
         }
 
@@ -91,7 +94,7 @@ namespace NigelFinanceManage
             // Validation
             if (txtATM.Text == "")
             {
-                errorMessage("ATM Name is required!");
+                errorMessage(ErrorCodes.e0004);
                 txtATM.Focus();
                 return;
             }
@@ -107,7 +110,7 @@ namespace NigelFinanceManage
             }
             if (isOK)
             {
-                successMessage("Removed ATM");
+                successMessage(ErrorCodes.m0023);
                 loadATMList();
                 txtATM.Text = "";
                 main.loadATMACB();
@@ -115,20 +118,20 @@ namespace NigelFinanceManage
             }
             else
             {
-                errorMessage("Cannot remove this ATM! Maybe this ATM name does not exist!");
+                errorMessage(ErrorCodes.e0011);
             }
         }
 
         private void successMessage(string message)
         {
-            sttATM.Text = message;
+            sttATM.Text = admin.getError(message);
             sttATM.ForeColor = Color.Green;
             statusStrip1.Refresh();
         }
 
         private void errorMessage(string message)
         {
-            sttATM.Text = message;
+            sttATM.Text = admin.getError(message);
             sttATM.ForeColor = Color.DarkRed;
             statusStrip1.Refresh();
 

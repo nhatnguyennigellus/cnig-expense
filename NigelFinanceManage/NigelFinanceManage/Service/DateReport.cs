@@ -23,9 +23,17 @@ namespace NigelFinanceManage.Service
             SpreadsheetInfo.SetLicense("FREE-LIMITED-KEY");
             SpreadsheetInfo.FreeLimitReached +=
              (sender, e) => e.FreeLimitReachedAction = FreeLimitReachedAction.ContinueAsTrial;
-            output = new ExcelOutput
-                ("Report_" + financeType + "_" +
-                date.ToString("yyyyMMdd") + "_" + ".xls");
+            output = new ExcelOutput();
+            
+            string filename = output.DayRangeFilename
+                .Replace("[0]", financeType)
+                .Replace("[1]", date.ToString(output.DateFormat));
+            output.FileName = output.Path + filename + output.Extension;
+            
+              /*  "Report_" + financeType + "_" +
+                    date.ToString("yyyyMMdd") + "_" + ".xls"
+               "Report_[0]_[1].xls"
+               */
             this.workbook = new ExcelFile();
             this.worksheet = workbook.Worksheets.Add("Report");
             this.date = date;
@@ -40,7 +48,7 @@ namespace NigelFinanceManage.Service
 
         public override void printTitle()
         {
-            worksheet.Cells[row, 0].Value = financeType.ToUpper() + " DATE REPORT";
+            worksheet.Cells[row, 0].Value = financeType.ToUpper() + " " + output.DateTitle;
             worksheet.Cells[row++, 0].Style.Font.Weight = ExcelFont.BoldWeight;
             worksheet.Cells[row, 2].Value = date.ToString("yyyy.MM.dd");
             worksheet.Cells[row++, 2].Style.Font.Italic = true;

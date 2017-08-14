@@ -1,4 +1,5 @@
 ﻿using Microsoft.Win32;
+using NigelFinanceManage.Data;
 using NigelFinanceManage.Entity;
 using NigelFinanceManage.Service;
 using System;
@@ -17,6 +18,7 @@ namespace NigelFinanceManage
     {
         Account account = new Account();
         Login frmLogin = new Login();
+        AdminService admin;
         DiaryService service;
         int database = -1;
         public Main()
@@ -24,7 +26,7 @@ namespace NigelFinanceManage
             InitializeComponent();
         }
 
-        public Main(Account account, Login frmLogin, DiaryService service, int database)
+        public Main(Account account, Login frmLogin, DiaryService service, AdminService admin, int database)
         {
             InitializeComponent();
             using (RegistryKey key = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true))
@@ -34,6 +36,7 @@ namespace NigelFinanceManage
             this.account = account;
             this.frmLogin = frmLogin;
             this.service = service;
+            this.admin = admin;
             frmLogin.Hide();
             this.database = database;
             service.chooseDatabase(database);
@@ -101,7 +104,7 @@ namespace NigelFinanceManage
             }
             if (dtInc.Rows.Count == 0)
             {
-                errorMessage("No data!");
+                errorMessage(ErrorCodes.e0001);
                 return;
             }
             dgvIncome.Columns[1].DefaultCellStyle.Alignment = 
@@ -193,7 +196,7 @@ namespace NigelFinanceManage
             }
             if (dtPay.Rows.Count == 0)
             {
-                errorMessage("No data!");
+                errorMessage(ErrorCodes.e0001);
                 return;
             }
             dgvPayment.Columns[1].DefaultCellStyle.Alignment = 
@@ -285,13 +288,13 @@ namespace NigelFinanceManage
         {
             if (txtIncAmount.Text == "")
             {
-                errorMessage("Amount is required!");
+                errorMessage(ErrorCodes.e0002);
                 txtIncAmount.Focus();
                 return;
             }
             if (txtIncDesc.Text == "")
             {
-                errorMessage("Description is required!");
+                errorMessage(ErrorCodes.e0009);
                 txtIncDesc.Focus();
                 return;
             }
@@ -310,9 +313,7 @@ namespace NigelFinanceManage
             };
             if (service.addIncomeLog(income, lbID.Text))
             {
-                successMessage("Income log added!");
-
-                
+                successMessage(ErrorCodes.m0011);
 
                 if (cbAddTo.SelectedItem.ToString().Equals("Bank"))
                 {
@@ -337,7 +338,7 @@ namespace NigelFinanceManage
             }
             else
             {
-                errorMessage("Error occurred!");
+                errorMessage(ErrorCodes.e0011);
             }
         }
 
@@ -351,7 +352,7 @@ namespace NigelFinanceManage
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
             {
                 e.Handled = true;
-                errorMessage("Please enter number only!");
+                errorMessage(ErrorCodes.e0028);
 
             }
             else
@@ -364,13 +365,13 @@ namespace NigelFinanceManage
         {
             if (txtPayAmount.Text == "")
             {
-                errorMessage("Amount is required!");
+                errorMessage(ErrorCodes.e0002);
                 txtPayAmount.Focus();
                 return;
             }
             if (txtPayDesc.Text == "")
             {
-                errorMessage("Description is required!");
+                errorMessage(ErrorCodes.e0009);
                 txtPayDesc.Focus();
                 return;
             }
@@ -381,7 +382,7 @@ namespace NigelFinanceManage
                 case 0:
                     if (int.Parse(txtBank.Text) - amount < 0)
                     {
-                        errorMessage("Not enough budget!");
+                        errorMessage(ErrorCodes.e0023);
                         txtPayAmount.Focus();
                         return;
                     }
@@ -389,7 +390,7 @@ namespace NigelFinanceManage
                 case 1:
                     if (int.Parse(txtCash.Text) - amount < 0)
                     {
-                        errorMessage("Not enough budget!");
+                        errorMessage(ErrorCodes.e0023);
                         txtPayAmount.Focus();
                         return;
                     }
@@ -412,7 +413,7 @@ namespace NigelFinanceManage
             };
             if (service.addPaymentLog(payment, lbID.Text))
             {
-                successMessage("Payment log added!");
+                successMessage(ErrorCodes.m0015);
 
                 DataTable dt = service.getPaymentData(lbID.Text);
                 txtPayTotal.Text = calculateTotal(dt).ToString();
@@ -436,7 +437,7 @@ namespace NigelFinanceManage
             }
             else
             {
-                errorMessage("Error occurred!");
+                errorMessage(ErrorCodes.e0011);
             }
         }
 
@@ -455,19 +456,19 @@ namespace NigelFinanceManage
         {
             if (dt.Rows.Count == 0)
             {
-                errorMessage("No data");
+                errorMessage(ErrorCodes.e0001);
                 return;
             }
             else
             {
                 if (sttMain.Text.Length > 0)
                 {
-                    successMessage(sttMain.Text + " Data loaded!");
+                    successMessage(sttMain.Text + " " + ErrorCodes.m0001);
 
                 }
                 else
                 {
-                    successMessage("Data loaded");
+                    successMessage(ErrorCodes.m0001);
                 }
             }
             int total = 0;
@@ -507,11 +508,11 @@ namespace NigelFinanceManage
 
             if (dt.Rows.Count == 0)
             {
-                errorMessage("No data");
+                errorMessage(ErrorCodes.e0001);
             }
             else
             {
-                successMessage("Data loaded");
+                successMessage(ErrorCodes.m0001);
             }
 
             dgvWdh.DataSource = dt;
@@ -528,11 +529,11 @@ namespace NigelFinanceManage
                 int.Parse(cbWdhMonth.Text), int.Parse(cbWdhYear.Text));
             if (dt.Rows.Count == 0)
             {
-                errorMessage("No data");
+                errorMessage(ErrorCodes.e0001);
             }
             else
             {
-                successMessage("Data loaded");
+                successMessage(ErrorCodes.m0001);
             }
 
             dgvWdh.DataSource = dt;
@@ -542,13 +543,13 @@ namespace NigelFinanceManage
         {
             if (txtPlanAmount.Text == "")
             {
-                errorMessage("Amount is required!");
+                errorMessage(ErrorCodes.e0002);
                 txtPlanAmount.Focus();
                 return;
             }
             if (txtPlanDesc.Text == "")
             {
-                errorMessage("Description is required!");
+                errorMessage(ErrorCodes.e0009);
                 txtPlanDesc.Focus();
                 return;
             }
@@ -569,7 +570,7 @@ namespace NigelFinanceManage
 
             if (service.addPlanLog(plan, lbID.Text))
             {
-                successMessage("Plan added!");
+                successMessage(ErrorCodes.m0017);
 
                 DataTable dt = service.getPlanData(lbID.Text);
                 dgvPlan.DataSource = dt;
@@ -578,7 +579,7 @@ namespace NigelFinanceManage
             }
             else
             {
-                errorMessage("Error occurred!");
+                errorMessage(ErrorCodes.e0011);
             }
         }
 
@@ -586,20 +587,20 @@ namespace NigelFinanceManage
         {
             if (txtWdhAmount.Text == "")
             {
-                errorMessage("Amount is required!");
+                errorMessage(ErrorCodes.e0002);
                 txtPlanAmount.Focus();
                 return;
             }
             if (cbOtherATM.SelectedItem.ToString().Equals("") && rbATMOther.Checked == true)
             {
-                errorMessage("ATM is required!");
+                errorMessage(ErrorCodes.e0003);
                 return;
             }
 
             int amount = int.Parse(txtWdhAmount.Text);
             if (int.Parse(txtBank.Text) - amount < 100000)
             {
-                errorMessage("Not enough budget!");
+                errorMessage(ErrorCodes.e0023);
                 return;
             }
 
@@ -630,7 +631,7 @@ namespace NigelFinanceManage
 
             if (service.addWithdrawalLog(wdh, lbID.Text))
             {
-                successMessage("Withdrawal Log added! Data loaded!");
+                successMessage(ErrorCodes.m0024 + " " + ErrorCodes.m0001);
 
                 DataTable dt = service.getWithdrawalData(lbID.Text);
                 dgvWdh.DataSource = dt;
@@ -645,7 +646,7 @@ namespace NigelFinanceManage
             }
             else
             {
-                errorMessage("Error occurs!");
+                errorMessage(ErrorCodes.e0011);
             }
         }
 
@@ -668,7 +669,7 @@ namespace NigelFinanceManage
             }
             else
             {
-                errorMessage("No row selected!");
+                errorMessage(ErrorCodes.e0022);
             }
         }
 
@@ -684,7 +685,7 @@ namespace NigelFinanceManage
 
             if (service.modifyIncome(info, account.Id))
             {
-                successMessage("Income log updated!");
+                successMessage(ErrorCodes.m0012);
                 btnIncModify.Enabled = false;
                 dtpIncDate.Enabled = false;
                 int oldBalance = int.Parse(txtBank.Text);
@@ -701,7 +702,7 @@ namespace NigelFinanceManage
             }
             else
             {
-                errorMessage("Error occurs!");
+                errorMessage(ErrorCodes.e0011);
             }
         }
 
@@ -717,7 +718,7 @@ namespace NigelFinanceManage
 
             if (service.modifyPayment(info, account.Id))
             {
-                successMessage("Payment log updated!");
+                successMessage(ErrorCodes.m0016);
                 btnPayModify.Enabled = false;
                 dtpPayDate.Enabled = false;
                 int oldBalance = int.Parse(txtCash.Text);
@@ -733,7 +734,7 @@ namespace NigelFinanceManage
             }
             else
             {
-                errorMessage("Error occurs!");
+                errorMessage(ErrorCodes.e0011);
             }
         }
 
@@ -751,7 +752,7 @@ namespace NigelFinanceManage
             }
             else
             {
-                errorMessage("No row selected!");
+                errorMessage(ErrorCodes.e0022);
             }
         }
 
@@ -770,7 +771,7 @@ namespace NigelFinanceManage
 
             if (service.modifyPlan(info, account.Id))
             {
-                successMessage("Plan modified!");
+                successMessage(ErrorCodes.m0019);
                 DataTable dt = service.getPlanData(lbID.Text);
                 dgvPlan.DataSource = dt;
 
@@ -778,7 +779,7 @@ namespace NigelFinanceManage
             }
             else
             {
-                errorMessage("Error occurs");
+                errorMessage(ErrorCodes.e0011);
             }
         }
 
@@ -793,7 +794,7 @@ namespace NigelFinanceManage
             }
             else
             {
-                errorMessage("No row selected!");
+                errorMessage(ErrorCodes.e0022);
             }
         }
 
@@ -804,7 +805,7 @@ namespace NigelFinanceManage
             FinanceInfo info = service.getPlanById(account.Id, id);
             if (service.removePlan(info, lbID.Text))
             {
-                successMessage("Plan removed!");
+                successMessage(ErrorCodes.m0030);
                 DataTable dt = service.getPlanData(lbID.Text);
                 dgvPlan.DataSource = dt;
 
@@ -812,7 +813,7 @@ namespace NigelFinanceManage
             }
             else
             {
-                errorMessage("Error occurs");
+                errorMessage(ErrorCodes.e0011);
             }
         }
 
@@ -826,13 +827,13 @@ namespace NigelFinanceManage
 
             if (int.Parse(txtCash.Text) - plan.Amount < 0)
             {
-                errorMessage("Not enough budget");
+                errorMessage(ErrorCodes.e0023);
                 return;
             }
 
             if (service.addPaymentLog(payment, lbID.Text))
             {
-                successMessage("Plan implemented!");
+                successMessage(ErrorCodes.m0018);
                 DataTable dtPay = service.getPaymentData(lbID.Text);
                 txtPayTotal.Text = calculateTotal(dtPay).ToString();
                 account.CashWithdraw -= plan.Amount;
@@ -850,7 +851,7 @@ namespace NigelFinanceManage
             }
             else
             {
-                errorMessage("Error occurred!");
+                errorMessage(ErrorCodes.e0011);
             }
         }
 
@@ -867,7 +868,7 @@ namespace NigelFinanceManage
 
             if (service.modifyWithdrawal(info, lbID.Text))
             {
-                successMessage("Withdrawal Log modified!");
+                successMessage(ErrorCodes.m0025);
                 DataTable dt = service.getWithdrawalData(lbID.Text);
                 dgvWdh.DataSource = dt;
 
@@ -884,7 +885,7 @@ namespace NigelFinanceManage
             }
             else
             {
-                errorMessage("Error occur!");
+                errorMessage(ErrorCodes.m0011);
             }
 
             
@@ -904,7 +905,7 @@ namespace NigelFinanceManage
             }
             else
             {
-                errorMessage("No row selected!");
+                errorMessage(ErrorCodes.e0022);
             }
         }
 
@@ -917,7 +918,7 @@ namespace NigelFinanceManage
 
             if (service.removeWithdrawal(info, lbID.Text))
             {
-                successMessage("Withdrawal Log removed!");
+                successMessage(ErrorCodes.m0026);
 
                 DataTable dt = service.getWithdrawalData(lbID.Text);
                 dgvWdh.DataSource = dt;
@@ -932,7 +933,7 @@ namespace NigelFinanceManage
             }
             else
             {
-                errorMessage("Error occurs!");
+                errorMessage(ErrorCodes.e0011);
             }
         }
 
@@ -944,7 +945,7 @@ namespace NigelFinanceManage
 
             if (service.removePayment(payment, lbID.Text))
             {
-                successMessage("Payment info is rolled back to plan item!");
+                successMessage(ErrorCodes.m0014);
 
                 int oldCash = int.Parse(txtCash.Text);
                 int newCash = oldCash + delPayment;
@@ -966,13 +967,13 @@ namespace NigelFinanceManage
             }
             else
             {
-                errorMessage("Error occurred!");
+                errorMessage(ErrorCodes.e0011);
             }
         }
 
         private void miQE_Click(object sender, EventArgs e)
         {
-            QE qeForm = new QE(account, service, this);
+            QE qeForm = new QE(account, service, admin, this);
             qeForm.Show();
         }
 
@@ -1107,7 +1108,7 @@ namespace NigelFinanceManage
 
         private void addBankToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            AddATM addAtmForm = new AddATM(service, account, this);
+            AddATM addAtmForm = new AddATM(service, admin, account, this);
             addAtmForm.Show();
         }
     }

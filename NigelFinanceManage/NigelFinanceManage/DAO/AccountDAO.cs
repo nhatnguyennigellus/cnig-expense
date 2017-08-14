@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
+using System.Reflection;
 
 namespace NigelFinanceManage.DAO
 {
@@ -14,7 +15,10 @@ namespace NigelFinanceManage.DAO
         public Account getAccountById(XmlDataSource xml, String accId)
         {
             XmlDocument doc = xml.getXmlDocument();
-            string xpath = "/my-expense/account/profile[contains(@id, '" + accId + "')]";
+            string xpath = AdminConfigDAO.getXpath(
+                XmlAdminConfig.getInstance(), this.GetType().Name, 
+                "getAccountById").Path
+                .Replace("{0}", accId);
 
             XmlNode ndAcc = doc.SelectSingleNode(xpath);
             if (ndAcc == null)
@@ -37,7 +41,11 @@ namespace NigelFinanceManage.DAO
         public bool isAuthenticated(XmlDataSource xml, String id, String pin)
         {
             XmlDocument doc = xml.getXmlDocument();
-            string xpath = "/my-expense/account/profile[@id='" + id + "' and @pin='" + pin + "']";
+            string xpath = AdminConfigDAO.getXpath(
+                XmlAdminConfig.getInstance(), this.GetType().Name,
+                "isAuthenticated").Path
+                .Replace("{0}", id)
+                .Replace("{1}", pin);
 
             XmlNode ndAcc = doc.SelectSingleNode(xpath);
             if (ndAcc == null)
@@ -51,7 +59,11 @@ namespace NigelFinanceManage.DAO
         public bool updateBudget(XmlDataSource xml, string id, int newAmt, string budget)
         {
             XmlDocument doc = xml.getXmlDocument();
-            string xpath = "/my-expense/account/profile[@id='" + id + "']";
+            string xpath = AdminConfigDAO.getXpath(
+                XmlAdminConfig.getInstance(), this.GetType().Name,
+                "updateBudget").Path
+                .Replace("{0}", id);
+//            string xpath = "/my-expense/account/profile[@id='" + id + "']";
 
             XmlNode eleBudget = doc.SelectSingleNode(xpath);
 
@@ -72,7 +84,10 @@ namespace NigelFinanceManage.DAO
         public bool existedAccount(XmlDataSource xml, String accId)
         {
             XmlDocument doc = xml.getXmlDocument();
-            string xpath = "/my-expense/account/profile[contains(@id, '" + accId + "')]";
+            string xpath = AdminConfigDAO.getXpath(
+                XmlAdminConfig.getInstance(), this.GetType().Name,
+                "existedAccount").Path
+                .Replace("{0}", accId);
 
             XmlNode ndAcc = doc.SelectSingleNode(xpath);
             if (ndAcc == null)
@@ -87,7 +102,10 @@ namespace NigelFinanceManage.DAO
             XmlDocument doc = xml.getXmlDocument();
 
             // Add profile
-            string xpath = "/my-expense/account";
+            //string xpath = "/my-expense/account";
+            string xpath = AdminConfigDAO.getXpath(
+                XmlAdminConfig.getInstance(), this.GetType().Name,
+                "addAccount").Path;
             XmlElement eleList = (XmlElement)doc.SelectSingleNode(xpath);
             XmlElement elePrf = doc.CreateElement("profile");
 
@@ -109,7 +127,9 @@ namespace NigelFinanceManage.DAO
         {
             XmlDocument doc = xml.getXmlDocument();
 
-            string xpath = "/my-expense/expense-data";
+            string xpath = AdminConfigDAO.getXpath(
+                XmlAdminConfig.getInstance(), this.GetType().Name,
+                "addAccount").Path;
             XmlElement eleList = (XmlElement)doc.SelectSingleNode(xpath);
 
             // Add data
@@ -143,7 +163,10 @@ namespace NigelFinanceManage.DAO
         public bool modifyAccount(XmlDataSource xml, Account account)
         {
             XmlDocument doc = xml.getXmlDocument();
-            string xpath = "/my-expense/account/profile[@id='" + account.Id + "']";
+            string xpath = AdminConfigDAO.getXpath(
+                XmlAdminConfig.getInstance(), this.GetType().Name,
+                "modifyAccount").Path
+                .Replace("{0}", account.Id);
             XmlNode ele = doc.SelectSingleNode(xpath);
 
             ele.Attributes["name"].Value = account.Name;

@@ -61,23 +61,35 @@
     <Compile Include="AddATM.Designer.cs">
       <DependentUpon>AddATM.cs</DependentUpon>
     </Compile>
+    <Compile Include="AdminConfig.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AdminConfig.Designer.cs">
+      <DependentUpon>AdminConfig.cs</DependentUpon>
+    </Compile>
     <Compile Include="DAO\AccountDAO.cs" />
+    <Compile Include="DAO\AdminConfigDAO.cs" />
     <Compile Include="DAO\BankDAO.cs" />
+    <Compile Include="DAO\ErrorDAO.cs" />
     <Compile Include="DAO\IFinanceDAO.cs" />
     <Compile Include="DAO\IncomeDAO.cs" />
     <Compile Include="DAO\PaymentDAO.cs" />
     <Compile Include="DAO\PlanDAO.cs" />
     <Compile Include="DAO\QuickEntryDAO.cs" />
     <Compile Include="DAO\WithdrawalDAO.cs" />
+    <Compile Include="Data\ErrorCodes.cs" />
+    <Compile Include="Data\XmlAdminConfig.cs" />
     <Compile Include="Data\ExcelOutput.cs" />
     <Compile Include="Entity\Account.cs" />
     <Compile Include="Entity\Bank.cs" />
+    <Compile Include="Entity\Error.cs" />
     <Compile Include="Entity\FinanceInfo.cs" />
     <Compile Include="Entity\Income.cs" />
     <Compile Include="Entity\Payment.cs" />
     <Compile Include="Entity\Plan.cs" />
     <Compile Include="Entity\QuickEntry.cs" />
     <Compile Include="Entity\Withdrawal.cs" />
+    <Compile Include="Entity\XMLXpathConfig.cs" />
     <Compile Include="Login.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -99,6 +111,7 @@
     <Compile Include="QE.Designer.cs">
       <DependentUpon>QE.cs</DependentUpon>
     </Compile>
+    <Compile Include="Service\AdminService.cs" />
     <Compile Include="Service\DateReport.cs" />
     <Compile Include="Service\DayRangeReport.cs" />
     <Compile Include="Service\DiaryService.cs" />
@@ -109,6 +122,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AddATM.resx">
       <DependentUpon>AddATM.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AdminConfig.resx">
+      <DependentUpon>AdminConfig.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
@@ -147,8 +163,11 @@
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="Util\" />
+    <Content Include="Config.xml">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

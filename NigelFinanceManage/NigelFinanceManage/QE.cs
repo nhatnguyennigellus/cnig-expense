@@ -1,4 +1,5 @@
-﻿using NigelFinanceManage.Entity;
+﻿using NigelFinanceManage.Data;
+using NigelFinanceManage.Entity;
 using NigelFinanceManage.Service;
 using System;
 using System.Collections.Generic;
@@ -16,17 +17,19 @@ namespace NigelFinanceManage
     {
         Account account = new Account();
         DiaryService service;
+        AdminService admin;
         Main main;
         public QE()
         {
             InitializeComponent();
         }
 
-        public QE(Account account, DiaryService service, Main main)
+        public QE(Account account, DiaryService service, AdminService admin, Main main)
         {
             InitializeComponent();
             this.account = account;
             this.service = service;
+            this.admin = admin;
             cbQEType.SelectedIndex = 0;
             this.main = main;
         }
@@ -60,7 +63,7 @@ namespace NigelFinanceManage
             }
             else if (dt.Rows.Count == 0)
             {
-                errorMessage("No data");
+                errorMessage(ErrorCodes.e0001);
             }
         }
 
@@ -68,7 +71,7 @@ namespace NigelFinanceManage
         {
             if (txtQEDesc.Text == "")
             {
-                errorMessage("Description is required!");
+                errorMessage(ErrorCodes.e0009);
                 txtQEDesc.Focus();
                 return;
             }
@@ -85,7 +88,7 @@ namespace NigelFinanceManage
 
             if (service.addQE(qe, account.Id))
             {
-                successMessage("Quick Entry added!");
+                successMessage(ErrorCodes.m0020);
                 DataTable dt = service.getQEData(account.Id);
                 dgvQE.DataSource = dt;
 
@@ -93,7 +96,7 @@ namespace NigelFinanceManage
             }
             else
             {
-                errorMessage("Error occurs!");
+                errorMessage(ErrorCodes.e0011);
             }
             main.getIncPayTemp();
         }
@@ -102,7 +105,7 @@ namespace NigelFinanceManage
         {
             if (txtQEDesc.Text == "")
             {
-                errorMessage("Description is required!");
+                errorMessage(ErrorCodes.e0009);
                 txtQEDesc.Focus();
                 return;
             }
@@ -116,7 +119,7 @@ namespace NigelFinanceManage
 
             if (service.modifyQE(qe, account.Id))
             {
-                successMessage("Quick Entry modified!");
+                successMessage(ErrorCodes.m0021);
                 DataTable dt = service.getQEData(account.Id);
                 dgvQE.DataSource = dt;
 
@@ -124,7 +127,7 @@ namespace NigelFinanceManage
             }
             else
             {
-                errorMessage("Error occurs!");
+                errorMessage(ErrorCodes.e0011);
             }
             main.getIncPayTemp();
         }
@@ -141,7 +144,7 @@ namespace NigelFinanceManage
             }
             else
             {
-                errorMessage("No row selected!");
+                errorMessage(ErrorCodes.e0022);
             }
         }
 
@@ -151,14 +154,14 @@ namespace NigelFinanceManage
             QuickEntry qe = service.getById(account.Id, id.ToString());
             if (service.removeQE(qe, account.Id))
             {
-                successMessage("Quick Entry removed!");
+                successMessage(ErrorCodes.m0022);
 
                 DataTable dt = service.getQEData(account.Id);
                 dgvQE.DataSource = dt;
             }
             else
             {
-                errorMessage("Error occurs!");
+                errorMessage(ErrorCodes.e0011);
             }
             main.getIncPayTemp();
         }
