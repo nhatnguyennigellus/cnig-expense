@@ -271,7 +271,7 @@ namespace NigelFinanceManage
 
         private void errorMessage(string message)
         {
-            sttMain.Text = message;
+            sttMain.Text = admin.getError(message);
             sttMain.ForeColor = Color.DarkRed;
             statusStrip1.Refresh();
 
@@ -279,7 +279,7 @@ namespace NigelFinanceManage
 
         private void successMessage(string message)
         {
-            sttMain.Text = message;
+            sttMain.Text = admin.getError(message);
             sttMain.ForeColor = Color.Green;
             statusStrip1.Refresh();
 
@@ -444,6 +444,15 @@ namespace NigelFinanceManage
         private void btnPlanViewAll_Click(object sender, EventArgs e)
         {
             DataTable dt = service.getPlanData(lbID.Text);
+            if (dt != null)
+            {
+                dgvPlan.DataSource = dt;
+            }
+            if (dt.Rows.Count == 0)
+            {
+                errorMessage(ErrorCodes.e0001);
+                return;
+            }
             dgvPlan.DataSource = dt;
             dgvPlan.Columns[1].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             dgvPlan.Columns[2].Width = 150;
@@ -509,6 +518,7 @@ namespace NigelFinanceManage
             if (dt.Rows.Count == 0)
             {
                 errorMessage(ErrorCodes.e0001);
+                return;
             }
             else
             {

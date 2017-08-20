@@ -16,6 +16,59 @@
       <xpath method="addProfile" path="/my-expense/expense-data" params="0" />
       <xpath method="modifyAccount" path="/my-expense/account/profile[@id = '{0}']" params="1" />
     </dao>
+    <dao name="BankDAO">
+      <xpath method="addBank" path="/my-expense/banks" params="0" />
+      <xpath method="existedBank" path="/my-expense/banks/bank[@name = '{0}']" params="1" />
+    </dao>
+    <dao name="IncomeDAO">
+      <xpath method="getDataList" path="/my-expense/expense-data/data[@profile-id='{0}']/income-log/income" params="1" />
+      <xpath method="getById" path="/my-expense/expense-data/data[@profile-id='{0}']/income-log/income[@id='{1}']" params="2" />
+      <xpath method="add" path="/my-expense/expense-data/data[@profile-id='{0}']/income-log" params="1" />
+      <xpath method="modify" path="/my-expense/expense-data/data[@profile-id='{0}']/income-log/income[@id='{1}']" params="2" />
+      <xpath method="remove" path="/my-expense/expense-data/data[@profile-id='{0}']/income-log/income[@id='{1}']" params="2" />
+      <xpath method="getList" path="/my-expense/expense-data/data[@profile-id='{0}']/income-log/income" params="1" />
+    </dao>
+    <dao name="PaymentDAO">
+      <xpath method="add" path="/my-expense/expense-data/data[@profile-id='{0}']/payments-log" params="1" />
+      <xpath method="getDataList" path="/my-expense/expense-data/data[@profile-id='{0}']/payments-log/payment" params="1" />
+      <xpath method="getById" path="/my-expense/expense-data/data[@profile-id='{0}']/payments-log/payment[@id='{1}']" params="2" />
+      <xpath method="modify" path="/my-expense/expense-data/data[@profile-id='{0}']/payments-log/payment[@id='{1}']" params="2" />
+      <xpath method="remove" path="/my-expense/expense-data/data[@profile-id='{0}']/payments-log/payment[@id='{1}']" params="2" />
+      <xpath method="getList" path="/my-expense/expense-data/data[@profile-id='{0}']/payments-log/payment" params="1" />
+      <xpath method="getPayType" path="/my-expense/payment-type/type" params="0" />
+    </dao>
+    <dao name="QuickEntryDAO">
+      <xpath method="add" path="/my-expense/expense-data/data[@profile-id='{0}']/quick-entry" params="1" />
+      <xpath method="modify" path="/my-expense/expense-data/data[@profile-id='{0}']/quick-entry/item[@id='{1}']" params="2" />
+      <xpath method="remove" path="/my-expense/expense-data/data[@profile-id='{0}']/quick-entry/item[@id='{1}']" params="2" />
+      <xpath method="getById" path="/my-expense/expense-data/data[@profile-id='{0}']/quick-entry/item[@id='{1}']" params="2" />
+      <xpath method="getList" path="/my-expense/expense-data/data[@profile-id='{0}']/quick-entry/item" params="1" />
+      <xpath method="getDataListByType" path="/my-expense/expense-data/data[@profile-id='{0}']/quick-entry/item[@type='{1}']" params="2" />
+      <xpath method="getDataList" path="/my-expense/expense-data/data[@profile-id='{0}']/quick-entry/item" params="1" />
+    </dao>
+    <dao name="PlanDAO">
+      <xpath method="add" path="/my-expense/expense-data/data[@profile-id='{0}']/expense-plan" params="1" />
+      <xpath method="modify" path="/my-expense/expense-data/data[@profile-id='{0}']/expense-plan/plan-item[@id='{1}']" params="2" />
+      <xpath method="remove" path="/my-expense/expense-data/data[@profile-id='{0}']/expense-plan/plan-item[@id='{1}']" params="2" />
+      <xpath method="getList" path="/my-expense/expense-data/data[@profile-id='{0}']/expense-plan/plan-item" params="1" />
+      <xpath method="getDataList" path="/my-expense/expense-data/data[@profile-id='{0}']/expense-plan/plan-item" params="1" />
+      <xpath method="getById" path="/my-expense/expense-data/data[@profile-id='{0}']/expense-plan/plan-item[@id='{1}']" params="2" />
+    </dao>
+    <dao name="WithdrawalDAO">
+      <xpath method="getDataList" path="/my-expense/expense-data/data[@profile-id='{0}']/withdraw-history/withdraw" params="1" />
+      <xpath method="getById" path="/my-expense/expense-data/data[@profile-id='{0}']/withdraw-history/withdraw[@id='{1}']" params="2" />
+      <xpath method="add" path="/my-expense/expense-data/data[@profile-id='{0}']/withdraw-history" params="1" />
+      <xpath method="modify" path="/my-expense/expense-data/data[@profile-id='{0}']/withdraw-history/withdraw[@id='{1}']" params="2" />
+      <xpath method="remove" path="/my-expense/expense-data/data[@profile-id='{0}']/withdraw-history/withdraw[@id='{1}']" params="2" />
+      <xpath method="getList" path="/my-expense/expense-data/data[@profile-id='{0}']/withdraw-history/withdraw" params="1" />
+      <xpath method="getATMListByBank" path="/my-expense/banks/bank[@name='{0}']/atm" params="1" />
+      <xpath method="getATMOtherList" path="/my-expense/expense-data/data[@profile-id = '{0}']/atm-other/atm" params="1" />
+      <xpath method="getWithdrawFee" path="/my-expense/banks/bank[@name='{0}']" params="1" />
+      <xpath method="addATM" path="/my-expense/banks/bank[@name='{0}']" params="1" />
+      <xpath method="addATM1" path="/my-expense/expense-data/data[@profile-id = '{0}']/atm-other" params="1" />
+      <xpath method="removeATM" path="/my-expense/expense-data/data[@profile-id = '{0}']/atm-other/atm[@name = '{1}']" params="2" />
+      <xpath method="removeATM1" path="/my-expense/banks/bank[@name ='{0}']/atm[@name = '{1}']" params="2" />
+    </dao>
   </xpaths>
   <excel-output>
     <output-path>E:\PROJECTS\\Report</output-path>

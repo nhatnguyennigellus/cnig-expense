@@ -14,7 +14,10 @@ namespace NigelFinanceManage.DAO
         public bool existedBank(XmlDataSource xml, string bank)
         {
             XmlDocument doc = xml.getXmlDocument();
-            string xpath = "/my-expense/banks/bank[@name = '" + bank + "']";
+            string xpath = AdminConfigDAO.getXpath(
+                XmlAdminConfig.getInstance(), this.GetType().Name,
+                "existedBank").Path
+                .Replace("{0}", bank);
 
             XmlNode ndBank = doc.SelectSingleNode(xpath);
             if (ndBank == null)
@@ -29,7 +32,9 @@ namespace NigelFinanceManage.DAO
         {
             XmlDocument doc = xml.getXmlDocument();
 
-            string xpath = "/my-expense/banks";
+            string xpath = AdminConfigDAO.getXpath(
+                XmlAdminConfig.getInstance(), this.GetType().Name,
+                "addBank").Path;
             XmlElement eleList = (XmlElement)doc.SelectSingleNode(xpath);
             XmlElement ele = doc.CreateElement("bank");
 

@@ -36,7 +36,7 @@ namespace NigelFinanceManage
 
         private void errorMessage(string message)
         {
-            sttQE.Text = message;
+            sttQE.Text = admin.getError(message);
             sttQE.ForeColor = Color.DarkRed;
             statusStrip1.Refresh();
 
@@ -44,7 +44,7 @@ namespace NigelFinanceManage
 
         private void successMessage(string message)
         {
-            sttQE.Text = message;
+            sttQE.Text = admin.getError(message);
             sttQE.ForeColor = Color.Green;
             statusStrip1.Refresh();
 
@@ -53,6 +53,11 @@ namespace NigelFinanceManage
         private void btnQEViewAll_Click(object sender, EventArgs e)
         {
             DataTable dt = service.getQEData(account.Id);
+            if (dt.Rows.Count == 0)
+            {
+                errorMessage(ErrorCodes.e0001);
+                return;
+            }
             if (dt != null || dt.Rows.Count > 0)
             {
                 dgvQE.DataSource = dt;
@@ -60,10 +65,6 @@ namespace NigelFinanceManage
                 dgvQE.Columns[0].Width = 20;
                 dgvQE.Columns[1].Width = 60;
                 dgvQE.Columns[2].Width = 120;
-            }
-            else if (dt.Rows.Count == 0)
-            {
-                errorMessage(ErrorCodes.e0001);
             }
         }
 

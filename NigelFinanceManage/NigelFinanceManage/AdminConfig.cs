@@ -128,16 +128,18 @@ namespace NigelFinanceManage
             if (dt.Rows.Count == 0)
             {
                 errorMessage(ErrorCodes.e0001);
+                dgvXpath.DataSource = dt;
             }
             else
             {
                 successMessage(ErrorCodes.m0001);
+                dgvXpath.DataSource = dt;
+                dgvXpath.Columns[0].Width = 100;
+                dgvXpath.Columns[1].Width = 300;
+                dgvXpath.Columns[2].Width = 75;
             }
 
-            dgvXpath.DataSource = dt;
-            dgvXpath.Columns[0].Width = 100;
-            dgvXpath.Columns[1].Width = 300;
-            dgvXpath.Columns[2].Width = 75;
+            
         }
 
         private void btnSaveXpath_Click(object sender, EventArgs e)
@@ -178,6 +180,9 @@ namespace NigelFinanceManage
                     successMessage(ErrorCodes.m0027);
                     DataTable dt = service.getXpathList(cbDAOList.SelectedItem.ToString());
                     dgvXpath.DataSource = dt;
+                    dgvXpath.Columns[0].Width = 100;
+                    dgvXpath.Columns[1].Width = 300;
+                    dgvXpath.Columns[2].Width = 75;
 
                     clearXpathFields();
                 }
@@ -193,6 +198,9 @@ namespace NigelFinanceManage
                     successMessage(ErrorCodes.m0028);
                     DataTable dt = service.getXpathList(cbDAOList.SelectedItem.ToString());
                     dgvXpath.DataSource = dt;
+                    dgvXpath.Columns[0].Width = 100;
+                    dgvXpath.Columns[1].Width = 300;
+                    dgvXpath.Columns[2].Width = 75;
 
                     clearXpathFields();
                 }

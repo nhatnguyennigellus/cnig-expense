@@ -19,8 +19,10 @@ namespace NigelFinanceManage.DAO
             XmlDocument doc = xml.getXmlDocument();
             XmlNode root = doc.DocumentElement;
 
-            string xpath = "/my-expense/expense-data/data[@profile-id='" + accId
-                + "']/quick-entry/item";
+            string xpath = AdminConfigDAO.getXpath(
+                XmlAdminConfig.getInstance(), this.GetType().Name,
+                "getDataList").Path
+                .Replace("{0}", accId);
             XmlNodeList nodeList = root.SelectNodes(xpath);
             if (nodeList.Count > 0)
             {
@@ -35,8 +37,11 @@ namespace NigelFinanceManage.DAO
             XmlDocument doc = xml.getXmlDocument();
             XmlNode root = doc.DocumentElement;
 
-            string xpath = "/my-expense/expense-data/data[@profile-id='" + accId
-                + "']/quick-entry/item[@type='" + type + "']";
+            string xpath = AdminConfigDAO.getXpath(
+                XmlAdminConfig.getInstance(), this.GetType().Name,
+                "getDataListByType").Path
+                .Replace("{0}", accId)
+                .Replace("{1}", type);
             XmlNodeList nodeList = root.SelectNodes(xpath);
             List<QuickEntry> list = new List<QuickEntry>();
             foreach (XmlElement ele in nodeList)
@@ -61,8 +66,10 @@ namespace NigelFinanceManage.DAO
             XmlDocument doc = xml.getXmlDocument();
             XmlNode root = doc.DocumentElement;
 
-            string xpath = "/my-expense/expense-data/data[@profile-id='" + accId
-                + "']/quick-entry/item";
+            string xpath = AdminConfigDAO.getXpath(
+                XmlAdminConfig.getInstance(), this.GetType().Name,
+                "getList").Path
+                .Replace("{0}", accId);
             XmlNodeList nodeList = root.SelectNodes(xpath);
 
             List<QuickEntry> list = new List<QuickEntry>();
@@ -102,9 +109,11 @@ namespace NigelFinanceManage.DAO
         public QuickEntry getById(XmlDataSource xml, string id, string accId)
         {
             XmlDocument doc = xml.getXmlDocument();
-            string xpath = "/my-expense/expense-data/data[@profile-id='"
-                + accId + "']/quick-entry/item[@id='" + id + "']";
-
+            string xpath = AdminConfigDAO.getXpath(
+                 XmlAdminConfig.getInstance(), this.GetType().Name,
+                 "getById").Path
+                 .Replace("{0}", accId)
+                 .Replace("{1}", id);
             XmlNode ndQE = doc.SelectSingleNode(xpath);
             if (ndQE == null)
             {
@@ -125,7 +134,10 @@ namespace NigelFinanceManage.DAO
         {
             XmlDocument doc = xml.getXmlDocument();
 
-            string xpath = "/my-expense/expense-data/data[@profile-id='" + accId + "']/quick-entry";
+            string xpath = AdminConfigDAO.getXpath(
+                XmlAdminConfig.getInstance(), this.GetType().Name,
+                "add").Path
+                .Replace("{0}", accId);
             XmlElement eleList = (XmlElement)doc.SelectSingleNode(xpath);
             XmlElement ele = doc.CreateElement("item");
 
@@ -141,8 +153,11 @@ namespace NigelFinanceManage.DAO
         public bool modify(XmlDataSource xml, QuickEntry mdfInfo, string accId)
         {
             XmlDocument doc = xml.getXmlDocument();
-            string xpath = "/my-expense/expense-data/data[@profile-id='" + accId
-                + "']/quick-entry/item[@id='" + mdfInfo.Id + "']";
+            string xpath = AdminConfigDAO.getXpath(
+                XmlAdminConfig.getInstance(), this.GetType().Name,
+                "modify").Path
+                .Replace("{0}", accId)
+                .Replace("{1}", mdfInfo.Id.ToString());
             XmlNode ele = doc.SelectSingleNode(xpath);
 
             ele.Attributes["id"].Value = mdfInfo.Id.ToString();
@@ -157,8 +172,11 @@ namespace NigelFinanceManage.DAO
         public bool remove(XmlDataSource xml, QuickEntry rmvInfo, string accId)
         {
             XmlDocument doc = xml.getXmlDocument();
-            string xpath = "/my-expense/expense-data/data[@profile-id='" + accId
-                + "']/quick-entry/item[@id='" + rmvInfo.Id + "']";
+            string xpath = AdminConfigDAO.getXpath(
+                XmlAdminConfig.getInstance(), this.GetType().Name,
+                "remove").Path
+                .Replace("{0}", accId)
+                .Replace("{1}", rmvInfo.Id.ToString());
             XmlNode ele = doc.SelectSingleNode(xpath);
             ele.ParentNode.RemoveChild(ele);
             doc.Save(xml.XmlPath);

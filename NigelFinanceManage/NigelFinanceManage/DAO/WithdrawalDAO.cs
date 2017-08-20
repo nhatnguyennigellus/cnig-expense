@@ -40,8 +40,10 @@ namespace NigelFinanceManage.DAO
             XmlDocument doc = xml.getXmlDocument();
             XmlNode root = doc.DocumentElement;
 
-            string xpath = "/my-expense/expense-data/data[@profile-id='"
-                + accId + "']/withdraw-history/withdraw";
+            string xpath = AdminConfigDAO.getXpath(
+                XmlAdminConfig.getInstance(), this.GetType().Name,
+                "getDataList").Path
+                .Replace("{0}", accId);
             XmlNodeList nodeList = root.SelectNodes(xpath);
             if (nodeList.Count > 0)
             {
@@ -70,8 +72,11 @@ namespace NigelFinanceManage.DAO
         public Withdrawal getById(XmlDataSource xml, string id, string accId)
         {
             XmlDocument doc = xml.getXmlDocument();
-            string xpath = "/my-expense/expense-data/data[@profile-id='"
-                + accId + "']/withdraw-history/withdraw[@id='" + id + "']";
+            string xpath = AdminConfigDAO.getXpath(
+                XmlAdminConfig.getInstance(), this.GetType().Name,
+                "getById").Path
+                .Replace("{0}", accId)
+                .Replace("{1}", id);
 
             XmlNode ndWdh = doc.SelectSingleNode(xpath);
             if (ndWdh == null)
@@ -96,7 +101,10 @@ namespace NigelFinanceManage.DAO
         {
             XmlDocument doc = xml.getXmlDocument();
 
-            string xpath = "/my-expense/expense-data/data[@profile-id='" + accId + "']/withdraw-history";
+            string xpath = AdminConfigDAO.getXpath(
+                        XmlAdminConfig.getInstance(), this.GetType().Name,
+                        "add").Path
+                        .Replace("{0}", accId);
             XmlElement eleList = (XmlElement)doc.SelectSingleNode(xpath);
             XmlElement ele = doc.CreateElement("withdraw");
 
@@ -115,8 +123,11 @@ namespace NigelFinanceManage.DAO
         public bool modify(XmlDataSource xml, Withdrawal mdfInfo, string accId)
         {
             XmlDocument doc = xml.getXmlDocument();
-            string xpath = "/my-expense/expense-data/data[@profile-id='" + accId
-                + "']/withdraw-history/withdraw[@id='" + mdfInfo.Id + "']";
+            string xpath = AdminConfigDAO.getXpath(
+                XmlAdminConfig.getInstance(), this.GetType().Name,
+                "modify").Path
+                .Replace("{0}", accId)
+                .Replace("{1}", mdfInfo.Id); 
             XmlNode ele = doc.SelectSingleNode(xpath);
 
             ele.Attributes["amount"].Value = mdfInfo.Amount.ToString();
@@ -133,8 +144,11 @@ namespace NigelFinanceManage.DAO
         public bool remove(XmlDataSource xml, FinanceInfo rmvInfo, string accId)
         {
             XmlDocument doc = xml.getXmlDocument();
-            string xpath = "/my-expense/expense-data/data[@profile-id='" + accId
-                + "']/withdraw-history/withdraw[@id='" + rmvInfo.Id + "']";
+            string xpath = AdminConfigDAO.getXpath(
+                XmlAdminConfig.getInstance(), this.GetType().Name,
+                "remove").Path
+                .Replace("{0}", accId)
+                .Replace("{1}", rmvInfo.Id);
             XmlNode ele = doc.SelectSingleNode(xpath);
             ele.ParentNode.RemoveChild(ele);
             doc.Save(xml.XmlPath);
@@ -148,8 +162,10 @@ namespace NigelFinanceManage.DAO
             XmlDocument doc = xml.getXmlDocument();
             XmlNode root = doc.DocumentElement;
 
-            string xpath = "/my-expense/expense-data/data[@profile-id='" + accId
-                + "']/withdraw-history/withdraw";
+            string xpath = AdminConfigDAO.getXpath(
+                XmlAdminConfig.getInstance(), this.GetType().Name,
+                "getList").Path
+                .Replace("{0}", accId);
             XmlNodeList nodeList = root.SelectNodes(xpath);
 
             List<FinanceInfo> list = new List<FinanceInfo>();
@@ -175,7 +191,10 @@ namespace NigelFinanceManage.DAO
         {
             List<String> list = new List<String>();
             XmlDocument doc = xml.getXmlDocument();
-            string xpath = "/my-expense/banks/bank[@name='" + bank + "']/atm";
+            string xpath = AdminConfigDAO.getXpath(
+                XmlAdminConfig.getInstance(), this.GetType().Name,
+                "getATMListByBank").Path
+                .Replace("{0}", bank);
             XmlNode root = doc.DocumentElement;
             XmlNodeList nodeList = root.SelectNodes(xpath);
             foreach (XmlElement ele in nodeList)
@@ -190,8 +209,10 @@ namespace NigelFinanceManage.DAO
         {
             List<String> list = new List<String>();
             XmlDocument doc = xml.getXmlDocument();
-            string xpath = "/my-expense/expense-data/data[@profile-id = '"
-                + account.Id + "']/atm-other/atm";
+            string xpath = AdminConfigDAO.getXpath(
+                XmlAdminConfig.getInstance(), this.GetType().Name,
+                "getATMOtherList").Path
+                .Replace("{0}", account.Id);
             XmlNode root = doc.DocumentElement;
             XmlNodeList nodeList = root.SelectNodes(xpath);
             foreach (XmlElement ele in nodeList)
@@ -206,7 +227,10 @@ namespace NigelFinanceManage.DAO
         {
             List<String> list = new List<String>();
             XmlDocument doc = xml.getXmlDocument();
-            string xpath = "/my-expense/banks/bank[@name='" + bank + "']";
+            string xpath = AdminConfigDAO.getXpath(
+                XmlAdminConfig.getInstance(), this.GetType().Name,
+                "getWithdrawFee").Path
+                .Replace("{0}", bank);
             XmlNode root = doc.DocumentElement;
             XmlNodeList nodeList = root.SelectNodes(xpath);
             foreach (XmlElement ele in nodeList)
@@ -223,7 +247,10 @@ namespace NigelFinanceManage.DAO
         {
             XmlDocument doc = xml.getXmlDocument();
 
-            string xpath = "/my-expense/banks/bank[@name ='" + bank + "']";
+            string xpath = AdminConfigDAO.getXpath(
+                XmlAdminConfig.getInstance(), this.GetType().Name,
+                "addATM").Path
+                .Replace("{0}", bank);
             XmlElement eleList = (XmlElement)doc.SelectSingleNode(xpath);
             XmlElement ele = doc.CreateElement("atm");
 
@@ -238,8 +265,10 @@ namespace NigelFinanceManage.DAO
         {
             XmlDocument doc = xml.getXmlDocument();
 
-            string xpath = "/my-expense/expense-data/data[@profile-id = '" 
-                +  account.Id + "']/atm-other";
+            string xpath = AdminConfigDAO.getXpath(
+                XmlAdminConfig.getInstance(), this.GetType().Name,
+                "addATM1").Path
+                .Replace("{0}", account.Id);
             XmlElement eleList = (XmlElement)doc.SelectSingleNode(xpath);
             XmlElement ele = doc.CreateElement("atm");
 
@@ -253,8 +282,11 @@ namespace NigelFinanceManage.DAO
         public bool removeATM(XmlDataSource xml, string atmName, Account account)
         {
             XmlDocument doc = xml.getXmlDocument();
-            string xpath = "/my-expense/expense-data/data[@profile-id = '"
-                + account.Id + "']/atm-other/atm[@name = '" + atmName + "']";
+            string xpath = AdminConfigDAO.getXpath(
+                XmlAdminConfig.getInstance(), this.GetType().Name,
+                "removeATM").Path
+                .Replace("{0}", account.Id)
+                .Replace("{1}", atmName);
             XmlNode ele = doc.SelectSingleNode(xpath);
             ele.ParentNode.RemoveChild(ele);
             doc.Save(xml.XmlPath);
@@ -264,7 +296,11 @@ namespace NigelFinanceManage.DAO
         public bool removeATM(XmlDataSource xml, string atmName, string bank)
         {
             XmlDocument doc = xml.getXmlDocument();
-            string xpath = "/my-expense/banks/bank[@name ='" + bank + "']/atm[@name = '" + atmName + "']";
+            string xpath = AdminConfigDAO.getXpath(
+                XmlAdminConfig.getInstance(), this.GetType().Name,
+                "removeATM1").Path
+                .Replace("{0}", bank)
+                .Replace("{1}", atmName);
             XmlNode ele = doc.SelectSingleNode(xpath);
             ele.ParentNode.RemoveChild(ele);
             doc.Save(xml.XmlPath);

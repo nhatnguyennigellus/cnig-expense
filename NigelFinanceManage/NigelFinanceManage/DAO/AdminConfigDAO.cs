@@ -69,6 +69,17 @@ namespace NigelFinanceManage.DAO
 
                 string xpath = "/config/xpaths/dao[@name='" + xmlXpath.Dao + "']";
                 XmlElement eleList = (XmlElement)doc.SelectSingleNode(xpath);
+                if (eleList == null)
+                {
+                    string xpathPath = "/config/xpaths";
+                    XmlElement eleXpath = (XmlElement)doc.SelectSingleNode(xpathPath);
+                    XmlElement eleDao = doc.CreateElement("dao");
+                    eleDao.SetAttribute("name", xmlXpath.Dao);
+
+                    eleXpath.AppendChild(eleDao);
+
+                    eleList = (XmlElement)doc.SelectSingleNode(xpath);
+                }
                 XmlElement ele = doc.CreateElement("xpath");
 
                 ele.SetAttribute("method", xmlXpath.Method);
@@ -91,7 +102,7 @@ namespace NigelFinanceManage.DAO
             try
             {
                 XmlDocument doc = xml.getXmlDocument();
-                string xpath = "/config/xpaths/dao[@name='" + xmlXpath.Path
+                string xpath = "/config/xpaths/dao[@name='" + xmlXpath.Dao
                     + "']/xpath[@method='" + xmlXpath.Method + "']";
                 XmlNode ele = doc.SelectSingleNode(xpath);
 
@@ -114,7 +125,7 @@ namespace NigelFinanceManage.DAO
             try
             {
                 XmlDocument doc = xml.getXmlDocument();
-                string xpath = "/config/xpaths/dao[@name='" + xmlXpath.Path
+                string xpath = "/config/xpaths/dao[@name='" + xmlXpath.Dao
                     + "']/xpath[@method='" + xmlXpath.Method + "']";
                 XmlNode ele = doc.SelectSingleNode(xpath);
                 ele.ParentNode.RemoveChild(ele);
@@ -133,7 +144,7 @@ namespace NigelFinanceManage.DAO
             try
             {
                 XmlDocument doc = xml.getXmlDocument();
-                string xpath = "/config/xpaths/dao[@name='" + xmlXpath.Path
+                string xpath = "/config/xpaths/dao[@name='" + xmlXpath.Dao
                     + "']/xpath[@method='" + xmlXpath.Method + "']";
                 XmlNode ele = doc.SelectSingleNode(xpath);
                 
